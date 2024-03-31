@@ -22,6 +22,11 @@ let Constants = {
   orderHistoryText: 'Order History',
   noOrderFoundText: 'You have not placed any orders yet',
   logOutText: 'Logout',
+  myAccountText: 'My Account',
+  myOrderText: 'My Orders',
+  myWishlistText: 'My Wishlists',
+  myAddressText: 'My Address',
+  additionalAddressText: 'Additional Address',
   //Checkout
   continueePaymentText: 'Continuee Payment',
   applyBtnText: 'Apply',

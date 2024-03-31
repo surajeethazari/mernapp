@@ -145,7 +145,7 @@ export default function Products() {
           >
             {Constants.sortByText}:
           </Typography>
-          <List sx={{ bgcolor: 'background.paper', marginLeft: 1 }}>
+          <List sx={{ bgcolor: 'appmain.main', marginLeft: 1, width: 150 }}>
             <ListItemButton
               sx={{ boxShadow: '0 0 10px rgba(0, 0, 0, 0.2)' }}
               onClick={handleClickListItem}
@@ -285,16 +285,24 @@ export default function Products() {
         >
           <Masonry sx={{ marginTop: 1 }} columns={{ md: 3, xs: 2 }} spacing={2}>
             {data.map((item, index) => (
-              <Paper elevation={8} key={index} sx={{ height: item.height }}>
+              <Paper elevation={5} key={index} sx={{ height: item.height }}>
                 <Card>
                   <CardContent
                     style={{ background: theme.palette.primary.light }}
                   >
                     <CardMedia
+                      onClick={() => onProductTitleClick(item)}
                       component="img"
                       height={item.height - 90}
                       image={item.img}
                       alt="Image Title"
+                      sx={{
+                        transform: 'scale(0.8)',
+                        transition: '0.5s ease-in-out',
+                        '&:hover': {
+                          transform: 'scale(1)',
+                        },
+                      }}
                     />
                     <Typography
                       onClick={() => onProductTitleClick(item)}

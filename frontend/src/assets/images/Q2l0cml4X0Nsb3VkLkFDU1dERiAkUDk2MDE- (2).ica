@@ -12,48 +12,48 @@ Version=2
 VirtualCOMPortEmulation=On
 
 [ApplicationServers]
-Virtual Desktop D $A18-4-669B4383-0001=
+ACSWDF $P9601=
 
-[Virtual Desktop D $A18-4-669B4383-0001]
-Address=;baafa94f1132029f13c3da5bc167d6c422b383e5f74f7208cf3eadc4
+[ACSWDF $P9601]
+Address=;42;CWSSAPSE4;D65902969161B9958E9B6D5DEDFC9AE8;CWSSAPSE4;4F25F16B5C126EFDF3094482203000CA
 AutologonAllowed=ON
 BrowserProtocol=HTTPonTCP
 CGPSecurityTicket=On
-ClearPassword=1FF92C4DDDC827
+ClearPassword=675D555617B065
 ClientAudio=On
 ConnectionBar=1
 DesiredColor=8
 DesiredHRES=4294967295
 DesiredVRES=4294967295
-DesktopRestartAllowed=1
-Domain=\ACF2DD1AC725C973
+Domain=\38EBCC7D6C0D827E
 DoNotUseDefaultCSL=On
 FontSmoothingType=0
-HDXoverUDP=Preferred
+HDXoverUDP=Off
 HTTPBrowserAddress=!
-InitialProgram=#Virtual Desktop D $A18-4-669B4383-0001
+InitialProgram=#ACSWDF $P9601
 Launcher=WI
-LaunchReference=300B4D61434F6966FE3DF3148D47BF
+LaunchReference=AE5E0179E438F2397E666B0B5292A9
 LocHttpBrowserAddress=!
-LogonTicket=1FF92C4DDDC827ACF2DD1AC725C973
+LogonTicket=675D555617B06538EBCC7D6C0D827E
 LogonTicketType=CTXS1
 LongCommandLine=
-LPWD=807
-NRWD=666
+LPWD=656
+NRWD=343
 ProxyTimeout=30000
 ProxyType=Auto
-SessionsharingKey=-4Jv2NQ6BY8H0O7OnHL2T0gaXvAC
+SecureChannelProtocol=Detect
+SessionsharingKey=-hBPZTen4XrTB7E7oyi4UngACFIE
 SFRAllowed=Off
+SSLCiphers=all
 SSLEnable=On
-SSLProxyHost=connectit.equinor.com:443
-startSCD=1711615368665
-SubscriptionUrl=https://ctxsvgprod.statoil.net/Citrix/External/resources/v2/subscriptions/U3RhdmFuZ2VyIDcueCBQcm9kLlZpcnR1YWwgRGVza3RvcCBEICRBMTgtNC02NjlCNDM4My0wMDAx
-Title=Virtual Desktop Developer NO East
+SSLProxyHost=office.access-emea.sap.com:443
+startSCD=1711874455807
+SubscriptionUrl=https://citrix-access.global.corp.sap/Citrix/Office/resources/v2/subscriptions/Q2l0cml4X0Nsb3VkLkFDU1dERiAkUDk2MDE-
+Title=ACSWDF015893 - Windows 11 SAP Corporate
 TransportDriver=TCP/IP
 TRWD=0
 TWIMode=Off
-UDPCGPPort=10.73.113.58:2598
-UDPICAPort=10.73.113.58:1494
+WebSocketPort=8008
 WinStationDriver=ICA 3.0
 
 [Compress]

@@ -23,10 +23,13 @@ import ReturnPolicy from './pages/ReturnPolicy';
 import TermsAndConditions from './pages/TermsAndConditions';
 import AboutUs from './pages/AboutUs';
 import CreatePassword from './pages/CreatePassword';
+import MyOrders from './pages/MyOrders';
+import MyWishLists from './pages/MyWishlists';
+import MyAddress from './pages/MyAddress';
 
 const defaultTheme = createTheme({
   typography: {
-    fontFamily: 'emoji',
+    fontFamily: 'math',
   },
   palette: {
     appmain: {
@@ -74,6 +77,9 @@ function App() {
           <Route path="/detail/:title" element={<ProductDetail />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/paymentSuccess" element={<PaymentSuccess />} />
+          <Route path="/orders" element={<MyOrders />} />
+          <Route path="/wishlists" element={<MyWishLists />} />
+          <Route path="/address" element={<MyAddress />} />
           <Route path="/*" element={<ErrorPage />} />
         </Routes>
         <Footer />

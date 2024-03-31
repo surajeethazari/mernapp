@@ -25,8 +25,8 @@ export default function PaymentSuccess() {
   const [item, setItem] = React.useState(data);
   console.log(item[0][0]);
   let crumbs = [
-    { name: 'Home', trigger: '/', active: false },
-    { name: 'Payment Success', trigger: '/paymentSuccess', active: true },
+    { name: 'Home', trigger: '/', active: true },
+    { name: 'Payment Success', trigger: '/paymentSuccess', active: false },
   ];
 
   return (
@@ -36,12 +36,16 @@ export default function PaymentSuccess() {
         width={'100%'}
         justifyContent={'space-between'}
         display="flex"
-        sx={{ marginTop: 5, flexDirection: { xs: 'column', md: 'row' } }}
+        sx={{
+          marginTop: 5,
+          marginBottom: 5,
+          flexDirection: { xs: 'column', md: 'row' },
+        }}
       >
         <Box
           display="flex"
           flexDirection={'column'}
-          sx={{ width: { xs: '100%', md: '68%' } }}
+          sx={{ width: { xs: '100%', md: '70%' } }}
         >
           <Box display="flex" alignItems={'center'} flexDirection={'row'}>
             <IconButton
@@ -73,7 +77,7 @@ export default function PaymentSuccess() {
             </Box>
           </Box>
           <Masonry sx={{ marginTop: 2 }} columns={2} spacing={2}>
-            <Paper elevation={8} sx={{ padding: 3, height: 180 }}>
+            <Paper sx={{ boxShadow: 2, padding: 3, height: 180 }}>
               <Typography
                 color={'primary.main'}
                 variant="h6"
@@ -100,7 +104,7 @@ export default function PaymentSuccess() {
                 Email: sonanlifashioninfo@gmail.com
               </Typography>
             </Paper>
-            <Paper elevation={8} sx={{ padding: 3, height: 180 }}>
+            <Paper sx={{ boxShadow: 2, padding: 3, height: 180 }}>
               <Typography
                 color={'primary.main'}
                 variant="h6"
@@ -119,7 +123,7 @@ export default function PaymentSuccess() {
                 Credit Card
               </Typography>
             </Paper>
-            <Paper elevation={8} sx={{ padding: 3, height: 250 }}>
+            <Paper sx={{ boxShadow: 2, padding: 3, height: 250 }}>
               <Typography
                 color={'primary.main'}
                 variant="h6"
@@ -170,7 +174,7 @@ export default function PaymentSuccess() {
                 Pin: 721160
               </Typography>
             </Paper>
-            <Paper elevation={8} sx={{ padding: 3, height: 250 }}>
+            <Paper sx={{ boxShadow: 2, padding: 3, height: 250 }}>
               <Typography
                 color={'primary.main'}
                 variant="h6"
@@ -227,20 +231,50 @@ export default function PaymentSuccess() {
           display="flex"
           flexDirection={'column'}
           sx={{
-            width: { xs: '100%', md: '28%' },
-            boxShadow: 2,
-            padding: 2,
-            marginTop: { xs: 1, md: 18 },
+            width: { xs: '100%', md: '30%' },
+
+            marginTop: { xs: 2, md: 5 },
           }}
         >
-          <Typography
-            variant="h5"
-            color={'primary'}
-            sx={{ fontWeight: 'bold', marginBottom: 1 }}
+          <Link
+            to="/products"
+            state={data}
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           >
-            Order Summary
-          </Typography>
-          {/* <Stack
+            <Button
+              fullWidth
+              endIcon={<ArrowForwardTwoTone />}
+              type="submit"
+              variant="contained"
+              sx={{
+                '&:hover': {
+                  backgroundColor: 'primary.dark',
+                  color: 'appmain.main',
+                },
+                backgroundColor: 'secondary.dark',
+                color: 'appmain.main',
+              }}
+            >
+              {Constants.continueShoppingText}
+            </Button>
+          </Link>
+          <Box
+            display="flex"
+            flexDirection={'column'}
+            sx={{
+              boxShadow: 2,
+              padding: 2,
+              marginTop: { xs: 2, md: 9 },
+            }}
+          >
+            <Typography
+              variant="h5"
+              color={'primary'}
+              sx={{ fontWeight: 'bold', marginBottom: 1, marginTop: 3 }}
+            >
+              Order Summary
+            </Typography>
+            {/* <Stack
             direction={'column'}
             spacing={1}
             padding={1}
@@ -290,68 +324,39 @@ export default function PaymentSuccess() {
               </Box>
             ))}
           </Stack> */}
-          <Divider sx={{ marginTop: 2 }} />
-          <Box
-            display="flex"
-            justifyContent={'space-between'}
-            flexDirection={'row'}
-          >
+            <Divider sx={{ marginTop: 2 }} />
+            <Box
+              display="flex"
+              justifyContent={'space-between'}
+              flexDirection={'row'}
+            >
+              <Typography
+                component={'div'}
+                variant="h6"
+                color={'primary.main'}
+                sx={{ fontWeight: 'bold', marginTop: '5px' }}
+              >
+                Total
+              </Typography>
+              <Typography
+                component={'div'}
+                variant="h6"
+                color={'primary.main'}
+                sx={{ fontWeight: 'bold', marginTop: '5px' }}
+              >
+                5678 /-
+              </Typography>
+            </Box>
             <Typography
               component={'div'}
-              variant="h6"
+              variant="body2"
               color={'primary.main'}
-              sx={{ fontWeight: 'bold', marginTop: '5px' }}
+              sx={{ fontWeight: '400', marginTop: '5px' }}
             >
-              Total
-            </Typography>
-            <Typography
-              component={'div'}
-              variant="h6"
-              color={'primary.main'}
-              sx={{ fontWeight: 'bold', marginTop: '5px' }}
-            >
-              5678 /-
+              (Inclusive of tax $0.00)
             </Typography>
           </Box>
-          <Typography
-            component={'div'}
-            variant="body2"
-            color={'primary.main'}
-            sx={{ fontWeight: '400', marginTop: '5px' }}
-          >
-            (Inclusive of tax $0.00)
-          </Typography>
         </Box>
-      </Box>
-      <Box
-        display={'flex'}
-        flexDirection={'row'}
-        alignItems={'center'}
-        justifyContent={'center'}
-        sx={{ marginBottom: '20px', marginTop: '20px' }}
-      >
-        <Link
-          to="/products"
-          state={data}
-          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-        >
-          <Button
-            fullWidth
-            endIcon={<ArrowForwardTwoTone />}
-            type="submit"
-            variant="contained"
-            sx={{
-              '&:hover': {
-                backgroundColor: 'primary.dark',
-                color: 'appmain.main',
-              },
-              backgroundColor: 'secondary.dark',
-              color: 'appmain.main',
-            }}
-          >
-            {Constants.continueShoppingText}
-          </Button>
-        </Link>
       </Box>
     </Container>
   );
