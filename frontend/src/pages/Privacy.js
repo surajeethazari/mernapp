@@ -40,7 +40,15 @@ export default function Privacy() {
   ];
   return (
     <Container maxWidth="xl">
-      <BreadCrumbs crumbs={crumbs} />
+      <Box
+        alignItems={'center'}
+        flexDirection={'column'}
+        display={'flex'}
+        mb={2}
+        sx={{ marginTop: 12 }}
+      >
+        <BreadCrumbs crumbs={crumbs} />
+      </Box>
       <Container component="main" maxWidth="xl">
         <Box display="flex" flexDirection={'column'} mt={5} mb={5} sx={{}}>
           <Typography

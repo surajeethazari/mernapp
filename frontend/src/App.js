@@ -40,8 +40,8 @@ const defaultTheme = createTheme({
       light: colors.grey[200],
     },
     secondary: {
-      main: colors.teal[600],
-      light: colors.teal[200],
+      main: colors.amber[600],
+      light: colors.amber[50],
     },
     tertiary: {
       main: '#ff9d0a',

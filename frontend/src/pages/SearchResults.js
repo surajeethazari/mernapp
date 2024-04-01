@@ -10,7 +10,15 @@ export default function SearchResults() {
 
   return (
     <Container maxWidth="xl">
-      <BreadCrumbs crumbs={crumbs} />
+      <Box
+        alignItems={'center'}
+        flexDirection={'column'}
+        display={'flex'}
+        mb={2}
+        sx={{ marginTop: 12 }}
+      >
+        <BreadCrumbs crumbs={crumbs} />
+      </Box>
     </Container>
   );
 }

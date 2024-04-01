@@ -23,6 +23,8 @@ import {
   MenuItem,
   Paper,
   Slider,
+  Tooltip,
+  Zoom,
 } from '@mui/material';
 import Constants from '../utils/Constants';
 import { useTheme } from '@mui/material/styles';
@@ -35,6 +37,10 @@ import PaginationItem from '@mui/material/PaginationItem';
 import Stack from '@mui/material/Stack';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import InfoIcon from '@mui/icons-material/Info';
+import StarIcon from '@mui/icons-material/Star';
+import KurtiBanner from '../assets/images/KurtiBanner.jpg';
 
 const colorTypes = [
   'White',
@@ -96,249 +102,398 @@ export default function Products() {
   };
 
   return (
-    <Container component="main" maxWidth="xl">
-      <BreadCrumbs crumbs={crumbs} />
-      <Box
-        height={100}
-        display="flex"
-        alignItems="strat"
-        justifyContent="center"
-        flexDirection={'column'}
-        sx={{ marginTop: 2, backgroundColor: 'secondary.light' }}
-      >
-        <Typography
-          color={'appmain.main'}
-          variant="h4"
-          component="div"
-          sx={{ fontWeight: 'bold', marginLeft: 5 }}
-        >
-          {Constants.productHeaderText}
-        </Typography>
+    <Box>
+      <CardMedia
+        sx={{ marginTop: 8 }}
+        component="img"
+        height="400"
+        image={KurtiBanner}
+        alt="Image Title"
+      />
+      <Box sx={{ padding: 2, backgroundColor: 'primary.light' }}>
+        <BreadCrumbs marginTop={2} crumbs={crumbs} />
       </Box>
-      <Box
-        height={50}
-        display="flex"
-        flexDirection={'row'}
-        m={2}
-        sx={{ justifyContent: { md: 'space-between', xs: 'end' } }}
-      >
-        <Typography
-          color={'primary.main'}
-          variant="h6"
-          component="div"
-          sx={{ fontWeight: 'bold', display: { md: 'block', xs: 'none' } }}
-        >
-          {Constants.shopByText}
-        </Typography>
+      <Container component="main" maxWidth="xl">
         <Box
+          height={50}
           display="flex"
-          alignItems="center"
           flexDirection={'row'}
           m={2}
+          sx={{ justifyContent: { md: 'space-between', xs: 'end' } }}
+        >
+          <Typography
+            color={'primary.main'}
+            variant="h6"
+            component="div"
+            sx={{ fontWeight: 'bold', display: { md: 'block', xs: 'none' } }}
+          >
+            {Constants.shopByText}
+          </Typography>
+          <Box
+            display="flex"
+            alignItems="center"
+            flexDirection={'row'}
+            m={2}
+            sx={{}}
+          >
+            <Typography
+              color={'primary.main'}
+              variant="h6"
+              component="div"
+              sx={{ fontWeight: 'bold' }}
+            >
+              {Constants.sortByText}:
+            </Typography>
+            <List sx={{ bgcolor: 'appmain.main', marginLeft: 1, width: 150 }}>
+              <ListItemButton
+                sx={{ boxShadow: '0 0 10px rgba(0, 0, 0, 0.2)' }}
+                onClick={handleClickListItem}
+              >
+                <ListItemText secondary={options[selectedIndex]} />
+              </ListItemButton>
+            </List>
+            <Menu
+              anchorEl={anchorEl}
+              open={open}
+              onClose={handleClose}
+              MenuListProps={{
+                'aria-labelledby': 'lock-button',
+                role: 'listbox',
+              }}
+            >
+              {options.map((option, index) => (
+                <MenuItem
+                  key={option}
+                  selected={index === selectedIndex}
+                  onClick={(event) => handleMenuItemClick(event, index)}
+                >
+                  {option}
+                </MenuItem>
+              ))}
+            </Menu>
+            <IconButton
+              sx={{
+                color: 'appmain.main',
+                bgcolor: 'primary.main',
+                marginLeft: 1,
+                '&:hover': { color: 'secondary.main' },
+              }}
+              size="medium"
+              aria-label="Sort"
+            >
+              <ArrowDownward />
+            </IconButton>
+          </Box>
+        </Box>
+        <Box
+          width={'100%'}
+          justifyContent={'space-between'}
+          display="flex"
+          flexDirection={'row'}
+          m={1}
           sx={{}}
         >
-          <Typography
-            color={'primary.main'}
-            variant="h6"
-            component="div"
-            sx={{ fontWeight: 'bold' }}
-          >
-            {Constants.sortByText}:
-          </Typography>
-          <List sx={{ bgcolor: 'appmain.main', marginLeft: 1, width: 150 }}>
-            <ListItemButton
-              sx={{ boxShadow: '0 0 10px rgba(0, 0, 0, 0.2)' }}
-              onClick={handleClickListItem}
-            >
-              <ListItemText secondary={options[selectedIndex]} />
-            </ListItemButton>
-          </List>
-          <Menu
-            anchorEl={anchorEl}
-            open={open}
-            onClose={handleClose}
-            MenuListProps={{
-              'aria-labelledby': 'lock-button',
-              role: 'listbox',
-            }}
-          >
-            {options.map((option, index) => (
-              <MenuItem
-                key={option}
-                selected={index === selectedIndex}
-                onClick={(event) => handleMenuItemClick(event, index)}
-              >
-                {option}
-              </MenuItem>
-            ))}
-          </Menu>
-          <IconButton
+          <Box
+            flexDirection={'column'}
             sx={{
-              color: 'appmain.main',
-              bgcolor: 'primary.main',
-              marginLeft: 1,
-              '&:hover': { color: 'secondary.main' },
+              display: { xs: 'none', md: 'flex' },
+              width: { xs: '0%', md: '22%' },
             }}
-            size="medium"
-            aria-label="Sort"
           >
-            <ArrowDownward />
-          </IconButton>
-        </Box>
-      </Box>
-      <Box
-        width={'100%'}
-        justifyContent={'space-between'}
-        display="flex"
-        flexDirection={'row'}
-        m={1}
-        sx={{}}
-      >
-        <Box
-          flexDirection={'column'}
-          sx={{
-            display: { xs: 'none', md: 'flex' },
-            width: { xs: '0%', md: '22%' },
-          }}
-        >
-          <Typography
-            color={'primary.main'}
-            variant="h6"
-            component="div"
-            sx={{ fontWeight: 'normal' }}
-          >
-            {Constants.priceText}
-          </Typography>
-          <Slider
-            sx={{ marginTop: 2 }}
-            getAriaLabel={() => 'Price range'}
-            value={value}
-            onChange={handleSliderChange}
-            valueLabelDisplay="auto"
-            getAriaValueText={valuetext}
-          />
-
-          <Typography
-            color={'primary.main'}
-            variant="h6"
-            component="div"
-            sx={{ fontWeight: 'normal', marginTop: 5 }}
-          >
-            {Constants.colorText}
-          </Typography>
-          <Divider sx={{ marginTop: 2 }} />
-          <FormGroup sx={{ marginTop: 2 }}>
-            {colorTypes.map((item, index) => (
-              <FormControlLabel
-                key={index}
-                control={<Checkbox />}
-                label={item}
-              />
-            ))}
-          </FormGroup>
-
-          <Typography
-            color={'primary.main'}
-            variant="h6"
-            component="div"
-            sx={{ fontWeight: 'normal', marginTop: 5 }}
-          >
-            {Constants.sizeText}
-          </Typography>
-          <Divider sx={{ marginTop: 2 }} />
-          <FormGroup sx={{ marginTop: 2 }}>
-            {sizeTypes.map((item, index) => (
-              <FormControlLabel
-                key={index}
-                control={<Checkbox />}
-                label={item}
-              />
-            ))}
-          </FormGroup>
-
-          <Typography
-            color={'primary.main'}
-            variant="h6"
-            component="div"
-            sx={{ fontWeight: 'normal', marginTop: 5 }}
-          >
-            {Constants.brandText}
-          </Typography>
-          <Divider sx={{ marginTop: 2 }} />
-          <FormGroup sx={{ marginTop: 2 }}>
-            {brandTypes.map((item, index) => (
-              <FormControlLabel
-                key={index}
-                control={<Checkbox />}
-                label={item}
-              />
-            ))}
-          </FormGroup>
-        </Box>
-        <Box
-          width={'75%'}
-          display="flex"
-          alignItems={'center'}
-          flexDirection={'column'}
-          m={1}
-          sx={{ width: { xs: '100%', md: '75%' } }}
-        >
-          <Masonry sx={{ marginTop: 1 }} columns={{ md: 3, xs: 2 }} spacing={2}>
-            {data.map((item, index) => (
-              <Paper elevation={5} key={index} sx={{ height: item.height }}>
-                <Card>
-                  <CardContent
-                    style={{ background: theme.palette.primary.light }}
-                  >
-                    <CardMedia
-                      onClick={() => onProductTitleClick(item)}
-                      component="img"
-                      height={item.height - 90}
-                      image={item.img}
-                      alt="Image Title"
-                      sx={{
-                        transform: 'scale(0.8)',
-                        transition: '0.5s ease-in-out',
-                        '&:hover': {
-                          transform: 'scale(1)',
-                        },
-                      }}
-                    />
-                    <Typography
-                      onClick={() => onProductTitleClick(item)}
-                      color={'primary.main'}
-                      variant="h6"
-                      component="div"
-                      sx={{ fontWeight: 'bold' }}
-                    >
-                      {item.title}
-                    </Typography>
-                    <Typography
-                      component={'div'}
-                      variant="body2"
-                      color={'secondary.main'}
-                      sx={{ fontWeight: 'bold' }}
-                    >
-                      Price: {item.Price}/-
-                    </Typography>
-                  </CardContent>
-                </Card>
-              </Paper>
-            ))}
-          </Masonry>
-          <Stack sx={{ marginTop: 2 }} spacing={2}>
-            <Pagination
-              count={10}
-              renderItem={(item) => (
-                <PaginationItem
-                  slots={{ previous: ArrowBackIcon, next: ArrowForwardIcon }}
-                  {...item}
-                />
-              )}
+            <Typography
+              color={'primary.main'}
+              variant="h6"
+              component="div"
+              sx={{ fontWeight: 'normal' }}
+            >
+              {Constants.priceText}
+            </Typography>
+            <Slider
+              sx={{ marginTop: 2 }}
+              getAriaLabel={() => 'Price range'}
+              value={value}
+              onChange={handleSliderChange}
+              valueLabelDisplay="auto"
+              getAriaValueText={valuetext}
             />
-          </Stack>
+
+            <Typography
+              color={'primary.main'}
+              variant="h6"
+              component="div"
+              sx={{ fontWeight: 'normal', marginTop: 5 }}
+            >
+              {Constants.colorText}
+            </Typography>
+            <Divider sx={{ marginTop: 2 }} />
+            <FormGroup sx={{ marginTop: 2 }}>
+              {colorTypes.map((item, index) => (
+                <FormControlLabel
+                  key={index}
+                  control={<Checkbox />}
+                  label={item}
+                />
+              ))}
+            </FormGroup>
+
+            <Typography
+              color={'primary.main'}
+              variant="h6"
+              component="div"
+              sx={{ fontWeight: 'normal', marginTop: 5 }}
+            >
+              {Constants.sizeText}
+            </Typography>
+            <Divider sx={{ marginTop: 2 }} />
+            <FormGroup sx={{ marginTop: 2 }}>
+              {sizeTypes.map((item, index) => (
+                <FormControlLabel
+                  key={index}
+                  control={<Checkbox />}
+                  label={item}
+                />
+              ))}
+            </FormGroup>
+
+            <Typography
+              color={'primary.main'}
+              variant="h6"
+              component="div"
+              sx={{ fontWeight: 'normal', marginTop: 5 }}
+            >
+              {Constants.brandText}
+            </Typography>
+            <Divider sx={{ marginTop: 2 }} />
+            <FormGroup sx={{ marginTop: 2 }}>
+              {brandTypes.map((item, index) => (
+                <FormControlLabel
+                  key={index}
+                  control={<Checkbox />}
+                  label={item}
+                />
+              ))}
+            </FormGroup>
+          </Box>
+          <Box
+            width={'75%'}
+            display="flex"
+            alignItems={'center'}
+            flexDirection={'column'}
+            m={1}
+            sx={{ width: { xs: '100%', md: '75%' } }}
+          >
+            <Masonry
+              sx={{ marginTop: 1 }}
+              columns={{ md: 3, xs: 2 }}
+              spacing={3}
+            >
+              {data.map((item, index) => (
+                <Box key={index} sx={{ height: item.height + 100 }}>
+                  <Card>
+                    <CardContent
+                      sx={{
+                        padding: 0,
+                        backgroundColor: 'appmain.main',
+                      }}
+                    >
+                      <Box sx={{ overflow: 'hidden' }}>
+                        <CardMedia
+                          onClick={() => onProductTitleClick(item)}
+                          component="img"
+                          height={item.height}
+                          image={item.img}
+                          alt="Image Title"
+                          sx={{
+                            cursor: 'pointer',
+                            transform: 'scale(1)',
+                            transformOrigin: '50% 50%',
+                            transition: '0.5s ease-in-out',
+                            '&:hover': {
+                              transform: 'scale(1.2)',
+                            },
+                          }}
+                        />
+                      </Box>
+                      <Box
+                        sx={{
+                          marginTop: -9,
+                          backgroundColor: '#ffffff9e',
+                          borderTopLeftRadius: 10,
+                          borderTopRightRadius: 10,
+                          position: 'relative',
+                          zIndex: 999,
+                          padding: 2,
+                        }}
+                        display={'flex'}
+                        flexDirection={'row'}
+                        justifyContent={'space-around'}
+                      >
+                        <Tooltip
+                          componentsProps={{
+                            tooltip: {
+                              sx: {
+                                bgcolor: 'common.black',
+                              },
+                            },
+                            arrow: {
+                              sx: {
+                                color: 'common.black',
+                              },
+                            },
+                          }}
+                          TransitionComponent={Zoom}
+                          arrow
+                          title="Add To Cart"
+                        >
+                          <IconButton
+                            size="medium"
+                            aria-label="search"
+                            sx={{
+                              p: 1,
+                              backgroundColor: 'common.black',
+                              width: '55px',
+                              height: '40px',
+                              borderRadius: '5px 5px 5px 5px',
+                              color: 'appmain.main',
+                              '&:hover': {
+                                color: 'common.black',
+                                backgroundColor: 'transparent',
+                                borderWidth: 2,
+                                borderStyle: 'solid',
+                                borderColor: 'secondary.main',
+                              },
+                            }}
+                          >
+                            <AddShoppingCartIcon />
+                          </IconButton>
+                        </Tooltip>
+                        <Tooltip
+                          componentsProps={{
+                            tooltip: {
+                              sx: {
+                                bgcolor: 'common.black',
+                              },
+                            },
+                            arrow: {
+                              sx: {
+                                color: 'common.black',
+                              },
+                            },
+                          }}
+                          TransitionComponent={Zoom}
+                          arrow
+                          title="Information"
+                        >
+                          <IconButton
+                            size="medium"
+                            aria-label="search"
+                            sx={{
+                              p: 1,
+                              backgroundColor: 'common.black',
+                              width: '55px',
+                              height: '40px',
+                              borderRadius: '5px 5px 5px 5px',
+                              color: 'appmain.main',
+                              '&:hover': {
+                                color: 'common.black',
+                                backgroundColor: 'transparent',
+                                borderWidth: 2,
+                                borderStyle: 'solid',
+                                borderColor: 'secondary.main',
+                              },
+                            }}
+                          >
+                            <InfoIcon />
+                          </IconButton>
+                        </Tooltip>
+                        <Tooltip
+                          componentsProps={{
+                            tooltip: {
+                              sx: {
+                                bgcolor: 'common.black',
+                              },
+                            },
+                            arrow: {
+                              sx: {
+                                color: 'common.black',
+                              },
+                            },
+                          }}
+                          TransitionComponent={Zoom}
+                          arrow
+                          title="Add To Wishlists"
+                        >
+                          <IconButton
+                            size="medium"
+                            aria-label="search"
+                            sx={{
+                              p: 1,
+                              backgroundColor: 'common.black',
+                              width: '55px',
+                              height: '40px',
+                              borderRadius: '5px 5px 5px 5px',
+                              color: 'appmain.main',
+                              '&:hover': {
+                                color: 'common.black',
+                                backgroundColor: 'transparent',
+                                borderWidth: 2,
+                                borderStyle: 'solid',
+                                borderColor: 'secondary.main',
+                              },
+                            }}
+                          >
+                            <StarIcon />
+                          </IconButton>
+                        </Tooltip>
+                      </Box>
+                      <Box
+                        display={'flex'}
+                        flexDirection={'column'}
+                        sx={{ paddingLeft: 3, paddingRight: 3 }}
+                      >
+                        <Typography
+                          onClick={() => onProductTitleClick(item)}
+                          color={'primary.dark'}
+                          variant="h6"
+                          component="div"
+                          sx={{
+                            cursor: 'pointer',
+                            fontWeight: 'bold',
+                            '&:hover': {
+                              color: 'secondary.main',
+                            },
+                          }}
+                        >
+                          {item.title}
+                        </Typography>
+                        <Typography
+                          component={'div'}
+                          variant="body1"
+                          color={'primary.main'}
+                          sx={{ fontWeight: 'bold' }}
+                        >
+                          {item.Price}/-
+                        </Typography>
+                      </Box>
+                    </CardContent>
+                  </Card>
+                </Box>
+              ))}
+            </Masonry>
+            <Stack sx={{ marginTop: 2 }} spacing={2}>
+              <Pagination
+                count={10}
+                renderItem={(item) => (
+                  <PaginationItem
+                    slots={{ previous: ArrowBackIcon, next: ArrowForwardIcon }}
+                    {...item}
+                  />
+                )}
+              />
+            </Stack>
+          </Box>
         </Box>
-      </Box>
-    </Container>
+      </Container>
+    </Box>
   );
 }

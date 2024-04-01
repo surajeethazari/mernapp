@@ -58,7 +58,15 @@ export default function Checkout() {
 
   return (
     <Container maxWidth="xl">
-      <BreadCrumbs crumbs={crumbs} />
+      <Box
+        alignItems={'center'}
+        flexDirection={'column'}
+        display={'flex'}
+        mb={2}
+        sx={{ marginTop: 12 }}
+      >
+        <BreadCrumbs crumbs={crumbs} />
+      </Box>
       <Box display={'flex'} flexDirection={'row'} alignItems={'center'}>
         <Box
           width={'50%'}

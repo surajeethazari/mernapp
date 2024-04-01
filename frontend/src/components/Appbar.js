@@ -458,15 +458,33 @@ function DefaultAppBar() {
             sx={{ flexGrow: 1, display: { xs: 'flex', md: 'flex' } }}
           >
             <React.Fragment key={'top'}>
-              <IconButton
-                onClick={toggleDrawer(true)}
-                size="large"
-                aria-label="search"
-                color="inherit"
-                sx={{ '&:hover': { color: 'secondary.main' } }}
+              <Tooltip
+                componentsProps={{
+                  tooltip: {
+                    sx: {
+                      bgcolor: 'common.black',
+                    },
+                  },
+                  arrow: {
+                    sx: {
+                      color: 'common.black',
+                    },
+                  },
+                }}
+                TransitionComponent={Zoom}
+                arrow
+                title="Search"
               >
-                <SearchIcon />
-              </IconButton>
+                <IconButton
+                  onClick={toggleDrawer(true)}
+                  size="large"
+                  aria-label="search"
+                  color="inherit"
+                  sx={{ '&:hover': { color: 'secondary.main' } }}
+                >
+                  <SearchIcon />
+                </IconButton>
+              </Tooltip>
               <SwipeableDrawer
                 anchor={'top'}
                 open={state}
@@ -476,33 +494,61 @@ function DefaultAppBar() {
                 {searchSection()}
               </SwipeableDrawer>
             </React.Fragment>
-
-            <IconButton
-              sx={{ display: { md: 'inline-flex', xs: 'none' } }}
-              size="large"
-              color="inherit"
+            <Tooltip
+              componentsProps={{
+                tooltip: {
+                  sx: {
+                    bgcolor: 'common.black',
+                  },
+                },
+                arrow: {
+                  sx: {
+                    color: 'common.black',
+                  },
+                },
+              }}
+              TransitionComponent={Zoom}
+              arrow
+              title="Wish Lists"
             >
-              <Badge
-                badgeContent={2}
-                color="error"
-                sx={{ '&:hover': { color: 'secondary.main' } }}
+              <IconButton
+                onClick={() => navigate('/wishlists')}
+                sx={{ display: { md: 'inline-flex', xs: 'none' } }}
+                size="large"
+                color="inherit"
               >
-                <StarIcon />
-              </Badge>
-            </IconButton>
-            <IconButton
-              onClick={toggleDrawerHandler(true)}
-              size="large"
-              color="inherit"
+                <Badge badgeContent={2} color="secondary">
+                  <StarIcon />
+                </Badge>
+              </IconButton>
+            </Tooltip>
+            <Tooltip
+              componentsProps={{
+                tooltip: {
+                  sx: {
+                    bgcolor: 'common.black',
+                  },
+                },
+                arrow: {
+                  sx: {
+                    color: 'common.black',
+                  },
+                },
+              }}
+              TransitionComponent={Zoom}
+              arrow
+              title="Cart"
             >
-              <Badge
-                badgeContent={1}
-                color="error"
-                sx={{ '&:hover': { color: 'secondary.main' } }}
+              <IconButton
+                onClick={toggleDrawerHandler(true)}
+                size="large"
+                color="inherit"
               >
-                <ShoppingCart />
-              </Badge>
-            </IconButton>
+                <Badge badgeContent={1} color="secondary">
+                  <ShoppingCart />
+                </Badge>
+              </IconButton>
+            </Tooltip>
 
             <Drawer
               anchor="right"
@@ -747,23 +793,41 @@ function DefaultAppBar() {
                 </Box>
               </Box>
             </Drawer>
-
-            <IconButton
-              // onClick={() => setOpen(true)}
-              onClick={(event) => {
-                setMountElementForAccount(event.currentTarget);
+            <Tooltip
+              componentsProps={{
+                tooltip: {
+                  sx: {
+                    bgcolor: 'common.black',
+                  },
+                },
+                arrow: {
+                  sx: {
+                    color: 'common.black',
+                  },
+                },
               }}
-              size="large"
-              aria-label="search"
-              color="inherit"
-              sx={{
-                '&:hover': { color: 'secondary.main' },
-                display: { md: 'inline-flex', xs: 'none' },
-              }}
+              TransitionComponent={Zoom}
+              arrow
+              title="Profile"
             >
-              <AccountCircle />
-              <KeyboardArrowDownIcon />
-            </IconButton>
+              <IconButton
+                disableFocusRipple
+                // onClick={() => setOpen(true)}
+                onClick={(event) => {
+                  setMountElementForAccount(event.currentTarget);
+                }}
+                size="large"
+                aria-label="search"
+                color="inherit"
+                sx={{
+                  '&:hover': { color: 'secondary.main' },
+                  display: { md: 'inline-flex', xs: 'none' },
+                }}
+              >
+                <AccountCircle />
+                <KeyboardArrowDownIcon />
+              </IconButton>
+            </Tooltip>
             <Menu
               elevation={0}
               anchorOrigin={{

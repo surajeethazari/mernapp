@@ -31,7 +31,15 @@ export default function PaymentSuccess() {
 
   return (
     <Container maxWidth="xl">
-      <BreadCrumbs crumbs={crumbs} />
+      <Box
+        alignItems={'center'}
+        flexDirection={'column'}
+        display={'flex'}
+        mb={2}
+        sx={{ marginTop: 12 }}
+      >
+        <BreadCrumbs crumbs={crumbs} />
+      </Box>
       <Box
         width={'100%'}
         justifyContent={'space-between'}

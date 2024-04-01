@@ -63,7 +63,7 @@ export default function Footer() {
         flexDirection={'column'}
         sx={{
           width: '100%',
-          backgroundColor: 'secondary.main',
+          backgroundColor: '#222',
         }}
       >
         <Box
@@ -74,10 +74,9 @@ export default function Footer() {
           sx={{ flexDirection: { xs: 'column', md: 'row' } }}
         >
           <Box display="flex" width={300} flexDirection={'column'}>
-            <Typography variant="h5" color="appmain.main">
+            <Typography variant="h4" color="appmain.main">
               Contact Us
             </Typography>
-            <Divider sx={{ color: theme.palette.appmain.main, marginTop: 1 }} />
             <Box display="flex" flexDirection={'row'} sx={{ marginTop: 1 }}>
               <WhereToVoteIcon sx={{ color: 'appmain.main' }} />
               <Box
@@ -85,13 +84,13 @@ export default function Footer() {
                 flexDirection={'column'}
                 sx={{ marginLeft: 2 }}
               >
-                <Typography variant="body2" color="appmain.main">
+                <Typography variant="h6" color="appmain.main">
                   106, Chaklalpur,
                 </Typography>
-                <Typography variant="body2" color="appmain.main">
+                <Typography variant="h6" color="appmain.main">
                   Radhamohanpur,
                 </Typography>
-                <Typography variant="body2" color="appmain.main">
+                <Typography variant="h6" color="appmain.main">
                   West Bengal - 721160
                 </Typography>
               </Box>
@@ -105,7 +104,7 @@ export default function Footer() {
               <EmailIcon sx={{ color: 'appmain.main' }} />
               <Typography
                 sx={{ marginLeft: 2 }}
-                variant="body2"
+                variant="h6"
                 color="appmain.main"
               >
                 sonanlifashioninfo@gmail.com
@@ -120,7 +119,7 @@ export default function Footer() {
               <PhoneIcon sx={{ color: 'appmain.main' }} />
               <Typography
                 sx={{ marginLeft: 2 }}
-                variant="body2"
+                variant="h6"
                 color="appmain.main"
               >
                 +91 8900162177
@@ -132,121 +131,45 @@ export default function Footer() {
             flexDirection={'column'}
             sx={{ marginTop: { xs: '20px', md: 0 } }}
           >
-            <Typography variant="h5" color="appmain.main">
+            <Typography variant="h4" color="appmain.main">
               Information
             </Typography>
-            <Divider sx={{ color: theme.palette.appmain.main, marginTop: 1 }} />
-            <Link
-              to="/about"
-              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-              style={{
-                cursor: 'pointer',
-                marginTop: '5px',
-                fontFamily: 'Roboto, Helvetica, Arial, sans-serif',
-                textDecoration: 'none',
-                fontSize: '0.875rem',
-                letterSpacing: '.rem',
-                color: theme.palette.appmain.main,
-                textDecoration: 'none',
-              }}
-            >
-              About Us
-            </Link>
-            <Link
-              to="/contact"
-              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-              style={{
-                cursor: 'pointer',
-                marginTop: '5px',
-                fontFamily: 'Roboto, Helvetica, Arial, sans-serif',
-                textDecoration: 'none',
-                fontSize: '0.875rem',
-                letterSpacing: '.rem',
-                color: theme.palette.appmain.main,
-                textDecoration: 'none',
-              }}
-            >
-              Contact Us
-            </Link>
-            <Link
-              to="/termsAndConditions"
-              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-              style={{
-                cursor: 'pointer',
-                marginTop: '5px',
-                fontFamily: 'Roboto, Helvetica, Arial, sans-serif',
-                textDecoration: 'none',
-                fontSize: '0.875rem',
-                letterSpacing: '.rem',
-                color: theme.palette.appmain.main,
-                textDecoration: 'none',
-              }}
-            >
-              Terms & Conditions
-            </Link>
-            <Link
-              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-              to="/returnPolicy"
-              style={{
-                cursor: 'pointer',
-                marginTop: '5px',
-                fontFamily: 'Roboto, Helvetica, Arial, sans-serif',
-                textDecoration: 'none',
-                fontSize: '0.875rem',
-                letterSpacing: '.rem',
-                color: theme.palette.appmain.main,
-                textDecoration: 'none',
-              }}
-            >
-              Returns & Exchanges
-            </Link>
-            <Link
-              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-              to="/shippingPolicy"
-              style={{
-                cursor: 'pointer',
-                marginTop: '5px',
-                fontFamily: 'Roboto, Helvetica, Arial, sans-serif',
-                textDecoration: 'none',
-                fontSize: '0.875rem',
-                letterSpacing: '.rem',
-                color: theme.palette.appmain.main,
-                textDecoration: 'none',
-              }}
-            >
-              Shipping and Delivery
-            </Link>
-            <Link
-              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-              to="/privacy"
-              style={{
-                cursor: 'pointer',
-                marginTop: '5px',
-                fontFamily: 'Roboto, Helvetica, Arial, sans-serif',
-                textDecoration: 'none',
-                fontSize: '0.875rem',
-                letterSpacing: '.rem',
-                color: theme.palette.appmain.main,
-                textDecoration: 'none',
-              }}
-            >
-              Privacy & policy
-            </Link>
+            {[
+              { name: 'About Us', trigger: '/about' },
+              { name: 'Contact Us', trigger: '/contact' },
+              { name: 'Terms & Conditions', trigger: '/termsAndConditions' },
+              { name: 'Returns & Exchanges', trigger: '/returnPolicy' },
+              { name: 'Shipping and Delivery', trigger: '/shippingPolicy' },
+              { name: 'Privacy & policy', trigger: '/privacy' },
+            ].map((item, index) => (
+              <Link
+                key={index}
+                to={item.trigger}
+                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                style={{
+                  cursor: 'pointer',
+                  marginTop: '5px',
+                  fontFamily: 'Roboto, Helvetica, Arial, sans-serif',
+                  textDecoration: 'none',
+                  fontSize: '18px',
+                  letterSpacing: '.rem',
+                  color: theme.palette.appmain.main,
+                  textDecoration: 'none',
+                }}
+              >
+                {item.name}
+              </Link>
+            ))}
           </Box>
           <Box
             display="flex"
             flexDirection={'column'}
             sx={{ marginTop: { xs: '20px', md: 0 } }}
           >
-            <Typography variant="h5" color="appmain.main">
+            <Typography variant="h4" color="appmain.main">
               Newsletter Sign Up
             </Typography>
-            <Divider sx={{ color: theme.palette.appmain.main, marginTop: 1 }} />
-            <Typography
-              sx={{ marginTop: 1 }}
-              variant="body2"
-              color="appmain.main"
-            >
+            <Typography sx={{ marginTop: 1 }} variant="h6" color="appmain.main">
               Subscribe to our newsletter and get latest offers and news.
             </Typography>
             <Search sx={{ marginTop: 2 }}>
@@ -259,11 +182,7 @@ export default function Footer() {
               />
             </Search>
 
-            <Typography
-              sx={{ marginTop: 1 }}
-              variant="body2"
-              color="appmain.main"
-            >
+            <Typography sx={{ marginTop: 1 }} variant="h6" color="appmain.main">
               Follow Us:
             </Typography>
             <Box display="flex" flexDirection={'row'} sx={{ marginTop: 1 }}>
@@ -294,7 +213,7 @@ export default function Footer() {
             </Box>
           </Box>
         </Box>
-        <Divider></Divider>
+        <Divider sx={{ backgroundColor: theme.palette.appmain.main }}></Divider>
         <Box
           alignItems={'center'}
           display="flex"
@@ -303,7 +222,7 @@ export default function Footer() {
           py={2}
           sx={{ flexDirection: { xs: 'column', md: 'row' } }}
         >
-          <Typography variant="body2" color="appmain.main" align="center">
+          <Typography variant="h6" color="appmain.main" align="center">
             {'Copyright © '}
             Sonali Fashion
             {new Date().getFullYear()}
