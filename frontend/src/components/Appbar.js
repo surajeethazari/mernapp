@@ -50,7 +50,7 @@ import { useNavigate, NavLink, Link } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
 
 function DefaultAppBar() {
-  const navItems = ['Kurties', 'Plazzo Suits', 'Salwar Kamiz'];
+  const navItems = ['Kurties', 'Palazzo Suits', 'Salwar Kamiz'];
   const [state, setState] = React.useState(false);
   const [openDrawer, setOpenDrawer] = React.useState(false);
   const [openLeftDrawer, setOpenLeftDrawer] = React.useState(false);
@@ -77,7 +77,13 @@ function DefaultAppBar() {
   const navigate = useNavigate();
 
   const handleNavItemClick = (navItemName) => {
-    navigate('/products');
+    const navRouterPath = ['/kurties', '/palazzoes', '/salwars'];
+    const index = navItems.findIndex(function (params) {
+      console.log(params);
+      return params === navItemName;
+    });
+    console.log(index);
+    navigate(navRouterPath[index]);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -173,7 +179,7 @@ function DefaultAppBar() {
                     right: 8,
                     top: 8,
                     zIndex: 999,
-                    backgroundColor: 'appmain.main',
+                    backgroundColor: 'common.white',
                     boxShadow: '0 0 10px rgba(0, 0, 0, 0.2)',
                   }}
                 >
@@ -287,7 +293,11 @@ function DefaultAppBar() {
               display: { xs: 'flex', md: 'flex' },
             }}
           >
-            <Avatar alt="SF" src={logo_transparent} />
+            <Avatar
+              alt="SF"
+              sx={{ color: 'common.black' }}
+              src={logo_transparent}
+            />
             <Link
               to="/"
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
@@ -300,10 +310,11 @@ function DefaultAppBar() {
               <Typography
                 sx={{
                   fontWeight: 'bold',
-                  fontFamily: 'fantasy',
-                  letterSpacing: '.rem',
-                  color: theme.palette.primary.main,
-                  fontSize: { md: '25px', xs: '20px' },
+                  fontFamily: 'fangsong',
+                  lineHeight: 1,
+                  letterSpacing: '2px',
+                  color: 'secondary.main',
+                  fontSize: { md: '30px', xs: '20px' },
                 }}
               >
                 Sonali Fashion
@@ -322,18 +333,18 @@ function DefaultAppBar() {
                 componentsProps={{
                   tooltip: {
                     sx: {
-                      bgcolor: 'appmain.main',
+                      bgcolor: 'common.white',
                       maxWidth: 600,
                       padding: '20px',
                       boxShadow: '0 0 10px rgba(0, 0, 0, 0.2)',
                       '& .MuiTooltip-arrow': {
-                        color: 'appmain.main',
+                        color: 'common.white',
                       },
                     },
                   },
                 }}
                 key={index}
-                onClick={() => handleNavItemClick('Kurties')}
+                onClick={() => handleNavItemClick(navItem)}
                 TransitionComponent={Zoom}
                 title={
                   <React.Fragment>
@@ -568,7 +579,7 @@ function DefaultAppBar() {
                     left: 0,
                     top: 0,
                     zIndex: 999,
-                    backgroundColor: 'appmain.main',
+                    backgroundColor: 'common.white',
                     boxShadow: '0 0 10px rgba(0, 0, 0, 0.2)',
                   }}
                 >
@@ -709,7 +720,7 @@ function DefaultAppBar() {
                     left: 0,
                     bottom: 0,
                     zIndex: 999,
-                    backgroundColor: 'appmain.main',
+                    backgroundColor: 'common.white',
                     boxShadow: '0 0 10px rgba(0, 0, 0, 0.2)',
                   }}
                 >
@@ -757,7 +768,7 @@ function DefaultAppBar() {
                         sx={{
                           '&:hover': {
                             backgroundColor: 'primary.dark',
-                            color: 'appmain.main',
+                            color: 'common.white',
                           },
                           backgroundColor: 'primary.light',
                           color: 'primary.dark',
@@ -915,7 +926,7 @@ function DefaultAppBar() {
                   transform: 'translate(-50%, -50%)',
                   height: 400,
                   width: 500,
-                  bgcolor: 'appmain.main',
+                  bgcolor: 'common.white',
                   boxShadow: 24,
                   p: 5,
                   display: 'flex',
@@ -1010,7 +1021,7 @@ function DefaultAppBar() {
                               transform: 'translate(-50%, -50%)',
                               height: 400,
                               width: 500,
-                              bgcolor: 'appmain.main',
+                              bgcolor: 'common.white',
                               boxShadow: 24,
                               p: 5,
                               display: 'flex',
@@ -1099,7 +1110,7 @@ function DefaultAppBar() {
                                 transform: 'translate(-50%, -50%)',
                                 height: 400,
                                 width: 500,
-                                bgcolor: 'appmain.main',
+                                bgcolor: 'common.white',
                                 boxShadow: 24,
                                 p: 5,
                                 display: 'flex',

@@ -12,7 +12,6 @@ import ErrorPage from './pages/ErrorPage';
 import Footer from './components/Footer';
 import Cart from './pages/Cart';
 import Contact from './pages/Contact';
-import Products from './pages/Products';
 import ProductDetail from './pages/ProductDetail';
 import Checkout from './pages/Checkout';
 import AccountDetails from './pages/AccountDetails';
@@ -26,6 +25,9 @@ import CreatePassword from './pages/CreatePassword';
 import MyOrders from './pages/MyOrders';
 import MyWishLists from './pages/MyWishlists';
 import MyAddress from './pages/MyAddress';
+import Kurties from './pages/Kurties';
+import Salwars from './pages/Salwars';
+import Palazzoes from './pages/Palazzoes';
 
 const defaultTheme = createTheme({
   typography: {
@@ -73,7 +75,9 @@ function App() {
           <Route path="/about" element={<AboutUs />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/products" element={<Products />} />
+          <Route path="/kurties" element={<Kurties />} />
+          <Route path="/palazzoes" element={<Palazzoes />} />
+          <Route path="/salwars" element={<Salwars />} />
           <Route path="/detail/:title" element={<ProductDetail />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/paymentSuccess" element={<PaymentSuccess />} />

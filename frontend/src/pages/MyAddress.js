@@ -192,7 +192,7 @@ export default function MyAddress() {
               width: '250px',
               '&:hover': {
                 backgroundColor: 'primary.dark',
-                color: 'appmain.main',
+                color: 'common.white',
               },
               backgroundColor: 'secondary.main',
               color: 'appmain.dark',

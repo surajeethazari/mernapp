@@ -42,7 +42,7 @@ const SearchIconWrapper = styled('div')(({ theme }) => ({
 }));
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: theme.palette.appmain.main,
+  color: theme.palette.common.white,
   width: '100%',
   '& .MuiInputBase-input': {
     padding: theme.spacing(1, 1, 1, 0),
@@ -54,6 +54,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export default function Footer() {
   const theme = useTheme();
+  console.log(theme);
   const location = useLocation();
 
   return (
@@ -74,23 +75,23 @@ export default function Footer() {
           sx={{ flexDirection: { xs: 'column', md: 'row' } }}
         >
           <Box display="flex" width={300} flexDirection={'column'}>
-            <Typography variant="h4" color="appmain.main">
+            <Typography variant="h4" color="common.white">
               Contact Us
             </Typography>
             <Box display="flex" flexDirection={'row'} sx={{ marginTop: 1 }}>
-              <WhereToVoteIcon sx={{ color: 'appmain.main' }} />
+              <WhereToVoteIcon sx={{ color: 'common.white' }} />
               <Box
                 display="flex"
                 flexDirection={'column'}
                 sx={{ marginLeft: 2 }}
               >
-                <Typography variant="h6" color="appmain.main">
+                <Typography variant="h6" color="common.white">
                   106, Chaklalpur,
                 </Typography>
-                <Typography variant="h6" color="appmain.main">
+                <Typography variant="h6" color="common.white">
                   Radhamohanpur,
                 </Typography>
-                <Typography variant="h6" color="appmain.main">
+                <Typography variant="h6" color="common.white">
                   West Bengal - 721160
                 </Typography>
               </Box>
@@ -101,11 +102,11 @@ export default function Footer() {
               flexDirection={'row'}
               sx={{ marginTop: '5px' }}
             >
-              <EmailIcon sx={{ color: 'appmain.main' }} />
+              <EmailIcon sx={{ color: 'common.white' }} />
               <Typography
                 sx={{ marginLeft: 2 }}
                 variant="h6"
-                color="appmain.main"
+                color="common.white"
               >
                 sonanlifashioninfo@gmail.com
               </Typography>
@@ -116,11 +117,11 @@ export default function Footer() {
               flexDirection={'row'}
               sx={{ marginTop: '5px' }}
             >
-              <PhoneIcon sx={{ color: 'appmain.main' }} />
+              <PhoneIcon sx={{ color: 'common.white' }} />
               <Typography
                 sx={{ marginLeft: 2 }}
                 variant="h6"
-                color="appmain.main"
+                color="common.white"
               >
                 +91 8900162177
               </Typography>
@@ -131,7 +132,7 @@ export default function Footer() {
             flexDirection={'column'}
             sx={{ marginTop: { xs: '20px', md: 0 } }}
           >
-            <Typography variant="h4" color="appmain.main">
+            <Typography variant="h4" color="common.white">
               Information
             </Typography>
             {[
@@ -153,7 +154,7 @@ export default function Footer() {
                   textDecoration: 'none',
                   fontSize: '18px',
                   letterSpacing: '.rem',
-                  color: theme.palette.appmain.main,
+                  color: theme.palette.common.white,
                   textDecoration: 'none',
                 }}
               >
@@ -166,15 +167,15 @@ export default function Footer() {
             flexDirection={'column'}
             sx={{ marginTop: { xs: '20px', md: 0 } }}
           >
-            <Typography variant="h4" color="appmain.main">
+            <Typography variant="h4" color="common.white">
               Newsletter Sign Up
             </Typography>
-            <Typography sx={{ marginTop: 1 }} variant="h6" color="appmain.main">
+            <Typography sx={{ marginTop: 1 }} variant="h6" color="common.white">
               Subscribe to our newsletter and get latest offers and news.
             </Typography>
             <Search sx={{ marginTop: 2 }}>
               <SearchIconWrapper>
-                <EmailIcon sx={{ color: 'appmain.main' }} />
+                <EmailIcon sx={{ color: 'common.white' }} />
               </SearchIconWrapper>
               <StyledInputBase
                 placeholder="Enter Mail ID"
@@ -182,7 +183,7 @@ export default function Footer() {
               />
             </Search>
 
-            <Typography sx={{ marginTop: 1 }} variant="h6" color="appmain.main">
+            <Typography sx={{ marginTop: 1 }} variant="h6" color="common.white">
               Follow Us:
             </Typography>
             <Box display="flex" flexDirection={'row'} sx={{ marginTop: 1 }}>
@@ -192,7 +193,7 @@ export default function Footer() {
                   cursor: 'pointer',
                 }}
               >
-                <FacebookIcon sx={{ color: 'appmain.main' }} />
+                <FacebookIcon sx={{ color: 'common.white' }} />
               </Link>
               <Link
                 to=""
@@ -200,7 +201,7 @@ export default function Footer() {
                   cursor: 'pointer',
                 }}
               >
-                <YouTubeIcon sx={{ color: 'appmain.main', marginLeft: 1 }} />
+                <YouTubeIcon sx={{ color: 'common.white', marginLeft: 1 }} />
               </Link>
               <Link
                 to=""
@@ -208,12 +209,12 @@ export default function Footer() {
                   cursor: 'pointer',
                 }}
               >
-                <InstagramIcon sx={{ color: 'appmain.main', marginLeft: 1 }} />
+                <InstagramIcon sx={{ color: 'common.white', marginLeft: 1 }} />
               </Link>
             </Box>
           </Box>
         </Box>
-        <Divider sx={{ backgroundColor: theme.palette.appmain.main }}></Divider>
+        <Divider sx={{ backgroundColor: theme.palette.common.white }}></Divider>
         <Box
           alignItems={'center'}
           display="flex"
@@ -222,7 +223,7 @@ export default function Footer() {
           py={2}
           sx={{ flexDirection: { xs: 'column', md: 'row' } }}
         >
-          <Typography variant="h6" color="appmain.main" align="center">
+          <Typography variant="h6" color="common.white" align="center">
             {'Copyright © '}
             Sonali Fashion
             {new Date().getFullYear()}

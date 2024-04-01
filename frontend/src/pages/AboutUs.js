@@ -154,7 +154,7 @@ export default function AboutUs() {
                 }}
               >
                 <Typography
-                  color={'appmain.main'}
+                  color={'common.white'}
                   align="center"
                   variant="h6"
                   component="div"

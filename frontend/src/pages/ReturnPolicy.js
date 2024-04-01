@@ -34,7 +34,7 @@ export default function ReturnPolicy() {
       <Container component="main" maxWidth="xl">
         <Box display="flex" flexDirection={'column'} mt={5} mb={5} sx={{}}>
           <Typography
-            color={'appmain.main'}
+            color={'common.white'}
             variant="h6"
             component="div"
             sx={{

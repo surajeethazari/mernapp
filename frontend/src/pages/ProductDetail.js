@@ -218,7 +218,7 @@ export default function ProductDetail(props) {
                     left: 0,
                     top: 0,
                     zIndex: 999,
-                    backgroundColor: 'appmain.main',
+                    backgroundColor: 'common.white',
                     boxShadow: '0 0 10px rgba(0, 0, 0, 0.2)',
                   }}
                 >
@@ -359,7 +359,7 @@ export default function ProductDetail(props) {
                     left: 0,
                     bottom: 0,
                     zIndex: 999,
-                    backgroundColor: 'appmain.main',
+                    backgroundColor: 'common.white',
                     boxShadow: '0 0 10px rgba(0, 0, 0, 0.2)',
                   }}
                 >
@@ -407,7 +407,7 @@ export default function ProductDetail(props) {
                         sx={{
                           '&:hover': {
                             backgroundColor: 'primary.dark',
-                            color: 'appmain.main',
+                            color: 'common.white',
                           },
                           backgroundColor: 'primary.light',
                           color: 'primary.dark',

@@ -27,7 +27,7 @@ export default function CreatePassword(props) {
     <Container maxWidth="xl">
       <Box
         sx={{
-          bgcolor: 'appmain.main',
+          bgcolor: 'common.white',
           boxShadow: 2,
           p: 5,
           marginTop: '120px',

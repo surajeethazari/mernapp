@@ -40,7 +40,7 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import InfoIcon from '@mui/icons-material/Info';
 import StarIcon from '@mui/icons-material/Star';
-import KurtiBanner from '../assets/images/KurtiBanner.jpg';
+import PalazzoBanner from '../assets/images/PalazzoBanner.jpg';
 
 const colorTypes = [
   'White',
@@ -63,11 +63,11 @@ function valuetext(value) {
   return `${value} /-`;
 }
 
-export default function Products() {
+export default function Palazzoes() {
   const [value, setValue] = React.useState([0, 100]);
   let crumbs = [
     { name: 'Home', trigger: '/', active: true },
-    { name: 'Collection', trigger: '/products', active: false },
+    { name: 'Palazzo Suits', trigger: '/palazzoes', active: false },
   ];
 
   const navigate = useNavigate();
@@ -107,7 +107,7 @@ export default function Products() {
         sx={{ marginTop: 8 }}
         component="img"
         height="400"
-        image={KurtiBanner}
+        image={PalazzoBanner}
         alt="Image Title"
       />
       <Box sx={{ padding: 2, backgroundColor: 'primary.light' }}>
@@ -144,7 +144,7 @@ export default function Products() {
             >
               {Constants.sortByText}:
             </Typography>
-            <List sx={{ bgcolor: 'appmain.main', marginLeft: 1, width: 150 }}>
+            <List sx={{ bgcolor: 'common.white', marginLeft: 1, width: 150 }}>
               <ListItemButton
                 sx={{ boxShadow: '0 0 10px rgba(0, 0, 0, 0.2)' }}
                 onClick={handleClickListItem}
@@ -173,7 +173,7 @@ export default function Products() {
             </Menu>
             <IconButton
               sx={{
-                color: 'appmain.main',
+                color: 'common.white',
                 bgcolor: 'primary.main',
                 marginLeft: 1,
                 '&:hover': { color: 'secondary.main' },
@@ -283,7 +283,7 @@ export default function Products() {
             sx={{ width: { xs: '100%', md: '75%' } }}
           >
             <Masonry
-              sx={{ marginTop: 1 }}
+              sx={{ marginTop: 1, height: 1300, overflow: 'hidden' }}
               columns={{ md: 3, xs: 2 }}
               spacing={3}
             >
@@ -293,7 +293,7 @@ export default function Products() {
                     <CardContent
                       sx={{
                         padding: 0,
-                        backgroundColor: 'appmain.main',
+                        backgroundColor: 'common.white',
                       }}
                     >
                       <Box sx={{ overflow: 'hidden' }}>
@@ -354,7 +354,7 @@ export default function Products() {
                               width: '55px',
                               height: '40px',
                               borderRadius: '5px 5px 5px 5px',
-                              color: 'appmain.main',
+                              color: 'common.white',
                               '&:hover': {
                                 color: 'common.black',
                                 backgroundColor: 'transparent',
@@ -393,7 +393,7 @@ export default function Products() {
                               width: '55px',
                               height: '40px',
                               borderRadius: '5px 5px 5px 5px',
-                              color: 'appmain.main',
+                              color: 'common.white',
                               '&:hover': {
                                 color: 'common.black',
                                 backgroundColor: 'transparent',
@@ -432,7 +432,7 @@ export default function Products() {
                               width: '55px',
                               height: '40px',
                               borderRadius: '5px 5px 5px 5px',
-                              color: 'appmain.main',
+                              color: 'common.white',
                               '&:hover': {
                                 color: 'common.black',
                                 backgroundColor: 'transparent',

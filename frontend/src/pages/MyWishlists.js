@@ -99,7 +99,7 @@ export default function MyWishLists() {
               <Box key={index} sx={{ height: item.height + 100 }}>
                 <Card>
                   <CardContent
-                    sx={{ padding: 0, backgroundColor: 'appmain.main' }}
+                    sx={{ padding: 0, backgroundColor: 'common.white' }}
                   >
                     <CardMedia
                       onClick={() => onProductTitleClick(item)}
@@ -147,7 +147,7 @@ export default function MyWishLists() {
                             width: '55px',
                             height: '40px',
                             borderRadius: '5px 5px 5px 5px',
-                            color: 'appmain.main',
+                            color: 'common.white',
                             '&:hover': {
                               color: 'common.black',
                               backgroundColor: 'transparent',
@@ -186,7 +186,7 @@ export default function MyWishLists() {
                             width: '55px',
                             height: '40px',
                             borderRadius: '5px 5px 5px 5px',
-                            color: 'appmain.main',
+                            color: 'common.white',
                             '&:hover': {
                               color: 'common.black',
                               backgroundColor: 'transparent',
@@ -225,7 +225,7 @@ export default function MyWishLists() {
                             width: '55px',
                             height: '40px',
                             borderRadius: '5px 5px 5px 5px',
-                            color: 'appmain.main',
+                            color: 'common.white',
                             '&:hover': {
                               color: 'common.black',
                               backgroundColor: 'transparent',

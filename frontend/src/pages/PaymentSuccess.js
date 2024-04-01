@@ -257,10 +257,10 @@ export default function PaymentSuccess() {
               sx={{
                 '&:hover': {
                   backgroundColor: 'primary.dark',
-                  color: 'appmain.main',
+                  color: 'common.white',
                 },
                 backgroundColor: 'secondary.dark',
-                color: 'appmain.main',
+                color: 'common.white',
               }}
             >
               {Constants.continueShoppingText}

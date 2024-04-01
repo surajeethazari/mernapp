@@ -98,7 +98,7 @@ export default function Checkout() {
               borderColor: activeStep
                 ? theme.palette.tertiary.main
                 : theme.palette.primary.main,
-              backgroundColor: theme.palette.appmain.main,
+              backgroundColor: theme.palette.common.white,
               borderStyle: 'solid',
               borderRadius: '0% 0% 45% 45%',
             }}
@@ -161,7 +161,7 @@ export default function Checkout() {
               borderColor: !activeStep
                 ? theme.palette.tertiary.main
                 : theme.palette.primary.main,
-              backgroundColor: theme.palette.appmain.main,
+              backgroundColor: theme.palette.common.white,
               borderStyle: 'solid',
               borderRadius: '0% 0% 45% 45%',
             }}
