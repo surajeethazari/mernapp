@@ -594,10 +594,15 @@ function DefaultAppBar() {
                 open={openDrawer}
                 onClose={toggleDrawerHandler(false)}
               >
-                <Box height={'100%'} sx={{ overflowY: 'auto' }}>
+                <Box
+                  height={'100%'}
+                  sx={{
+                    overflowY: 'auto',
+                  }}
+                >
                   <Box
-                    height={80}
-                    width={'100%'}
+                    height={50}
+                    width={'95%'}
                     display="flex"
                     alignItems={'center'}
                     justifyContent={'space-between'}
@@ -608,21 +613,20 @@ function DefaultAppBar() {
                       top: 0,
                       zIndex: 999,
                       backgroundColor: 'common.white',
-                      boxShadow: '0 0 10px rgba(0, 0, 0, 0.2)',
                     }}
                   >
                     <Typography
                       component={'div'}
-                      variant="h5"
+                      variant="h6"
                       color={'primary.dark'}
                       sx={{
                         fontWeight: '400',
                         fontWeight: 'bold',
                         marginTop: '5px',
-                        marginLeft: '10px',
+                        marginLeft: '25px',
                       }}
                     >
-                      Shopping Cart
+                      Cart
                     </Typography>
                     <IconButton
                       onClick={toggleDrawerHandler(false)}
@@ -637,7 +641,10 @@ function DefaultAppBar() {
                     direction={'column'}
                     spacing={1}
                     padding={1}
-                    sx={{ marginBottom: '200px', marginTop: '80px' }}
+                    sx={{
+                      position: 'relative',
+                      top: 30,
+                    }}
                   >
                     {data.map((item, index) => (
                       <Box
@@ -741,7 +748,7 @@ function DefaultAppBar() {
                   </Stack>
                   <Box
                     display="flex"
-                    width={'100%'}
+                    width={'95%'}
                     flexDirection={'column'}
                     sx={{
                       position: 'absolute',
@@ -749,7 +756,6 @@ function DefaultAppBar() {
                       bottom: 0,
                       zIndex: 999,
                       backgroundColor: 'common.white',
-                      boxShadow: '0 0 10px rgba(0, 0, 0, 0.2)',
                     }}
                   >
                     <Box
@@ -779,7 +785,7 @@ function DefaultAppBar() {
                       display="flex"
                       justifyContent={'space-between'}
                       flexDirection={'column'}
-                      sx={{ marginTop: 1, padding: 2 }}
+                      sx={{ padding: 2 }}
                     >
                       <Link
                         to="/cart"

@@ -9,6 +9,7 @@ import {
   CardMedia,
   Container,
   Divider,
+  Grow,
   IconButton,
   Pagination,
   PaginationItem,
@@ -29,6 +30,7 @@ import MyAcccountSidePanel from '../components/MyAcccountSidePanel';
 import Masonry from '@mui/lab/Masonry';
 
 export default function MyWishLists() {
+  const [imageSectionShow, setImageSectionShow] = React.useState(0);
   const theme = useTheme();
   const navigate = useNavigate();
   let crumbs = [
@@ -101,143 +103,161 @@ export default function MyWishLists() {
                   <CardContent
                     sx={{ padding: 0, backgroundColor: 'common.white' }}
                   >
-                    <CardMedia
-                      onClick={() => onProductTitleClick(item)}
-                      component="img"
-                      height={item.height}
-                      image={item.img}
-                      alt="Image Title"
-                      sx={{ cursor: 'pointer' }}
-                    />
                     <Box
-                      sx={{
-                        marginTop: -9,
-                        backgroundColor: '#ffffff9e',
-                        position: 'relative',
-                        zIndex: 999,
-                        padding: 2,
-                      }}
-                      display={'flex'}
-                      flexDirection={'row'}
-                      justifyContent={'space-around'}
+                      onMouseEnter={() => setImageSectionShow(index + 1)}
+                      onMouseLeave={() => setImageSectionShow(0)}
+                      sx={{ overflow: 'hidden' }}
                     >
-                      <Tooltip
-                        componentsProps={{
-                          tooltip: {
-                            sx: {
-                              bgcolor: 'common.black',
-                            },
-                          },
-                          arrow: {
-                            sx: {
-                              color: 'common.black',
-                            },
-                          },
-                        }}
-                        TransitionComponent={Zoom}
-                        arrow
-                        title="Add To Cart"
-                      >
-                        <IconButton
-                          size="medium"
-                          aria-label="search"
-                          sx={{
-                            p: 1,
-                            backgroundColor: 'common.black',
-                            width: '55px',
-                            height: '40px',
-                            borderRadius: '5px 5px 5px 5px',
-                            color: 'common.white',
-                            '&:hover': {
-                              color: 'common.black',
-                              backgroundColor: 'transparent',
-                              borderWidth: 2,
-                              borderStyle: 'solid',
-                              borderColor: 'secondary.main',
-                            },
-                          }}
-                        >
-                          <AddShoppingCartIcon />
-                        </IconButton>
-                      </Tooltip>
-                      <Tooltip
-                        componentsProps={{
-                          tooltip: {
-                            sx: {
-                              bgcolor: 'common.black',
-                            },
-                          },
-                          arrow: {
-                            sx: {
-                              color: 'common.black',
-                            },
+                      <CardMedia
+                        onClick={() => onProductTitleClick(item)}
+                        component="img"
+                        height={item.height}
+                        image={item.img}
+                        alt="Image Title"
+                        sx={{
+                          cursor: 'pointer',
+                          transform: 'scale(1)',
+                          transformOrigin: '50% 50%',
+                          transition: '0.5s ease-in-out',
+                          '&:hover': {
+                            transform: 'scale(1.2)',
                           },
                         }}
-                        TransitionComponent={Zoom}
-                        arrow
-                        title="Information"
-                      >
-                        <IconButton
-                          size="medium"
-                          aria-label="search"
+                      />
+                      <Grow in={imageSectionShow === index + 1}>
+                        <Box
                           sx={{
-                            p: 1,
-                            backgroundColor: 'common.black',
-                            width: '55px',
-                            height: '40px',
-                            borderRadius: '5px 5px 5px 5px',
-                            color: 'common.white',
-                            '&:hover': {
-                              color: 'common.black',
-                              backgroundColor: 'transparent',
-                              borderWidth: 2,
-                              borderStyle: 'solid',
-                              borderColor: 'secondary.main',
-                            },
+                            marginTop: -9,
+                            backgroundColor: '#ffffff9e',
+                            borderTopLeftRadius: 10,
+                            borderTopRightRadius: 10,
+                            position: 'relative',
+                            zIndex: 999,
+                            padding: 2,
                           }}
+                          display={'flex'}
+                          flexDirection={'row'}
+                          justifyContent={'space-around'}
                         >
-                          <InfoIcon />
-                        </IconButton>
-                      </Tooltip>
-                      <Tooltip
-                        componentsProps={{
-                          tooltip: {
-                            sx: {
-                              bgcolor: 'common.black',
-                            },
-                          },
-                          arrow: {
-                            sx: {
-                              color: 'common.black',
-                            },
-                          },
-                        }}
-                        TransitionComponent={Zoom}
-                        arrow
-                        title="Remove From Wishlists"
-                      >
-                        <IconButton
-                          size="medium"
-                          aria-label="search"
-                          sx={{
-                            p: 1,
-                            backgroundColor: 'common.black',
-                            width: '55px',
-                            height: '40px',
-                            borderRadius: '5px 5px 5px 5px',
-                            color: 'common.white',
-                            '&:hover': {
-                              color: 'common.black',
-                              backgroundColor: 'transparent',
-                              borderWidth: 2,
-                              borderStyle: 'solid',
-                              borderColor: 'secondary.main',
-                            },
-                          }}
-                        >
-                          <DeleteSweepIcon />
-                        </IconButton>
-                      </Tooltip>
+                          <Tooltip
+                            componentsProps={{
+                              tooltip: {
+                                sx: {
+                                  bgcolor: 'common.black',
+                                },
+                              },
+                              arrow: {
+                                sx: {
+                                  color: 'common.black',
+                                },
+                              },
+                            }}
+                            TransitionComponent={Zoom}
+                            arrow
+                            title="Add To Cart"
+                          >
+                            <IconButton
+                              size="medium"
+                              aria-label="search"
+                              sx={{
+                                p: 1,
+                                backgroundColor: 'common.black',
+                                width: '55px',
+                                height: '40px',
+                                borderRadius: '5px 5px 5px 5px',
+                                color: 'common.white',
+                                '&:hover': {
+                                  color: 'common.black',
+                                  backgroundColor: 'transparent',
+                                  borderWidth: 2,
+                                  borderStyle: 'solid',
+                                  borderColor: 'secondary.main',
+                                },
+                              }}
+                            >
+                              <AddShoppingCartIcon />
+                            </IconButton>
+                          </Tooltip>
+                          <Tooltip
+                            componentsProps={{
+                              tooltip: {
+                                sx: {
+                                  bgcolor: 'common.black',
+                                },
+                              },
+                              arrow: {
+                                sx: {
+                                  color: 'common.black',
+                                },
+                              },
+                            }}
+                            TransitionComponent={Zoom}
+                            arrow
+                            title="Information"
+                          >
+                            <IconButton
+                              size="medium"
+                              aria-label="search"
+                              sx={{
+                                p: 1,
+                                backgroundColor: 'common.black',
+                                width: '55px',
+                                height: '40px',
+                                borderRadius: '5px 5px 5px 5px',
+                                color: 'common.white',
+                                '&:hover': {
+                                  color: 'common.black',
+                                  backgroundColor: 'transparent',
+                                  borderWidth: 2,
+                                  borderStyle: 'solid',
+                                  borderColor: 'secondary.main',
+                                },
+                              }}
+                            >
+                              <InfoIcon />
+                            </IconButton>
+                          </Tooltip>
+                          <Tooltip
+                            componentsProps={{
+                              tooltip: {
+                                sx: {
+                                  bgcolor: 'common.black',
+                                },
+                              },
+                              arrow: {
+                                sx: {
+                                  color: 'common.black',
+                                },
+                              },
+                            }}
+                            TransitionComponent={Zoom}
+                            arrow
+                            title="Remove From Wishlists"
+                          >
+                            <IconButton
+                              size="medium"
+                              aria-label="search"
+                              sx={{
+                                p: 1,
+                                backgroundColor: 'common.black',
+                                width: '55px',
+                                height: '40px',
+                                borderRadius: '5px 5px 5px 5px',
+                                color: 'common.white',
+                                '&:hover': {
+                                  color: 'common.black',
+                                  backgroundColor: 'transparent',
+                                  borderWidth: 2,
+                                  borderStyle: 'solid',
+                                  borderColor: 'secondary.main',
+                                },
+                              }}
+                            >
+                              <DeleteSweepIcon />
+                            </IconButton>
+                          </Tooltip>
+                        </Box>
+                      </Grow>
                     </Box>
                     <Box
                       display={'flex'}

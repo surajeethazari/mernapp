@@ -197,7 +197,7 @@ export default function Kurties() {
             flexDirection={'column'}
             sx={{
               display: { xs: 'none', md: 'flex' },
-              width: { xs: '0%', md: '22%' },
+              width: { xs: '0%', md: '20%' },
             }}
           >
             <Typography
@@ -275,16 +275,15 @@ export default function Kurties() {
             </FormGroup>
           </Box>
           <Box
-            width={'75%'}
             display="flex"
             alignItems={'center'}
             flexDirection={'column'}
             m={1}
-            sx={{ width: { xs: '100%', md: '75%' } }}
+            sx={{ width: { xs: '100%', md: '78%' } }}
           >
             <Masonry
-              sx={{ marginTop: 1, height: 1300, overflow: 'hidden' }}
-              columns={{ md: 3, xs: 2 }}
+              sx={{ marginTop: 1, overflow: 'hidden' }}
+              columns={{ md: 4, xs: 2 }}
               spacing={3}
             >
               {data.map((item, index) => (
