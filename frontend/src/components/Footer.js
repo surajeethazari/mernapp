@@ -54,7 +54,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export default function Footer() {
   const theme = useTheme();
-  console.log(theme);
   const location = useLocation();
 
   return (

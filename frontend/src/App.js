@@ -5,6 +5,7 @@ import Link from '@mui/material/Link';
 import { useEffect, useState } from 'react';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import './App.css';
 
 import Home from './pages/Home';
 import DefaultAppBar from './components/Appbar';
