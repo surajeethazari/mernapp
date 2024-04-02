@@ -17,7 +17,7 @@ import PermIdentityIcon from '@mui/icons-material/PermIdentity';
 import StarOutlineIcon from '@mui/icons-material/StarOutline';
 import ShoppingCartCheckoutIcon from '@mui/icons-material/ShoppingCartCheckout';
 import CloseRounded from '@mui/icons-material/CloseRounded';
-import data from '../assets/data/featuredCollection.json';
+import { data } from '../assets/data/featuredCollection';
 import Zoom from '@mui/material/Zoom';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import BorderColorIcon from '@mui/icons-material/BorderColor';

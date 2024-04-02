@@ -24,7 +24,7 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import DeleteSweepIcon from '@mui/icons-material/DeleteSweep';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import InfoIcon from '@mui/icons-material/Info';
-import data from '../assets/data/featuredCollection.json';
+import { data } from '../assets/data/featuredCollection';
 import MyAcccountSidePanel from '../components/MyAcccountSidePanel';
 import Masonry from '@mui/lab/Masonry';
 

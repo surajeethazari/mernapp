@@ -1,7 +1,9 @@
 let Constants = {
   signInText: 'Sign In',
   signUpText: 'Sign Up',
+  newArrivalText: 'New Arrivals',
   featuredProductText: 'Featured Products',
+  faqText: 'FAQS',
   //Shoppping Cart
   shoppingCartText: 'Shopping Cart',
   shoppingCartEmptyText: 'your cart is empty!',

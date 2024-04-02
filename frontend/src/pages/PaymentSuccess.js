@@ -15,7 +15,7 @@ import BreadCrumbs from '../components/BreadCrumbs';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
 import Masonry from '@mui/lab/Masonry';
 import CheckCircleOutlined from '@mui/icons-material/CheckCircleOutlined';
-import data from '../assets/data/featuredCollection.json';
+import { data } from '../assets/data/featuredCollection';
 import ArrowForwardTwoTone from '@mui/icons-material/ArrowForwardTwoTone';
 import Constants from '../utils/Constants';
 

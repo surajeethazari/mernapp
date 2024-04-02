@@ -2,15 +2,18 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import CardMedia from '@mui/material/CardMedia';
-import DISCOUNT from '../assets/images/DISCOUNT.png';
 import KurtiBanner from '../assets/images/KurtiBanner.jpg';
 import PalazzoBanner from '../assets/images/PalazzoBanner.jpg';
 import SalwarBanner from '../assets/images/SalwarBanner.png';
-import Slider from 'react-slick';
 import { Carousel } from 'antd';
 import Masonry from '@mui/lab/Masonry';
 import Typography from '@mui/material/Typography';
+import AddIcon from '@mui/icons-material/Add';
+import RemoveIcon from '@mui/icons-material/Remove';
 import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
   Button,
   Card,
   CardActions,
@@ -24,17 +27,132 @@ import {
 } from '@mui/material';
 import Constants from '../utils/Constants';
 import { useTheme } from '@mui/material/styles';
-import data from '../assets/data/featuredCollection.json';
+import { data } from '../assets/data/featuredCollection';
 import { useNavigate, NavLink, Link } from 'react-router-dom';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import InfoIcon from '@mui/icons-material/Info';
 import StarIcon from '@mui/icons-material/Star';
 import Grow from '@mui/material/Grow';
+import Slider from 'react-slick';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 
 export default function Home(props) {
+  var settings = {
+    dots: false,
+    infinite: true,
+    autoplay: true,
+    speed: 500,
+    autoplaySpeed: 2000,
+    slidesToShow: 5,
+    slidesToScroll: 1,
+    initialSlide: 0,
+    nextArrow: (
+      <ArrowForwardIosIcon
+        sx={{
+          color: 'primary.main',
+          fontSize: 25,
+          '&:hover': { color: 'secondary.main' },
+        }}
+      />
+    ),
+    prevArrow: (
+      <ArrowBackIosIcon
+        sx={{
+          color: 'primary.main',
+          fontSize: 25,
+          '&:hover': { color: 'secondary.main' },
+        }}
+      />
+    ),
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+          infinite: true,
+          dots: true,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          initialSlide: 0,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
+  };
+
+  const newArrivalSettings = {
+    dots: false,
+    infinite: true,
+    autoplay: true,
+    speed: 500,
+    autoplaySpeed: 2000,
+    slidesToShow: 5,
+    slidesToScroll: 1,
+    initialSlide: 5,
+    nextArrow: (
+      <ArrowForwardIosIcon
+        sx={{
+          color: 'primary.main',
+          fontSize: 25,
+          '&:hover': { color: 'secondary.main' },
+        }}
+      />
+    ),
+    prevArrow: (
+      <ArrowBackIosIcon
+        sx={{
+          color: 'primary.main',
+          fontSize: 25,
+          '&:hover': { color: 'secondary.main' },
+        }}
+      />
+    ),
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+          infinite: true,
+          dots: true,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          initialSlide: 0,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
+  };
   const navigate = useNavigate();
   const theme = useTheme();
-  const [imageSectionShow, setImageSectionShow] = React.useState(0);
+  const [imageSectionShowFeatured, setImageSectionShowFeatured] =
+    React.useState(0);
+  const [imageSectionShowNew, setImageSectionShowNew] = React.useState(0);
+  const [expanded, setExpanded] = React.useState(false);
   const onProductTitleClick = (item) => {
     navigate('/detail/' + item.title, {
       state: {
@@ -44,9 +162,19 @@ export default function Home(props) {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const handleAccordionChange = (panel) => (event, isExpanded) => {
+    setExpanded(isExpanded ? panel : false);
+  };
+
   return (
     <Box sx={{ marginTop: 8, marginBottom: 5 }}>
-      <Carousel dotPosition="bottom" autoplay effect="fade" dots="false">
+      <Carousel
+        slidesToShow={2}
+        dotPosition="bottom"
+        autoplay
+        effect="fade"
+        dots="false"
+      >
         <CardMedia
           sx={{ cursor: 'pointer' }}
           onClick={() => navigate('/kurties')}
@@ -89,7 +217,7 @@ export default function Home(props) {
             alignItems="center"
             justifyContent="space-between"
             flexDirection={'row'}
-            width={450}
+            width={420}
           >
             <Box
               sx={{
@@ -116,9 +244,9 @@ export default function Home(props) {
               }}
             />
           </Box>
-          <Masonry sx={{ marginTop: 5 }} columns={{ md: 4, xs: 2 }} spacing={2}>
+          <Slider style={{ width: '100%' }} {...settings}>
             {data.map((item, index) => (
-              <Box key={index} sx={{ height: item.height + 100, width: 300 }}>
+              <Box key={index} sx={{ margin: 5 }}>
                 <Card>
                   <CardContent
                     sx={{
@@ -127,14 +255,15 @@ export default function Home(props) {
                     }}
                   >
                     <Box
-                      onMouseEnter={() => setImageSectionShow(index + 1)}
-                      onMouseLeave={() => setImageSectionShow(0)}
+                      onMouseEnter={() =>
+                        setImageSectionShowFeatured(index + 1)
+                      }
+                      onMouseLeave={() => setImageSectionShowFeatured(0)}
                       sx={{ overflow: 'hidden' }}
                     >
                       <CardMedia
                         onClick={() => onProductTitleClick(item)}
                         component="img"
-                        height={item.height}
                         image={item.img}
                         alt="Image Title"
                         sx={{
@@ -143,11 +272,11 @@ export default function Home(props) {
                           transformOrigin: '50% 50%',
                           transition: '0.5s ease-in-out',
                           '&:hover': {
-                            transform: 'scale(1.2)',
+                            transform: 'scale(1.5)',
                           },
                         }}
                       />
-                      <Grow in={imageSectionShow === index + 1}>
+                      <Grow in={imageSectionShowFeatured === index + 1}>
                         <Box
                           sx={{
                             marginTop: -9,
@@ -316,7 +445,358 @@ export default function Home(props) {
                 </Card>
               </Box>
             ))}
-          </Masonry>
+          </Slider>
+        </Box>
+
+        <Box
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+          flexDirection={'column'}
+          m={2}
+          sx={{}}
+        >
+          <Box
+            display="flex"
+            alignItems="center"
+            justifyContent="space-between"
+            flexDirection={'row'}
+            width={350}
+          >
+            <Box
+              sx={{
+                height: 3,
+                width: 100,
+                backgroundColor: 'common.black',
+                marginTop: 5,
+              }}
+            />
+            <Typography
+              mt={5}
+              variant="h5"
+              color={'common'}
+              sx={{ fontWeight: 'bold' }}
+            >
+              {Constants.newArrivalText}
+            </Typography>
+            <Box
+              sx={{
+                height: 3,
+                width: 100,
+                backgroundColor: 'common.black',
+                marginTop: 5,
+              }}
+            />
+          </Box>
+          <Slider style={{ width: '100%' }} {...newArrivalSettings}>
+            {data.map((item, index) => (
+              <Box key={index} sx={{ margin: 5 }}>
+                <Card>
+                  <CardContent
+                    sx={{
+                      padding: 0,
+                      backgroundColor: 'common.white',
+                    }}
+                  >
+                    <Box
+                      onMouseEnter={() => setImageSectionShowNew(index + 1)}
+                      onMouseLeave={() => setImageSectionShowNew(0)}
+                      sx={{ overflow: 'hidden' }}
+                    >
+                      <CardMedia
+                        onClick={() => onProductTitleClick(item)}
+                        component="img"
+                        image={item.img}
+                        alt="Image Title"
+                        sx={{
+                          cursor: 'pointer',
+                          transform: 'scale(1)',
+                          transformOrigin: '50% 50%',
+                          transition: '0.5s ease-in-out',
+                          '&:hover': {
+                            transform: 'scale(1.5)',
+                          },
+                        }}
+                      />
+                      <Grow in={imageSectionShowNew === index + 1}>
+                        <Box
+                          sx={{
+                            marginTop: -9,
+                            backgroundColor: '#ffffff9e',
+                            borderTopLeftRadius: 10,
+                            borderTopRightRadius: 10,
+                            position: 'relative',
+                            transition: '0.5s ease-in-out',
+                            zIndex: 999,
+                            padding: 2,
+                          }}
+                          display={'flex'}
+                          flexDirection={'row'}
+                          justifyContent={'space-around'}
+                        >
+                          <Tooltip
+                            componentsProps={{
+                              tooltip: {
+                                sx: {
+                                  bgcolor: 'common.black',
+                                },
+                              },
+                              arrow: {
+                                sx: {
+                                  color: 'common.black',
+                                },
+                              },
+                            }}
+                            TransitionComponent={Zoom}
+                            arrow
+                            title="Add To Cart"
+                          >
+                            <IconButton
+                              size="medium"
+                              aria-label="search"
+                              sx={{
+                                p: 1,
+                                backgroundColor: 'common.black',
+                                width: { md: '55px', sx: '35px' },
+                                height: { md: '40px', sx: '20px' },
+                                borderRadius: '5px 5px 5px 5px',
+                                color: 'common.white',
+                                '&:hover': {
+                                  color: 'common.black',
+                                  backgroundColor: 'transparent',
+                                  borderWidth: 2,
+                                  borderStyle: 'solid',
+                                  borderColor: 'secondary.main',
+                                },
+                              }}
+                            >
+                              <AddShoppingCartIcon />
+                            </IconButton>
+                          </Tooltip>
+                          <Tooltip
+                            componentsProps={{
+                              tooltip: {
+                                sx: {
+                                  bgcolor: 'common.black',
+                                },
+                              },
+                              arrow: {
+                                sx: {
+                                  color: 'common.black',
+                                },
+                              },
+                            }}
+                            TransitionComponent={Zoom}
+                            arrow
+                            title="Information"
+                          >
+                            <IconButton
+                              size="medium"
+                              aria-label="search"
+                              sx={{
+                                p: 1,
+                                backgroundColor: 'common.black',
+                                width: { md: '55px', sx: '35px' },
+                                height: { md: '40px', sx: '20px' },
+                                borderRadius: '5px 5px 5px 5px',
+                                color: 'common.white',
+                                '&:hover': {
+                                  color: 'common.black',
+                                  backgroundColor: 'transparent',
+                                  borderWidth: 2,
+                                  borderStyle: 'solid',
+                                  borderColor: 'secondary.main',
+                                },
+                              }}
+                            >
+                              <InfoIcon />
+                            </IconButton>
+                          </Tooltip>
+                          <Tooltip
+                            componentsProps={{
+                              tooltip: {
+                                sx: {
+                                  bgcolor: 'common.black',
+                                },
+                              },
+                              arrow: {
+                                sx: {
+                                  color: 'common.black',
+                                },
+                              },
+                            }}
+                            TransitionComponent={Zoom}
+                            arrow
+                            title="Add To Wishlists"
+                          >
+                            <IconButton
+                              size="medium"
+                              aria-label="search"
+                              sx={{
+                                p: 1,
+                                backgroundColor: 'common.black',
+                                width: { md: '55px', sx: '35px' },
+                                height: { md: '40px', sx: '20px' },
+                                borderRadius: '5px 5px 5px 5px',
+                                color: 'common.white',
+                                '&:hover': {
+                                  color: 'common.black',
+                                  backgroundColor: 'transparent',
+                                  borderWidth: 2,
+                                  borderStyle: 'solid',
+                                  borderColor: 'secondary.main',
+                                },
+                              }}
+                            >
+                              <StarIcon />
+                            </IconButton>
+                          </Tooltip>
+                        </Box>
+                      </Grow>
+                    </Box>
+                    <Box
+                      display={'flex'}
+                      flexDirection={'column'}
+                      sx={{ paddingLeft: 3, paddingRight: 3 }}
+                    >
+                      <Typography
+                        onClick={() => onProductTitleClick(item)}
+                        color={'primary.dark'}
+                        variant="h6"
+                        component="div"
+                        sx={{
+                          cursor: 'pointer',
+                          fontWeight: 'bold',
+                          '&:hover': {
+                            color: 'secondary.main',
+                          },
+                        }}
+                      >
+                        {item.title}
+                      </Typography>
+                      <Typography
+                        component={'div'}
+                        variant="body1"
+                        color={'primary.main'}
+                        sx={{ fontWeight: 'bold' }}
+                      >
+                        {item.Price}/-
+                      </Typography>
+                    </Box>
+                  </CardContent>
+                </Card>
+              </Box>
+            ))}
+          </Slider>
+        </Box>
+        <Box
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+          flexDirection={'column'}
+          m={2}
+          sx={{}}
+        >
+          <Box
+            display="flex"
+            alignItems="center"
+            justifyContent="space-between"
+            flexDirection={'row'}
+            width={268}
+          >
+            <Box
+              sx={{
+                height: 3,
+                width: 100,
+                backgroundColor: 'common.black',
+                marginTop: 5,
+              }}
+            />
+            <Typography
+              mt={5}
+              variant="h5"
+              color={'common'}
+              sx={{ fontWeight: 'bold' }}
+            >
+              {Constants.faqText}
+            </Typography>
+            <Box
+              sx={{
+                height: 3,
+                width: 100,
+                backgroundColor: 'common.black',
+                marginTop: 5,
+              }}
+            />
+          </Box>
+          <Box>
+            {[
+              {
+                text: 'What is Sonali Fashion, and what do you offer?',
+                innerText:
+                  'Sonali Fashion is a premier online destination for ethnic wear. We offer a wide range of traditional and contemporary Indian attire, including sarees, salwar kameez, lehengas, and more.',
+              },
+              {
+                text: 'How can I place an order on Sonali Fashion?',
+                innerText:
+                  'Ordering with Sonali Fashion is easy! Simply browse our collection, select your favourite items, and add them to your cart. Follow the checkout process to place your order.',
+              },
+              {
+                text: 'What payment methods are accepted on Sonali Fashion?',
+                innerText:
+                  'We accept payments via VISA/MASTER credit and debit cards, Phone pay, Google pay. We do not accept payments via ATM or interbank transfers.',
+              },
+              {
+                text: 'How can I track my order status?',
+                innerText:
+                  'Once your order has been shipped, you will receive email confirmation of your shipping details and a tracking number. You can additionally use the tracking details provided to you to track your order through our logistics partner.',
+              },
+              {
+                text: 'What is your return and exchange policy?',
+                innerText:
+                  'We are committed to maintaining a long-lasting relationship with our customers by providing them with 100% satisfaction. If you are unsatisfied with your purchase for any reason, we will take back the product. We have a generous 7-day no-questions-asked return policy.',
+              },
+              {
+                text: 'How can I get in touch with your customer support team?',
+                innerText:
+                  'We love to hear from you on our customer service, merchandise, website or any topics you want to share with us please get connected with you via telephone at +91-8900162177 from Monday to Saturday 11:00 AM - 6:00 PM and you can write us at sonanlifashioninfo@gmail.com',
+              },
+            ].map((item, index) => (
+              <Accordion
+                sx={{
+                  marginBottom: 1,
+                  boxShadow: 'none',
+                  padding: 0,
+                  '& .MuiAccordionSummary-content': {
+                    margin: 0,
+                  },
+                }}
+                spacing={1}
+                expanded={expanded === index}
+                onChange={handleAccordionChange(index)}
+                key={index}
+              >
+                <AccordionSummary
+                  expandIcon={expanded === index ? <RemoveIcon /> : <AddIcon />}
+                >
+                  <Typography
+                    variant="h6"
+                    sx={{ fontWeight: 'bold', color: 'secondary.dark' }}
+                  >
+                    {item.text}
+                  </Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                  <Typography
+                    variant="body2"
+                    sx={{ fontWeight: 'bold', color: 'primary.main' }}
+                  >
+                    {item.innerText}
+                  </Typography>
+                </AccordionDetails>
+              </Accordion>
+            ))}
+          </Box>
         </Box>
       </Container>
     </Box>

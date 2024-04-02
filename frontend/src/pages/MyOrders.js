@@ -18,7 +18,7 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import Email from '@mui/icons-material/Email';
-import data from '../assets/data/featuredCollection.json';
+import { data } from '../assets/data/featuredCollection';
 import MyAcccountSidePanel from '../components/MyAcccountSidePanel';
 
 export default function MyOrders() {

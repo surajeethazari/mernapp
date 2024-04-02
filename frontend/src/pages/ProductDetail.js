@@ -24,11 +24,10 @@ import ArrowForwardTwoTone from '@mui/icons-material/ArrowForwardTwoTone';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
-import data from '../assets/data/featuredCollection.json';
-
-function SlideTransition(props) {
-  return <Slide {...props} direction="up" />;
-}
+import { data } from '../assets/data/featuredCollection';
+import { Galleria } from 'primereact/galleria';
+import InnerImageZoom from 'react-inner-image-zoom';
+import 'react-inner-image-zoom/lib/InnerImageZoom/styles.min.css';
 
 export default function ProductDetail(props) {
   const navigate = useNavigate();
@@ -65,6 +64,42 @@ export default function ProductDetail(props) {
     setOpenDrawer(open);
   };
 
+  const itemTemplate = (item) => {
+    return (
+      <InnerImageZoom
+        style={{ width: '100%' }}
+        src={item.img}
+        alt={item.name}
+        zoomSrc={item.img}
+      />
+    );
+  };
+
+  const thumbnailTemplate = (item) => {
+    return (
+      <img
+        src={item.img}
+        alt={item.name}
+        style={{ width: 60, marginTop: 10 }}
+      />
+    );
+  };
+
+  const responsiveOptions = [
+    {
+      breakpoint: '991px',
+      numVisible: 4,
+    },
+    {
+      breakpoint: '767px',
+      numVisible: 3,
+    },
+    {
+      breakpoint: '575px',
+      numVisible: 1,
+    },
+  ];
+
   return (
     <div>
       <Container maxWidth="xl">
@@ -81,32 +116,29 @@ export default function ProductDetail(props) {
           width={'100%'}
           justifyContent={'space-between'}
           display="flex"
-          sx={{ marginTop: 5, flexDirection: { xs: 'column', md: 'row' } }}
+          sx={{
+            marginTop: 5,
+            marginBottom: 5,
+            flexDirection: { xs: 'column', md: 'row' },
+          }}
         >
           <Box
             display="flex"
             flexDirection={'column'}
-            sx={{ width: { xs: '100%', md: '48%' } }}
+            sx={{ width: { xs: '100%', md: '35%' } }}
           >
-            <Carousel dotPosition="right" autoplay effect="fade" dots="false">
-              <CardMedia
-                component="img"
-                height="500"
-                image={item.img}
-                alt="Image Title"
-              />
-              <CardMedia
-                component="img"
-                height="500"
-                image={item.img}
-                alt="Image Title"
-              />
-            </Carousel>
+            <Galleria
+              value={data}
+              responsiveOptions={responsiveOptions}
+              numVisible={5}
+              item={itemTemplate}
+              thumbnail={thumbnailTemplate}
+            />
           </Box>
           <Box
             display="flex"
             flexDirection={'column'}
-            sx={{ width: { xs: '100%', md: '48%', marginBottom: '100px' } }}
+            sx={{ width: { xs: '100%', md: '62%', marginBottom: '100px' } }}
           >
             <Typography
               color={'primary.main'}
@@ -187,9 +219,9 @@ export default function ProductDetail(props) {
             <Button
               onClick={toggleDrawerHandler(true)}
               type="submit"
-              fullWidth
               variant="contained"
               sx={{
+                width: '200px',
                 '&:hover': {
                   backgroundColor: 'primary.main',
                 },
