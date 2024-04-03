@@ -137,6 +137,7 @@ export default function MyWishLists() {
                           justifyContent={'space-around'}
                         >
                           <Tooltip
+                            placement="top"
                             componentsProps={{
                               tooltip: {
                                 sx: {
@@ -171,6 +172,7 @@ export default function MyWishLists() {
                             </IconButton>
                           </Tooltip>
                           <Tooltip
+                            placement="top"
                             componentsProps={{
                               tooltip: {
                                 sx: {

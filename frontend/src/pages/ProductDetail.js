@@ -13,9 +13,6 @@ import {
 } from '@mui/material';
 import React from 'react';
 import BreadCrumbs from '../components/BreadCrumbs';
-import Snackbar from '@mui/material/Snackbar';
-import Alert from '@mui/material/Alert';
-import { Carousel } from 'antd';
 import Constants from '../utils/Constants';
 import Slide from '@mui/material/Slide';
 import CloseRounded from '@mui/icons-material/CloseRounded';
@@ -25,11 +22,17 @@ import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import { data } from '../assets/data/featuredCollection';
-import { Galleria } from 'primereact/galleria';
 import InnerImageZoom from 'react-inner-image-zoom';
 import 'react-inner-image-zoom/lib/InnerImageZoom/styles.min.css';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/free-mode';
+import 'swiper/css/navigation';
+import 'swiper/css/thumbs';
+import { FreeMode, Navigation, Thumbs } from 'swiper/modules';
 
 export default function ProductDetail(props) {
+  const [thumbsSwiper, setThumbsSwiper] = React.useState(null);
   const navigate = useNavigate();
   const params = useParams();
   const obj = useLocation();
@@ -37,7 +40,7 @@ export default function ProductDetail(props) {
   const [item, setItem] = React.useState(obj.state.item);
   let crumbs = [
     { name: 'Home', trigger: '/', active: true },
-    { name: 'Collection', trigger: '/products', active: true },
+    { name: 'Kurties', trigger: '/kurties', active: true },
     { name: params.title, trigger: '/detail/' + params.title, active: false },
   ];
   const [open, setOpen] = React.useState(false);
@@ -125,20 +128,64 @@ export default function ProductDetail(props) {
           <Box
             display="flex"
             flexDirection={'column'}
-            sx={{ width: { xs: '100%', md: '35%' } }}
+            sx={{ width: { xs: '100%' } }}
           >
-            <Galleria
-              value={data}
-              responsiveOptions={responsiveOptions}
-              numVisible={5}
-              item={itemTemplate}
-              thumbnail={thumbnailTemplate}
-            />
+            <>
+              <Swiper
+                style={{
+                  width: '600px',
+                  '--swiper-navigation-color': '#fff',
+                  '--swiper-pagination-color': '#fff',
+                }}
+                spaceBetween={10}
+                navigation={true}
+                thumbs={{
+                  swiper:
+                    thumbsSwiper && !thumbsSwiper.destroyed
+                      ? thumbsSwiper
+                      : null,
+                }}
+                modules={[FreeMode, Navigation, Thumbs]}
+                className="mySwiper2"
+              >
+                {data.map((item, index) => (
+                  <SwiperSlide style={{ marginBottom: '5px' }} key={index}>
+                    <InnerImageZoom
+                      src={item.img}
+                      alt={item.name}
+                      zoomSrc={item.img}
+                    />
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+              <Swiper
+                style={{
+                  width: '600px',
+                }}
+                onSwiper={(swiper) => setThumbsSwiper(swiper)}
+                spaceBetween={10}
+                slidesPerView={5}
+                freeMode={true}
+                watchSlidesProgress={true}
+                modules={[FreeMode, Navigation, Thumbs]}
+                className="mySwiper"
+              >
+                {data.map((item, index) => (
+                  <SwiperSlide style={{ marginBottom: '5px' }} key={index}>
+                    <CardMedia
+                      component="img"
+                      image={item.img}
+                      alt={item.name}
+                    />
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+            </>
           </Box>
           <Box
             display="flex"
             flexDirection={'column'}
-            sx={{ width: { xs: '100%', md: '62%', marginBottom: '100px' } }}
+            sx={{ width: { xs: '100%' }, marginBottom: '100px' }}
           >
             <Typography
               color={'primary.main'}

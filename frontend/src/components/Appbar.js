@@ -43,6 +43,7 @@ import {
   LinearProgress,
   Modal,
   Popover,
+  Snackbar,
   Stack,
   SwipeableDrawer,
   TextField,
@@ -169,10 +170,25 @@ function DefaultAppBar() {
     navigate('/');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
+  const [openSnackbar, setOpenSnackbar] = React.useState(true);
 
   return (
     <ElevationScroll>
       <AppBar position="fixed" color="appmain">
+        <Snackbar
+          open={openSnackbar}
+          message="Flat 10% off Coupon Code: 'EXTRA10'"
+          action={
+            <IconButton
+              size="small"
+              aria-label="close"
+              color="inherit"
+              onClick={() => setOpenSnackbar(false)}
+            >
+              <CloseRounded fontSize="small" color="secondary" />
+            </IconButton>
+          }
+        />
         <Container maxWidth="xl">
           <Toolbar disableGutters>
             <Box sx={{ flexGrow: 2, display: { xs: 'flex', md: 'none' } }}>
@@ -486,7 +502,13 @@ function DefaultAppBar() {
                     </React.Fragment>
                   }
                 >
-                  <Button sx={{ fontWeight: 'bold', fontSize: '20px' }}>
+                  <Button
+                    sx={{
+                      fontWeight: 'bold',
+                      fontSize: '15px',
+                      fontFamily: 'roboto',
+                    }}
+                  >
                     {navItem}
                   </Button>
                 </Tooltip>

@@ -5,10 +5,7 @@ import Link from '@mui/material/Link';
 import { useEffect, useState } from 'react';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { PrimeReactProvider } from 'primereact/api';
 import './App.css';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
 
 import Home from './pages/Home';
 import DefaultAppBar from './components/Appbar';
@@ -66,37 +63,32 @@ function App() {
 
   return (
     <ThemeProvider theme={defaultTheme}>
-      <PrimeReactProvider>
-        <Router>
-          <DefaultAppBar />
-          <Routes>
-            <Route index element={<Home />} />
-            <Route path="/createPassword" element={<CreatePassword />} />
-            <Route path="/userdetails" element={<AccountDetails />} />
-            <Route path="/privacy" element={<Privacy />} />
-            <Route path="/shippingPolicy" element={<ShippingPolicy />} />
-            <Route path="/returnPolicy" element={<ReturnPolicy />} />
-            <Route
-              path="/termsAndConditions"
-              element={<TermsAndConditions />}
-            />
-            <Route path="/about" element={<AboutUs />} />
-            <Route path="/cart" element={<Cart />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/kurties" element={<Kurties />} />
-            <Route path="/palazzoes" element={<Palazzoes />} />
-            <Route path="/salwars" element={<Salwars />} />
-            <Route path="/detail/:title" element={<ProductDetail />} />
-            <Route path="/checkout" element={<Checkout />} />
-            <Route path="/paymentSuccess" element={<PaymentSuccess />} />
-            <Route path="/orders" element={<MyOrders />} />
-            <Route path="/wishlists" element={<MyWishLists />} />
-            <Route path="/address" element={<MyAddress />} />
-            <Route path="/*" element={<ErrorPage />} />
-          </Routes>
-          <Footer />
-        </Router>
-      </PrimeReactProvider>
+      <Router>
+        <DefaultAppBar />
+        <Routes>
+          <Route index element={<Home />} />
+          <Route path="/createPassword" element={<CreatePassword />} />
+          <Route path="/userdetails" element={<AccountDetails />} />
+          <Route path="/privacy" element={<Privacy />} />
+          <Route path="/shippingPolicy" element={<ShippingPolicy />} />
+          <Route path="/returnPolicy" element={<ReturnPolicy />} />
+          <Route path="/termsAndConditions" element={<TermsAndConditions />} />
+          <Route path="/about" element={<AboutUs />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/kurties" element={<Kurties />} />
+          <Route path="/palazzoes" element={<Palazzoes />} />
+          <Route path="/salwars" element={<Salwars />} />
+          <Route path="/detail/:title" element={<ProductDetail />} />
+          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/paymentSuccess" element={<PaymentSuccess />} />
+          <Route path="/orders" element={<MyOrders />} />
+          <Route path="/wishlists" element={<MyWishLists />} />
+          <Route path="/address" element={<MyAddress />} />
+          <Route path="/*" element={<ErrorPage />} />
+        </Routes>
+        <Footer />
+      </Router>
     </ThemeProvider>
   );
 }
