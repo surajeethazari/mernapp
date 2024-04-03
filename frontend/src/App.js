@@ -5,7 +5,6 @@ import Link from '@mui/material/Link';
 import { useEffect, useState } from 'react';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import './App.css';
 
 import Home from './pages/Home';
 import DefaultAppBar from './components/Appbar';
@@ -29,6 +28,16 @@ import MyAddress from './pages/MyAddress';
 import Kurties from './pages/Kurties';
 import Salwars from './pages/Salwars';
 import Palazzoes from './pages/Palazzoes';
+
+import './App.css';
+import 'rsuite/styles/index.less';
+import 'rsuite/dist/rsuite.min.css';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/effect-cube';
+import 'swiper/css/effect-fade';
+import 'swiper/css/pagination';
+import 'swiper/css/free-mode';
 
 const defaultTheme = createTheme({
   typography: {

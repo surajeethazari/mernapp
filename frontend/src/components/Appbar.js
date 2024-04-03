@@ -19,14 +19,12 @@ import ShoppingCartCheckoutIcon from '@mui/icons-material/ShoppingCartCheckout';
 import CloseRounded from '@mui/icons-material/CloseRounded';
 import { data } from '../assets/data/featuredCollection';
 import Zoom from '@mui/material/Zoom';
-import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
-import BorderColorIcon from '@mui/icons-material/BorderColor';
-import StarBorderPurple500Icon from '@mui/icons-material/StarBorderPurple500';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import LogoutIcon from '@mui/icons-material/Logout';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import useScrollTrigger from '@mui/material/useScrollTrigger';
+import { Drawer } from 'rsuite';
 import {
   Accordion,
   AccordionDetails,
@@ -36,7 +34,6 @@ import {
   CardMedia,
   Checkbox,
   Divider,
-  Drawer,
   Fade,
   FormControlLabel,
   Grid,
@@ -203,132 +200,143 @@ function DefaultAppBar() {
                 <MenuIcon />
               </IconButton>
               <Drawer
-                anchor="left"
+                closeButton={false}
+                style={{ zIndex: 1500, width: '300px' }}
+                placement={'left'}
                 open={openLeftDrawer}
                 onClose={toggleLeftDrawerHandler(false)}
               >
-                <Box
-                  width={'300px'}
-                  display={'flex'}
-                  flexDirection={'column'}
-                  p={2}
-                >
-                  <IconButton
-                    onClick={toggleLeftDrawerHandler(false)}
-                    size="small"
-                    aria-label="search"
-                    color="primary.dark"
-                    sx={{
-                      position: 'absolute',
-                      right: 8,
-                      top: 8,
-                      zIndex: 999,
-                      backgroundColor: 'common.white',
-                      boxShadow: '0 0 10px rgba(0, 0, 0, 0.2)',
-                    }}
+                <Drawer.Body style={{ padding: 0 }}>
+                  <Box
+                    width={'300px'}
+                    display={'flex'}
+                    flexDirection={'column'}
+                    p={1}
                   >
-                    <CloseRounded />
-                  </IconButton>
-                  <Box sx={{ marginTop: 5 }}>
-                    {navItems.map((item, index) => (
-                      <Accordion
-                        sx={{
-                          marginBottom: 1,
-                          boxShadow: 'none',
-                          padding: 0,
-                          '& .MuiAccordionSummary-content': {
-                            margin: 0,
-                          },
-                        }}
-                        spacing={1}
-                        expanded={expanded === item}
-                        onChange={handleAccordionChange(item)}
-                        key={index}
-                      >
-                        <AccordionSummary
-                          expandIcon={
-                            expanded === item ? <RemoveIcon /> : <AddIcon />
-                          }
+                    <IconButton
+                      onClick={toggleLeftDrawerHandler(false)}
+                      size="small"
+                      aria-label="search"
+                      color="primary.dark"
+                      sx={{
+                        position: 'absolute',
+                        right: 8,
+                        top: 8,
+                        zIndex: 999,
+                        backgroundColor: 'common.white',
+                        boxShadow: '0 0 10px rgba(0, 0, 0, 0.2)',
+                      }}
+                    >
+                      <CloseRounded />
+                    </IconButton>
+                    <Box sx={{ marginTop: 5 }}>
+                      {navItems.map((item, index) => (
+                        <Accordion
+                          sx={{
+                            marginBottom: 1,
+                            boxShadow: 'none',
+                            padding: 0,
+                            '& .MuiAccordionSummary-content': {
+                              margin: 0,
+                            },
+                          }}
+                          spacing={1}
+                          expanded={expanded === item}
+                          onChange={handleAccordionChange(item)}
+                          key={index}
                         >
-                          <Typography
-                            variant="h6"
-                            sx={{ fontWeight: 'bold', color: 'primary.dark' }}
+                          <AccordionSummary
+                            expandIcon={
+                              expanded === item ? <RemoveIcon /> : <AddIcon />
+                            }
                           >
-                            {item}
-                          </Typography>
-                        </AccordionSummary>
-                        <AccordionDetails>
-                          <Box>
-                            {[
-                              'Shop By Color',
-                              'Shop By Fabric',
-                              'Shop By Work',
-                            ].map((innetItem, index1) => (
-                              <Accordion
-                                sx={{
-                                  marginBottom: 1,
-                                  boxShadow: 'none',
-                                }}
-                                spacing={1}
-                                expanded={innerAccordionExpanded === innetItem}
-                                onChange={handleInnerAccordionChange(innetItem)}
-                                key={index1}
-                              >
-                                <AccordionSummary
-                                  expandIcon={
-                                    innerAccordionExpanded === innetItem ? (
-                                      <RemoveIcon />
-                                    ) : (
-                                      <AddIcon />
-                                    )
+                            <Typography
+                              sx={{
+                                fontWeight: 'bold',
+                                color: 'primary.dark',
+                                fontSize: '16px',
+                              }}
+                            >
+                              {item}
+                            </Typography>
+                          </AccordionSummary>
+                          <AccordionDetails>
+                            <Box>
+                              {[
+                                'Shop By Color',
+                                'Shop By Fabric',
+                                'Shop By Work',
+                              ].map((innetItem, index1) => (
+                                <Accordion
+                                  sx={{
+                                    marginBottom: 1,
+                                    boxShadow: 'none',
+                                  }}
+                                  spacing={1}
+                                  expanded={
+                                    innerAccordionExpanded === innetItem
                                   }
+                                  onChange={handleInnerAccordionChange(
+                                    innetItem,
+                                  )}
+                                  key={index1}
                                 >
-                                  <Typography sx={{ color: 'primary.main' }}>
-                                    {innetItem}
-                                  </Typography>
-                                </AccordionSummary>
-                                <AccordionDetails>
-                                  <Box>
-                                    {[
-                                      'Print',
-                                      'Georgette',
-                                      'Net',
-                                      'Cotton',
-                                      'Silk',
-                                      'Satin',
-                                      'Velvet',
-                                    ].map((subInnerItem, index2) => (
-                                      <Typography
-                                        key={index2}
-                                        sx={{ color: 'primary.main' }}
-                                      >
-                                        {subInnerItem}
-                                      </Typography>
-                                    ))}
-                                  </Box>
-                                </AccordionDetails>
-                              </Accordion>
-                            ))}
-                          </Box>
-                        </AccordionDetails>
-                      </Accordion>
-                    ))}
+                                  <AccordionSummary
+                                    expandIcon={
+                                      innerAccordionExpanded === innetItem ? (
+                                        <RemoveIcon />
+                                      ) : (
+                                        <AddIcon />
+                                      )
+                                    }
+                                  >
+                                    <Typography sx={{ color: 'primary.main' }}>
+                                      {innetItem}
+                                    </Typography>
+                                  </AccordionSummary>
+                                  <AccordionDetails>
+                                    <Box>
+                                      {[
+                                        'Print',
+                                        'Georgette',
+                                        'Net',
+                                        'Cotton',
+                                        'Silk',
+                                        'Satin',
+                                        'Velvet',
+                                      ].map((subInnerItem, index2) => (
+                                        <Typography
+                                          key={index2}
+                                          sx={{ color: 'primary.main' }}
+                                        >
+                                          {subInnerItem}
+                                        </Typography>
+                                      ))}
+                                    </Box>
+                                  </AccordionDetails>
+                                </Accordion>
+                              ))}
+                            </Box>
+                          </AccordionDetails>
+                        </Accordion>
+                      ))}
+                    </Box>
+                    <Button
+                      fullWidth
+                      type="submit"
+                      variant="contained"
+                      sx={{
+                        '&:hover': {
+                          backgroundColor: 'primary.main',
+                        },
+                        marginTop: 2,
+                        backgroundColor: 'secondary.main',
+                      }}
+                    >
+                      Sign In
+                    </Button>
                   </Box>
-                  <Button
-                    fullWidth
-                    type="submit"
-                    variant="contained"
-                    sx={{
-                      '&:hover': {
-                        backgroundColor: 'primary.main',
-                      },
-                      marginTop: 2,
-                      backgroundColor: 'secondary.main',
-                    }}
-                  >
-                    Sign In
-                  </Button>
-                </Box>
+                </Drawer.Body>
               </Drawer>
             </Box>
             <Box
@@ -611,255 +619,6 @@ function DefaultAppBar() {
                 </IconButton>
               </Tooltip>
 
-              <Drawer
-                anchor="right"
-                open={openDrawer}
-                onClose={toggleDrawerHandler(false)}
-              >
-                <Box
-                  height={'100%'}
-                  sx={{
-                    overflowY: 'auto',
-                  }}
-                >
-                  <Box
-                    height={50}
-                    width={'95%'}
-                    display="flex"
-                    alignItems={'center'}
-                    justifyContent={'space-between'}
-                    flexDirection={'row'}
-                    sx={{
-                      position: 'absolute',
-                      left: 0,
-                      top: 0,
-                      zIndex: 999,
-                      backgroundColor: 'common.white',
-                    }}
-                  >
-                    <Typography
-                      component={'div'}
-                      variant="h6"
-                      color={'primary.dark'}
-                      sx={{
-                        fontWeight: '400',
-                        fontWeight: 'bold',
-                        marginTop: '5px',
-                        marginLeft: '25px',
-                      }}
-                    >
-                      Cart
-                    </Typography>
-                    <IconButton
-                      onClick={toggleDrawerHandler(false)}
-                      size="large"
-                      aria-label="search"
-                      color="primary.dark"
-                    >
-                      <CloseRounded />
-                    </IconButton>
-                  </Box>
-                  <Stack
-                    direction={'column'}
-                    spacing={1}
-                    padding={1}
-                    sx={{
-                      position: 'relative',
-                      top: 30,
-                    }}
-                  >
-                    {data.map((item, index) => (
-                      <Box
-                        key={index}
-                        display="flex"
-                        flexDirection={'column'}
-                        p={2}
-                      >
-                        <Box display="flex" flexDirection={'row'}>
-                          <CardMedia
-                            onClick={() =>
-                              navigate('/detail/' + item.title, {
-                                state: {
-                                  item: item,
-                                },
-                              })
-                            }
-                            component="img"
-                            height={150}
-                            image={item.img}
-                            alt="Image Title"
-                            sx={{ cursor: 'pointer' }}
-                          />
-                          <Box
-                            display="flex"
-                            width={'300px'}
-                            justifyContent={'space-arround'}
-                            flexDirection={'column'}
-                            sx={{ marginLeft: 3 }}
-                          >
-                            <Typography
-                              onClick={() =>
-                                navigate('/detail/' + item.title, {
-                                  state: {
-                                    item: item,
-                                  },
-                                })
-                              }
-                              variant="h6"
-                              color={'primary.main'}
-                              component="div"
-                              sx={{
-                                fontWeight: 'bold',
-                                cursor: 'pointer',
-                                '&:hover': {
-                                  color: 'secondary.main',
-                                },
-                              }}
-                            >
-                              {item.title}
-                            </Typography>
-                            <Typography
-                              component={'span'}
-                              variant="body2"
-                              color={'primary.dark'}
-                              sx={{ fontWeight: '400', marginTop: '5px' }}
-                            >
-                              Color: Blue, Size: XL
-                            </Typography>
-                            <Typography
-                              component={'span'}
-                              variant="body2"
-                              color={'primary.dark'}
-                              sx={{ fontWeight: '400', marginTop: '5px' }}
-                            >
-                              {item.Price} /-
-                            </Typography>
-                            <Box
-                              display="flex"
-                              flexDirection={'row'}
-                              alignItems={'center'}
-                            >
-                              <ButtonGroup
-                                size="small"
-                                aria-label="small outlined button group"
-                              >
-                                <Button>+</Button>
-                                <Button>{2}</Button>
-                                <Button>-</Button>
-                              </ButtonGroup>
-                              <Typography
-                                variant="body2"
-                                color={'primary.main'}
-                                component="div"
-                                sx={{
-                                  marginLeft: '5px',
-                                  fontWeight: 'normal',
-                                  cursor: 'pointer',
-                                  '&:hover': {
-                                    color: 'secondary.main',
-                                  },
-                                }}
-                              >
-                                update
-                              </Typography>
-                            </Box>
-                          </Box>
-                        </Box>
-                      </Box>
-                    ))}
-                  </Stack>
-                  <Box
-                    display="flex"
-                    width={'95%'}
-                    flexDirection={'column'}
-                    sx={{
-                      position: 'absolute',
-                      left: 0,
-                      bottom: 0,
-                      zIndex: 999,
-                      backgroundColor: 'common.white',
-                    }}
-                  >
-                    <Box
-                      display="flex"
-                      justifyContent={'space-between'}
-                      flexDirection={'row'}
-                      sx={{ padding: 2 }}
-                    >
-                      <Typography
-                        component={'div'}
-                        variant="h6"
-                        color={'primary.main'}
-                        sx={{ fontWeight: '400', marginTop: '5px' }}
-                      >
-                        Sub Total
-                      </Typography>
-                      <Typography
-                        component={'div'}
-                        variant="h6"
-                        color={'primary.main'}
-                        sx={{ fontWeight: '400', marginTop: '5px' }}
-                      >
-                        5678 /-
-                      </Typography>
-                    </Box>
-                    <Box
-                      display="flex"
-                      justifyContent={'space-between'}
-                      flexDirection={'column'}
-                      sx={{ padding: 2 }}
-                    >
-                      <Link
-                        to="/cart"
-                        state={data}
-                        onClick={() =>
-                          window.scrollTo({ top: 0, behavior: 'smooth' })
-                        }
-                      >
-                        <Button
-                          fullWidth
-                          onClick={toggleDrawerHandler(false)}
-                          type="submit"
-                          variant="contained"
-                          sx={{
-                            '&:hover': {
-                              backgroundColor: 'primary.dark',
-                              color: 'common.white',
-                            },
-                            backgroundColor: 'primary.light',
-                            color: 'primary.dark',
-                          }}
-                        >
-                          View Cart
-                        </Button>
-                      </Link>
-                      <Link
-                        to="/checkout"
-                        state={data}
-                        onClick={() =>
-                          window.scrollTo({ top: 0, behavior: 'smooth' })
-                        }
-                      >
-                        <Button
-                          fullWidth
-                          onClick={toggleDrawerHandler(false)}
-                          type="submit"
-                          variant="contained"
-                          sx={{
-                            '&:hover': {
-                              backgroundColor: 'primary.main',
-                            },
-                            marginTop: 2,
-                            backgroundColor: 'secondary.main',
-                          }}
-                        >
-                          CHECKOUT
-                        </Button>
-                      </Link>
-                    </Box>
-                  </Box>
-                </Box>
-              </Drawer>
               <Tooltip
                 componentsProps={{
                   tooltip: {
@@ -896,6 +655,7 @@ function DefaultAppBar() {
                 </IconButton>
               </Tooltip>
               <Menu
+                sx={{ width: '250px' }}
                 elevation={0}
                 anchorOrigin={{
                   vertical: 'bottom',
@@ -915,13 +675,12 @@ function DefaultAppBar() {
                     navigate('/userdetails');
                     handleCloseAccountMenu(event);
                   }}
-                  disableRipple
-                  sx={{ color: theme.palette.primary.dark }}
+                  sx={{
+                    color: theme.palette.primary.dark,
+                    fontSize: '18px',
+                    width: '150px',
+                  }}
                 >
-                  <ManageAccountsIcon
-                    color="secondary"
-                    sx={{ marginRight: 1 }}
-                  />
                   My account
                 </MenuItem>
                 <MenuItem
@@ -930,10 +689,8 @@ function DefaultAppBar() {
                     navigate('/orders');
                     handleCloseAccountMenu(event);
                   }}
-                  disableRipple
-                  sx={{ color: theme.palette.primary.dark }}
+                  sx={{ color: theme.palette.primary.dark, fontSize: '18px' }}
                 >
-                  <BorderColorIcon color="secondary" sx={{ marginRight: 1 }} />
                   My Orders
                 </MenuItem>
                 <MenuItem
@@ -942,13 +699,8 @@ function DefaultAppBar() {
                     navigate('/wishlists');
                     handleCloseAccountMenu(event);
                   }}
-                  disableRipple
-                  sx={{ color: theme.palette.primary.dark }}
+                  sx={{ color: theme.palette.primary.dark, fontSize: '18px' }}
                 >
-                  <StarBorderPurple500Icon
-                    color="secondary"
-                    sx={{ marginRight: 1 }}
-                  />
                   My Wishlists
                 </MenuItem>
                 <Divider sx={{ my: 0.5 }} />
@@ -958,8 +710,7 @@ function DefaultAppBar() {
                     navigate('/');
                     handleCloseAccountMenu(event);
                   }}
-                  disableRipple
-                  sx={{ color: theme.palette.primary.dark }}
+                  sx={{ color: theme.palette.primary.dark, fontSize: '18px' }}
                 >
                   <LogoutIcon color="secondary" sx={{ marginRight: 1 }} />
                   Log Out
@@ -1274,6 +1025,209 @@ function DefaultAppBar() {
                   </Box>
                 </Box>
               </Modal>
+              <Drawer
+                size="xs"
+                style={{ zIndex: 1500 }}
+                placement={'right'}
+                open={openDrawer}
+                onClose={toggleDrawerHandler(false)}
+              >
+                <Drawer.Header>
+                  <Drawer.Title>
+                    <Typography
+                      component={'div'}
+                      variant="h6"
+                      color={'primary.dark'}
+                      sx={{
+                        fontWeight: 'normal',
+                        marginTop: '2px',
+                      }}
+                    >
+                      Cart Items (15)
+                    </Typography>
+                    <Typography
+                      component={'div'}
+                      variant="h6"
+                      color={'primary.dark'}
+                      sx={{
+                        fontWeight: 'normal',
+                        marginTop: 2,
+                      }}
+                    >
+                      Sub Total: 5678 /-
+                    </Typography>
+                  </Drawer.Title>
+                  <Drawer.Actions>
+                    <Box
+                      display="flex"
+                      flexDirection={'column'}
+                      width={'120px'}
+                      justifyContent={'space-between'}
+                    >
+                      <Link
+                        to="/cart"
+                        state={data}
+                        onClick={() =>
+                          window.scrollTo({ top: 0, behavior: 'smooth' })
+                        }
+                      >
+                        <Button
+                          fullWidth
+                          onClick={toggleDrawerHandler(false)}
+                          type="submit"
+                          variant="contained"
+                          sx={{
+                            '&:hover': {
+                              backgroundColor: 'primary.dark',
+                              color: 'common.white',
+                            },
+                            backgroundColor: 'primary.light',
+                            color: 'primary.dark',
+                          }}
+                        >
+                          View Cart
+                        </Button>
+                      </Link>
+                      <Link
+                        to="/checkout"
+                        state={data}
+                        onClick={() =>
+                          window.scrollTo({ top: 0, behavior: 'smooth' })
+                        }
+                      >
+                        <Button
+                          fullWidth
+                          onClick={toggleDrawerHandler(false)}
+                          type="submit"
+                          variant="contained"
+                          sx={{
+                            '&:hover': {
+                              backgroundColor: 'primary.main',
+                            },
+                            marginTop: 2,
+                            backgroundColor: 'secondary.main',
+                          }}
+                        >
+                          CHECKOUT
+                        </Button>
+                      </Link>
+                    </Box>
+                  </Drawer.Actions>
+                </Drawer.Header>
+                <Drawer.Body style={{ padding: 0 }}>
+                  <Stack
+                    direction={'column'}
+                    spacing={1}
+                    padding={1}
+                    sx={{
+                      marginTop: 2,
+                      marginBottom: 2,
+                    }}
+                  >
+                    {data.map((item, index) => (
+                      <Box
+                        key={index}
+                        display="flex"
+                        flexDirection={'column'}
+                        p={2}
+                      >
+                        <Box
+                          display="flex"
+                          flexDirection={'row'}
+                          justifyContent={'space-between'}
+                        >
+                          <CardMedia
+                            onClick={() =>
+                              navigate('/detail/' + item.title, {
+                                state: {
+                                  item: item,
+                                },
+                              })
+                            }
+                            component="img"
+                            image={item.img}
+                            alt="Image Title"
+                            sx={{ cursor: 'pointer', width: 150, height: 150 }}
+                          />
+                          <Box
+                            display="flex"
+                            justifyContent={'space-arround'}
+                            flexDirection={'column'}
+                            sx={{ marginLeft: 3 }}
+                          >
+                            <Typography
+                              onClick={() =>
+                                navigate('/detail/' + item.title, {
+                                  state: {
+                                    item: item,
+                                  },
+                                })
+                              }
+                              variant="h6"
+                              color={'primary.main'}
+                              component="div"
+                              sx={{
+                                fontWeight: 'bold',
+                                cursor: 'pointer',
+                                '&:hover': {
+                                  color: 'secondary.main',
+                                },
+                              }}
+                            >
+                              {item.title}
+                            </Typography>
+                            <Typography
+                              component={'span'}
+                              variant="body2"
+                              color={'primary.dark'}
+                              sx={{ fontWeight: '400', marginTop: '5px' }}
+                            >
+                              Color: Blue, Size: XL
+                            </Typography>
+                            <Typography
+                              component={'span'}
+                              variant="body2"
+                              color={'primary.dark'}
+                              sx={{ fontWeight: '400', marginTop: '5px' }}
+                            >
+                              {item.Price} /-
+                            </Typography>
+                            <Box
+                              display="flex"
+                              flexDirection={'row'}
+                              alignItems={'center'}
+                            >
+                              <ButtonGroup
+                                size="small"
+                                aria-label="small outlined button group"
+                              >
+                                <Button>+</Button>
+                                <Button>{2}</Button>
+                                <Button>-</Button>
+                              </ButtonGroup>
+                              <Typography
+                                variant="body2"
+                                color={'primary.main'}
+                                component="div"
+                                sx={{
+                                  marginLeft: '5px',
+                                  fontWeight: 'normal',
+                                  cursor: 'pointer',
+                                  '&:hover': {
+                                    color: 'secondary.main',
+                                  },
+                                }}
+                              >
+                                update
+                              </Typography>
+                            </Box>
+                          </Box>
+                        </Box>
+                      </Box>
+                    ))}
+                  </Stack>
+                </Drawer.Body>
+              </Drawer>
             </Box>
           </Toolbar>
         </Container>

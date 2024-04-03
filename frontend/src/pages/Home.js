@@ -36,12 +36,6 @@ import Grow from '@mui/material/Grow';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/effect-cube';
-import 'swiper/css/effect-fade';
-import 'swiper/css/pagination';
-import 'swiper/css/free-mode';
 import {
   FreeMode,
   Autoplay,
@@ -478,7 +472,9 @@ export default function Home(props) {
                   }}
                 >
                   <Box
-                    onMouseEnter={() => setImageSectionShowFeatured(index + 1)}
+                    onMouseEnter={() =>
+                      setImageSectionShowFeatured(index + 100)
+                    }
                     onMouseLeave={() => setImageSectionShowFeatured(0)}
                     sx={{ overflow: 'hidden' }}
                   >
@@ -497,7 +493,7 @@ export default function Home(props) {
                         },
                       }}
                     />
-                    <Grow in={imageSectionShowFeatured === index + 1}>
+                    <Grow in={imageSectionShowFeatured === index + 100}>
                       <Box
                         sx={{
                           marginTop: -9,
