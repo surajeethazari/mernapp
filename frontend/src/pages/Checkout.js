@@ -28,6 +28,36 @@ import CreditScoreIcon from '@mui/icons-material/CreditScore';
 import { useTheme } from '@mui/material/styles';
 
 export default function Checkout() {
+  // y220qkHeKQLWqzPnmhvrxMf6
+  const handlePayment = (e) => {
+    var options = {
+      upi_link: true,
+      key: 'rzp_test_njQqdb9FDvm2Oq', // Enter the Key ID generated from the Dashboard
+      amount: 50000, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+      currency: 'INR',
+      name: 'Sonali Fashion', //your business name
+      description: 'Test Transaction',
+      image: '../assets/images/logo_transparent.png',
+      // order_id: '1234567890', //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+      callback_url: 'https://eneqd3r9zrjok.x.pipedream.net/',
+      prefill: {
+        //We recommend using the prefill parameter to auto-fill customer's contact information especially their phone number
+        name: 'Surajeet Hazari', //your customer's name
+        email: 'surajeet407@gmail.com',
+        contact: '8900162177', //Provide the customer's phone number for better conversion rates
+      },
+      notes: {
+        address: 'Razorpay Corporate Office',
+      },
+      theme: {
+        color: '#3399cc',
+      },
+    };
+    var rzp1 = new window.Razorpay(options);
+    rzp1.open();
+    e.preventDefault();
+  };
+
   const theme = useTheme();
   const [activeStep, setActiveStep] = React.useState(true);
   const steps = ['Shipping', 'Review & Payments'];
@@ -333,10 +363,14 @@ export default function Checkout() {
                     mt: 1,
                     fontSize: '20px',
                     '&:hover': {
-                      backgroundColor: 'primary.main',
+                      backgroundColor: 'common.white',
+                      color: 'common.black',
+                      borderWidth: '1px',
+                      borderStyle: 'solid',
+                      borderColor: 'secondary.main',
                     },
+                    backgroundColor: 'common.black',
                     display: { xs: 'none', md: 'block' },
-                    backgroundColor: 'secondary.main',
                   }}
                 >
                   {Constants.applyBtnText}
@@ -352,49 +386,66 @@ export default function Checkout() {
             Payment Method
           </Typography>
           <Box sx={{ padding: 2, boxShadow: 3, marginTop: 2 }}>
-            <FormControlLabel control={<Checkbox />} label="Razor Pay" />
             <Box
               width={'100%'}
               display={'flex'}
               flexDirection={'row'}
-              alignItems={'end'}
+              alignItems={'center'}
+              justifyContent={'space-between'}
               sx={{ mt: 1 }}
             >
+              <FormControlLabel control={<Checkbox />} label="Razor Pay" />
+
               <Button
+                onClick={(e) => handlePayment(e)}
                 type="submit"
                 variant="contained"
                 sx={{
                   '&:hover': {
-                    backgroundColor: 'primary.main',
+                    backgroundColor: 'common.white',
+                    color: 'common.black',
+                    borderWidth: '1px',
+                    borderStyle: 'solid',
+                    borderColor: 'secondary.main',
                   },
-                  mt: 3,
-                  mb: 2,
+                  backgroundColor: 'common.black',
                   display: { xs: 'none', md: 'block' },
-                  backgroundColor: 'secondary.main',
                 }}
               >
                 {Constants.payWithRazorText}
               </Button>
             </Box>
             <Divider sx={{ marginTop: 2 }} />
-            <FormControlLabel control={<Checkbox />} label="Cash On Delivery" />
+            <FormControlLabel
+              sx={{ mb: 1, mt: 2 }}
+              control={<Checkbox />}
+              label="Cash On Delivery"
+            />
           </Box>
-          <Button
-            onClick={() => handleNext(false)}
-            type="submit"
-            variant="contained"
-            sx={{
-              '&:hover': {
-                backgroundColor: 'primary.main',
-              },
-              mt: 3,
-              mb: 2,
-              display: { xs: 'none', md: 'block' },
-              backgroundColor: 'secondary.main',
-            }}
+          <Box
+            sx={{ marginBottom: 3, marginTop: 2, display: 'flex' }}
+            alignItems={'center'}
+            justifyContent={'end'}
           >
-            {Constants.placeOrderText}
-          </Button>
+            <Button
+              onClick={() => handleNext(false)}
+              type="submit"
+              variant="contained"
+              sx={{
+                width: '300px',
+                '&:hover': {
+                  backgroundColor: 'common.white',
+                  color: 'common.black',
+                  borderWidth: '1px',
+                  borderStyle: 'solid',
+                  borderColor: 'secondary.main',
+                },
+                backgroundColor: 'common.black',
+              }}
+            >
+              {Constants.placeOrderText}
+            </Button>
+          </Box>
         </Box>
         <Box
           display="flex"
@@ -627,12 +678,16 @@ export default function Checkout() {
             variant="contained"
             sx={{
               '&:hover': {
-                backgroundColor: 'primary.main',
+                backgroundColor: 'common.white',
+                color: 'common.black',
+                borderWidth: '1px',
+                borderStyle: 'solid',
+                borderColor: 'secondary.main',
               },
+              backgroundColor: 'common.black',
               mt: 3,
               mb: 2,
               display: { xs: 'block', md: 'none' },
-              backgroundColor: 'secondary.main',
             }}
           >
             {Constants.continueePaymentText}

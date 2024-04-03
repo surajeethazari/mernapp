@@ -173,7 +173,7 @@ export default function Home(props) {
         dotPosition="bottom"
         autoplay
         effect="fade"
-        dots="false"
+        dots="true"
       >
         <CardMedia
           sx={{ cursor: 'pointer' }}
@@ -272,7 +272,7 @@ export default function Home(props) {
                           transformOrigin: '50% 50%',
                           transition: '0.5s ease-in-out',
                           '&:hover': {
-                            transform: 'scale(1.5)',
+                            transform: 'scale(1.2)',
                           },
                         }}
                       />
@@ -280,9 +280,6 @@ export default function Home(props) {
                         <Box
                           sx={{
                             marginTop: -9,
-                            backgroundColor: '#ffffff9e',
-                            borderTopLeftRadius: 10,
-                            borderTopRightRadius: 10,
                             position: 'relative',
                             transition: '0.5s ease-in-out',
                             zIndex: 999,
@@ -290,87 +287,10 @@ export default function Home(props) {
                           }}
                           display={'flex'}
                           flexDirection={'row'}
-                          justifyContent={'space-around'}
+                          justifyContent={'center'}
                         >
                           <Tooltip
-                            componentsProps={{
-                              tooltip: {
-                                sx: {
-                                  bgcolor: 'common.black',
-                                },
-                              },
-                              arrow: {
-                                sx: {
-                                  color: 'common.black',
-                                },
-                              },
-                            }}
-                            TransitionComponent={Zoom}
-                            arrow
-                            title="Add To Cart"
-                          >
-                            <IconButton
-                              size="medium"
-                              aria-label="search"
-                              sx={{
-                                p: 1,
-                                backgroundColor: 'common.black',
-                                width: { md: '55px', sx: '35px' },
-                                height: { md: '40px', sx: '20px' },
-                                borderRadius: '5px 5px 5px 5px',
-                                color: 'common.white',
-                                '&:hover': {
-                                  color: 'common.black',
-                                  backgroundColor: 'transparent',
-                                  borderWidth: 2,
-                                  borderStyle: 'solid',
-                                  borderColor: 'secondary.main',
-                                },
-                              }}
-                            >
-                              <AddShoppingCartIcon />
-                            </IconButton>
-                          </Tooltip>
-                          <Tooltip
-                            componentsProps={{
-                              tooltip: {
-                                sx: {
-                                  bgcolor: 'common.black',
-                                },
-                              },
-                              arrow: {
-                                sx: {
-                                  color: 'common.black',
-                                },
-                              },
-                            }}
-                            TransitionComponent={Zoom}
-                            arrow
-                            title="Information"
-                          >
-                            <IconButton
-                              size="medium"
-                              aria-label="search"
-                              sx={{
-                                p: 1,
-                                backgroundColor: 'common.black',
-                                width: { md: '55px', sx: '35px' },
-                                height: { md: '40px', sx: '20px' },
-                                borderRadius: '5px 5px 5px 5px',
-                                color: 'common.white',
-                                '&:hover': {
-                                  color: 'common.black',
-                                  backgroundColor: 'transparent',
-                                  borderWidth: 2,
-                                  borderStyle: 'solid',
-                                  borderColor: 'secondary.main',
-                                },
-                              }}
-                            >
-                              <InfoIcon />
-                            </IconButton>
-                          </Tooltip>
-                          <Tooltip
+                            placement="top"
                             componentsProps={{
                               tooltip: {
                                 sx: {
@@ -391,22 +311,17 @@ export default function Home(props) {
                               size="medium"
                               aria-label="search"
                               sx={{
-                                p: 1,
-                                backgroundColor: 'common.black',
-                                width: { md: '55px', sx: '35px' },
-                                height: { md: '40px', sx: '20px' },
+                                padding: '5px',
+                                backgroundColor: 'common.white',
                                 borderRadius: '5px 5px 5px 5px',
-                                color: 'common.white',
                                 '&:hover': {
-                                  color: 'common.black',
-                                  backgroundColor: 'transparent',
-                                  borderWidth: 2,
-                                  borderStyle: 'solid',
-                                  borderColor: 'secondary.main',
+                                  backgroundColor: 'common.white',
                                 },
                               }}
                             >
-                              <StarIcon />
+                              <StarIcon
+                                sx={{ color: theme.palette.common.black }}
+                              />
                             </IconButton>
                           </Tooltip>
                         </Box>
@@ -514,7 +429,7 @@ export default function Home(props) {
                           transformOrigin: '50% 50%',
                           transition: '0.5s ease-in-out',
                           '&:hover': {
-                            transform: 'scale(1.5)',
+                            transform: 'scale(1.2)',
                           },
                         }}
                       />
@@ -522,9 +437,6 @@ export default function Home(props) {
                         <Box
                           sx={{
                             marginTop: -9,
-                            backgroundColor: '#ffffff9e',
-                            borderTopLeftRadius: 10,
-                            borderTopRightRadius: 10,
                             position: 'relative',
                             transition: '0.5s ease-in-out',
                             zIndex: 999,
@@ -532,87 +444,10 @@ export default function Home(props) {
                           }}
                           display={'flex'}
                           flexDirection={'row'}
-                          justifyContent={'space-around'}
+                          justifyContent={'center'}
                         >
                           <Tooltip
-                            componentsProps={{
-                              tooltip: {
-                                sx: {
-                                  bgcolor: 'common.black',
-                                },
-                              },
-                              arrow: {
-                                sx: {
-                                  color: 'common.black',
-                                },
-                              },
-                            }}
-                            TransitionComponent={Zoom}
-                            arrow
-                            title="Add To Cart"
-                          >
-                            <IconButton
-                              size="medium"
-                              aria-label="search"
-                              sx={{
-                                p: 1,
-                                backgroundColor: 'common.black',
-                                width: { md: '55px', sx: '35px' },
-                                height: { md: '40px', sx: '20px' },
-                                borderRadius: '5px 5px 5px 5px',
-                                color: 'common.white',
-                                '&:hover': {
-                                  color: 'common.black',
-                                  backgroundColor: 'transparent',
-                                  borderWidth: 2,
-                                  borderStyle: 'solid',
-                                  borderColor: 'secondary.main',
-                                },
-                              }}
-                            >
-                              <AddShoppingCartIcon />
-                            </IconButton>
-                          </Tooltip>
-                          <Tooltip
-                            componentsProps={{
-                              tooltip: {
-                                sx: {
-                                  bgcolor: 'common.black',
-                                },
-                              },
-                              arrow: {
-                                sx: {
-                                  color: 'common.black',
-                                },
-                              },
-                            }}
-                            TransitionComponent={Zoom}
-                            arrow
-                            title="Information"
-                          >
-                            <IconButton
-                              size="medium"
-                              aria-label="search"
-                              sx={{
-                                p: 1,
-                                backgroundColor: 'common.black',
-                                width: { md: '55px', sx: '35px' },
-                                height: { md: '40px', sx: '20px' },
-                                borderRadius: '5px 5px 5px 5px',
-                                color: 'common.white',
-                                '&:hover': {
-                                  color: 'common.black',
-                                  backgroundColor: 'transparent',
-                                  borderWidth: 2,
-                                  borderStyle: 'solid',
-                                  borderColor: 'secondary.main',
-                                },
-                              }}
-                            >
-                              <InfoIcon />
-                            </IconButton>
-                          </Tooltip>
-                          <Tooltip
+                            placement="top"
                             componentsProps={{
                               tooltip: {
                                 sx: {
@@ -633,22 +468,17 @@ export default function Home(props) {
                               size="medium"
                               aria-label="search"
                               sx={{
-                                p: 1,
-                                backgroundColor: 'common.black',
-                                width: { md: '55px', sx: '35px' },
-                                height: { md: '40px', sx: '20px' },
+                                padding: '5px',
+                                backgroundColor: 'common.white',
                                 borderRadius: '5px 5px 5px 5px',
-                                color: 'common.white',
                                 '&:hover': {
-                                  color: 'common.black',
-                                  backgroundColor: 'transparent',
-                                  borderWidth: 2,
-                                  borderStyle: 'solid',
-                                  borderColor: 'secondary.main',
+                                  backgroundColor: 'common.white',
                                 },
                               }}
                             >
-                              <StarIcon />
+                              <StarIcon
+                                sx={{ color: theme.palette.common.black }}
+                              />
                             </IconButton>
                           </Tooltip>
                         </Box>

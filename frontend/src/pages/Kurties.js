@@ -321,9 +321,6 @@ export default function Kurties() {
                           <Box
                             sx={{
                               marginTop: -9,
-                              backgroundColor: '#ffffff9e',
-                              borderTopLeftRadius: 10,
-                              borderTopRightRadius: 10,
                               position: 'relative',
                               zIndex: 999,
                               padding: 2,
@@ -333,6 +330,7 @@ export default function Kurties() {
                             justifyContent={'space-around'}
                           >
                             <Tooltip
+                              placement="top"
                               componentsProps={{
                                 tooltip: {
                                   sx: {
@@ -353,64 +351,21 @@ export default function Kurties() {
                                 size="medium"
                                 aria-label="search"
                                 sx={{
-                                  p: 1,
-                                  backgroundColor: 'common.black',
-                                  width: '55px',
-                                  height: '40px',
+                                  padding: '5px',
+                                  backgroundColor: 'common.white',
                                   borderRadius: '5px 5px 5px 5px',
-                                  color: 'common.white',
                                   '&:hover': {
-                                    color: 'common.black',
-                                    backgroundColor: 'transparent',
-                                    borderWidth: 2,
-                                    borderStyle: 'solid',
-                                    borderColor: 'secondary.main',
+                                    backgroundColor: 'common.white',
                                   },
                                 }}
                               >
-                                <AddShoppingCartIcon />
+                                <AddShoppingCartIcon
+                                  sx={{ color: theme.palette.common.black }}
+                                />
                               </IconButton>
                             </Tooltip>
                             <Tooltip
-                              componentsProps={{
-                                tooltip: {
-                                  sx: {
-                                    bgcolor: 'common.black',
-                                  },
-                                },
-                                arrow: {
-                                  sx: {
-                                    color: 'common.black',
-                                  },
-                                },
-                              }}
-                              TransitionComponent={Zoom}
-                              arrow
-                              title="Information"
-                            >
-                              <IconButton
-                                size="medium"
-                                aria-label="search"
-                                sx={{
-                                  p: 1,
-                                  backgroundColor: 'common.black',
-                                  width: '55px',
-                                  height: '40px',
-                                  borderRadius: '5px 5px 5px 5px',
-                                  color: 'common.white',
-                                  '&:hover': {
-                                    color: 'common.black',
-                                    backgroundColor: 'transparent',
-                                    borderWidth: 2,
-                                    borderStyle: 'solid',
-                                    borderColor: 'secondary.main',
-                                  },
-                                }}
-                              >
-                                <InfoIcon />
-                              </IconButton>
-                            </Tooltip>
-                            <Tooltip
+                              placement="top"
                               componentsProps={{
                                 tooltip: {
                                   sx: {
@@ -431,22 +386,17 @@ export default function Kurties() {
                                 size="medium"
                                 aria-label="search"
                                 sx={{
-                                  p: 1,
-                                  backgroundColor: 'common.black',
-                                  width: '55px',
-                                  height: '40px',
+                                  padding: '5px',
+                                  backgroundColor: 'common.white',
                                   borderRadius: '5px 5px 5px 5px',
-                                  color: 'common.white',
                                   '&:hover': {
-                                    color: 'common.black',
-                                    backgroundColor: 'transparent',
-                                    borderWidth: 2,
-                                    borderStyle: 'solid',
-                                    borderColor: 'secondary.main',
+                                    backgroundColor: 'common.white',
                                   },
                                 }}
                               >
-                                <StarIcon />
+                                <StarIcon
+                                  sx={{ color: theme.palette.common.black }}
+                                />
                               </IconButton>
                             </Tooltip>
                           </Box>

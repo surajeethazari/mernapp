@@ -30,7 +30,7 @@ let Constants = {
   additionalAddressText: 'Additional Address',
   //Checkout
   continueePaymentText: 'Continuee Payment',
-  applyBtnText: 'Apply',
+  applyBtnText: 'Apply Discount',
   payWithRazorText: 'Pay With RazorPay',
   placeOrderText: 'Place Order',
 };

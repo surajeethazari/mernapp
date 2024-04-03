@@ -96,7 +96,7 @@ export default function MyWishLists() {
           >
             {Constants.noOrderFoundText}
           </Typography> */}
-          <Masonry sx={{ marginTop: 1 }} columns={{ md: 3, xs: 2 }} spacing={3}>
+          <Masonry sx={{ marginTop: 1 }} columns={{ md: 4, xs: 2 }} spacing={3}>
             {data.map((item, index) => (
               <Box key={index} sx={{ height: item.height + 100 }}>
                 <Card>
@@ -128,9 +128,6 @@ export default function MyWishLists() {
                         <Box
                           sx={{
                             marginTop: -9,
-                            backgroundColor: '#ffffff9e',
-                            borderTopLeftRadius: 10,
-                            borderTopRightRadius: 10,
                             position: 'relative',
                             zIndex: 999,
                             padding: 2,
@@ -160,61 +157,17 @@ export default function MyWishLists() {
                               size="medium"
                               aria-label="search"
                               sx={{
-                                p: 1,
-                                backgroundColor: 'common.black',
-                                width: '55px',
-                                height: '40px',
+                                padding: '5px',
+                                backgroundColor: 'common.white',
                                 borderRadius: '5px 5px 5px 5px',
-                                color: 'common.white',
                                 '&:hover': {
-                                  color: 'common.black',
-                                  backgroundColor: 'transparent',
-                                  borderWidth: 2,
-                                  borderStyle: 'solid',
-                                  borderColor: 'secondary.main',
+                                  backgroundColor: 'common.white',
                                 },
                               }}
                             >
-                              <AddShoppingCartIcon />
-                            </IconButton>
-                          </Tooltip>
-                          <Tooltip
-                            componentsProps={{
-                              tooltip: {
-                                sx: {
-                                  bgcolor: 'common.black',
-                                },
-                              },
-                              arrow: {
-                                sx: {
-                                  color: 'common.black',
-                                },
-                              },
-                            }}
-                            TransitionComponent={Zoom}
-                            arrow
-                            title="Information"
-                          >
-                            <IconButton
-                              size="medium"
-                              aria-label="search"
-                              sx={{
-                                p: 1,
-                                backgroundColor: 'common.black',
-                                width: '55px',
-                                height: '40px',
-                                borderRadius: '5px 5px 5px 5px',
-                                color: 'common.white',
-                                '&:hover': {
-                                  color: 'common.black',
-                                  backgroundColor: 'transparent',
-                                  borderWidth: 2,
-                                  borderStyle: 'solid',
-                                  borderColor: 'secondary.main',
-                                },
-                              }}
-                            >
-                              <InfoIcon />
+                              <AddShoppingCartIcon
+                                sx={{ color: theme.palette.common.black }}
+                              />
                             </IconButton>
                           </Tooltip>
                           <Tooltip
@@ -238,22 +191,17 @@ export default function MyWishLists() {
                               size="medium"
                               aria-label="search"
                               sx={{
-                                p: 1,
-                                backgroundColor: 'common.black',
-                                width: '55px',
-                                height: '40px',
+                                padding: '5px',
+                                backgroundColor: 'common.white',
                                 borderRadius: '5px 5px 5px 5px',
-                                color: 'common.white',
                                 '&:hover': {
-                                  color: 'common.black',
-                                  backgroundColor: 'transparent',
-                                  borderWidth: 2,
-                                  borderStyle: 'solid',
-                                  borderColor: 'secondary.main',
+                                  backgroundColor: 'common.white',
                                 },
                               }}
                             >
-                              <DeleteSweepIcon />
+                              <DeleteSweepIcon
+                                sx={{ color: theme.palette.common.black }}
+                              />
                             </IconButton>
                           </Tooltip>
                         </Box>
