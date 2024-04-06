@@ -7,53 +7,52 @@ ProxyTimeout=30000
 ProxyType=Auto
 ProxyUseFQDN=Off
 RemoveICAFile=yes
+TransparentKeyPassthrough=Local
 TransportReconnectEnabled=Off
 Version=2
 VirtualCOMPortEmulation=On
 
 [ApplicationServers]
-Virtual Desktop D $A18-4-669B4383-0001=
+EMEA SAP Logon=
 
-[Virtual Desktop D $A18-4-669B4383-0001]
-Address=;c6f75f9831a428e81606a8c020a84d1c799d9568d96f5bd41023e826
+[EMEA SAP Logon]
+Address=;42;CWSSAPSE4;D90D70BDAF5AD6C34ABEAE68CC4BD804;CWSSAPSE4;BFB1462A570D2E3EF62C8C842E86BF94
 AutologonAllowed=ON
 BrowserProtocol=HTTPonTCP
 CGPSecurityTicket=On
-ClearPassword=7350CD7996E7B0
+ClearPassword=BD49B08D25C50D
 ClientAudio=On
-ConnectionBar=1
 DesiredColor=8
-DesiredHRES=4294967295
-DesiredVRES=4294967295
-DesktopRestartAllowed=1
-Domain=\9566584A5C2288AF
+DesiredHRES=0
+DesiredVRES=0
+Domain=\404225C53F9DE50D
 DoNotUseDefaultCSL=On
 FontSmoothingType=0
-HDXoverUDP=Preferred
+HDXoverUDP=Off
 HTTPBrowserAddress=!
-InitialProgram=#Virtual Desktop D $A18-4-669B4383-0001
+InitialProgram=#EMEA SAP Logon
 Launcher=WI
-LaunchReference=B4144F67641B5F42FE3DFCBF75DD22
+LaunchReference=FD4472E5B628237A59B38EDF68D5E5
 LocHttpBrowserAddress=!
-LogonTicket=7350CD7996E7B09566584A5C2288AF
+LogonTicket=BD49B08D25C50D404225C53F9DE50D
 LogonTicketType=CTXS1
 LongCommandLine=
-LPWD=875
-NRWD=640
+LPWD=562
+NRWD=250
 ProxyTimeout=30000
 ProxyType=Auto
-SessionsharingKey=-4Jv2NQ6BY8H0O7OnHL2T0gaXvAC
+SecureChannelProtocol=Detect
+SessionsharingKey=Az66OklqjNJZMeD7BUaqeRUG16LU7KZ1
 SFRAllowed=Off
+SSLCiphers=all
 SSLEnable=On
-SSLProxyHost=connectit.equinor.com:443
-startSCD=1712118443557
-SubscriptionUrl=https://ctxsvgprod.statoil.net/Citrix/External/resources/v2/subscriptions/U3RhdmFuZ2VyIDcueCBQcm9kLlZpcnR1YWwgRGVza3RvcCBEICRBMTgtNC02NjlCNDM4My0wMDAx
-Title=Virtual Desktop Developer NO East
+SSLProxyHost=office.access-emea.sap.com:443
+startSCD=1712292957853
+Title=SAP Logon
 TransportDriver=TCP/IP
 TRWD=0
-TWIMode=Off
-UDPCGPPort=10.73.113.58:2598
-UDPICAPort=10.73.113.58:1494
+TWIMode=On
+WebSocketPort=8008
 WinStationDriver=ICA 3.0
 
 [Compress]

@@ -17,7 +17,6 @@ import PermIdentityIcon from '@mui/icons-material/PermIdentity';
 import StarOutlineIcon from '@mui/icons-material/StarOutline';
 import ShoppingCartCheckoutIcon from '@mui/icons-material/ShoppingCartCheckout';
 import CloseRounded from '@mui/icons-material/CloseRounded';
-import { data } from '../assets/data/featuredCollection';
 import Zoom from '@mui/material/Zoom';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import LogoutIcon from '@mui/icons-material/Logout';
@@ -37,9 +36,12 @@ import {
   Fade,
   FormControlLabel,
   Grid,
+  InputAdornment,
   LinearProgress,
   Modal,
+  OutlinedInput,
   Popover,
+  Select,
   Snackbar,
   Stack,
   SwipeableDrawer,
@@ -48,6 +50,8 @@ import {
 } from '@mui/material';
 import { useNavigate, NavLink, Link } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
+import AuthModal from './AuthModal';
+import CartDrawer from './CartDrawer';
 
 function ElevationScroll(props) {
   const { children, window } = props;
@@ -80,8 +84,7 @@ function DefaultAppBar() {
   const [openDrawer, setOpenDrawer] = React.useState(false);
   const [openLeftDrawer, setOpenLeftDrawer] = React.useState(false);
   const [open, setOpen] = React.useState(false);
-  const [openSignUp, setOpenSignUp] = React.useState(false);
-  const [openForgotPassword, setOpenForgotPassword] = React.useState(false);
+
   const [mountElementForAccount, setMountElementForAccount] =
     React.useState(null);
   const [expanded, setExpanded] = React.useState(false);
@@ -116,28 +119,6 @@ function DefaultAppBar() {
     setMountElementForAccount(null);
   };
 
-  const searchSection = () => (
-    <Box height={100} p={15} alignItems="center" justifyContent="center">
-      <IconButton
-        onClick={toggleDrawer(false)}
-        sx={{ position: 'absolute', top: '5px', right: '10px' }}
-        size="large"
-        aria-label="search"
-        color="inherit"
-      >
-        <CloseRounded />
-      </IconButton>
-      <TextField
-        variant="standard"
-        color="secondary"
-        margin="normal"
-        fullWidth
-        name="Search"
-        label="Search"
-      />
-    </Box>
-  );
-
   const toggleDrawer = (open) => (event) => {
     if (
       event &&
@@ -157,18 +138,12 @@ function DefaultAppBar() {
     setOpenDrawer(open);
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
-    navigate('/');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
   const [openSnackbar, setOpenSnackbar] = React.useState(true);
 
+  const [category, setCategory] = React.useState('All Categories');
+  const onChangeCategories = (event) => {
+    setCategory(event.target.value);
+  };
   return (
     <ElevationScroll>
       <AppBar position="fixed" color="appmain">
@@ -306,6 +281,9 @@ function DefaultAppBar() {
                                         'Velvet',
                                       ].map((subInnerItem, index2) => (
                                         <Typography
+                                          onClick={toggleLeftDrawerHandler(
+                                            false,
+                                          )}
                                           key={index2}
                                           sx={{ color: 'primary.main' }}
                                         >
@@ -560,7 +538,140 @@ function DefaultAppBar() {
                   onClose={toggleDrawer(false)}
                   onOpen={toggleDrawer(true)}
                 >
-                  {searchSection()}
+                  <Box height={100} p={15}>
+                    <IconButton
+                      onClick={toggleDrawer(false)}
+                      sx={{ position: 'absolute', top: '5px', right: '10px' }}
+                      size="large"
+                      aria-label="search"
+                      color="inherit"
+                    >
+                      <CloseRounded />
+                    </IconButton>
+                    <Box
+                      alignItems="center"
+                      justifyContent="center"
+                      display={'flex'}
+                      flexDirection={'row'}
+                    >
+                      <Select
+                        width={400}
+                        value={category}
+                        onChange={onChangeCategories}
+                        displayEmpty
+                        inputProps={{ 'aria-label': 'Without label' }}
+                      >
+                        <MenuItem value="All Categories">
+                          All Categories
+                        </MenuItem>
+                        <MenuItem value="Kurties">Kurties</MenuItem>
+                        <MenuItem value="Palazzo Suits">Palazzo Suits</MenuItem>
+                        <MenuItem value="Salwar Kamiz">Salwar Kamiz</MenuItem>
+                      </Select>
+                      <OutlinedInput
+                        fullWidth
+                        placeholder="Enter text to search"
+                        endAdornment={
+                          <InputAdornment position="end">
+                            <IconButton
+                              onClick={toggleDrawer(false)}
+                              size="large"
+                              aria-label="search"
+                              color="inherit"
+                            >
+                              <SearchIcon />
+                            </IconButton>
+                          </InputAdornment>
+                        }
+                        aria-describedby="outlined-weight-helper-text"
+                        inputProps={{
+                          'aria-label': 'weight',
+                        }}
+                      />
+                    </Box>
+                    <Box
+                      alignItems="center"
+                      justifyContent="center"
+                      display={'flex'}
+                      flexDirection={'row'}
+                      sx={{ marginTop: '5px' }}
+                    >
+                      <Box
+                        onClick={toggleDrawer(false)}
+                        display={'flex'}
+                        flexDirection={'row'}
+                      >
+                        <Typography
+                          component={'div'}
+                          variant="h6"
+                          color={'primary.main'}
+                          sx={{
+                            marginTop: '2px',
+                            fontWeight: 'normal',
+                          }}
+                        >
+                          Quick Search:
+                        </Typography>
+                        <Typography
+                          onClick={() => {
+                            navigate('kurties');
+                          }}
+                          component={'div'}
+                          variant="h6"
+                          color={'primary.dark'}
+                          sx={{
+                            marginLeft: '5px',
+                            textDecoration: 'underline',
+                            cursor: 'pointer',
+                            fontWeight: 'normal',
+                            '&:hover': {
+                              color: 'secondary.main',
+                            },
+                          }}
+                        >
+                          Kurties
+                        </Typography>
+                        <Typography
+                          onClick={() => {
+                            navigate('palazzoes');
+                          }}
+                          component={'div'}
+                          variant="h6"
+                          color={'primary.dark'}
+                          sx={{
+                            marginLeft: '5px',
+                            textDecoration: 'underline',
+                            cursor: 'pointer',
+                            fontWeight: 'normal',
+                            '&:hover': {
+                              color: 'secondary.main',
+                            },
+                          }}
+                        >
+                          Palazzo Suits
+                        </Typography>
+                        <Typography
+                          onClick={() => {
+                            navigate('salwars');
+                          }}
+                          component={'div'}
+                          variant="h6"
+                          color={'primary.dark'}
+                          sx={{
+                            marginLeft: '5px',
+                            textDecoration: 'underline',
+                            cursor: 'pointer',
+                            fontWeight: 'normal',
+                            '&:hover': {
+                              color: 'secondary.main',
+                            },
+                          }}
+                        >
+                          Salwar Kamiz
+                        </Typography>
+                      </Box>
+                    </Box>
+                  </Box>
                 </SwipeableDrawer>
               </React.Fragment>
               <Tooltip
@@ -618,7 +729,10 @@ function DefaultAppBar() {
                   </Badge>
                 </IconButton>
               </Tooltip>
-
+              <CartDrawer
+                openDrawer={openDrawer}
+                closeDrawer={toggleDrawerHandler(false)}
+              />
               <Tooltip
                 componentsProps={{
                   tooltip: {
@@ -638,10 +752,10 @@ function DefaultAppBar() {
               >
                 <IconButton
                   disableFocusRipple
-                  // onClick={() => setOpen(true)}
-                  onClick={(event) => {
-                    setMountElementForAccount(event.currentTarget);
-                  }}
+                  onClick={() => setOpen(true)}
+                  // onClick={(event) => {
+                  //   setMountElementForAccount(event.currentTarget);
+                  // }}
                   size="large"
                   aria-label="search"
                   color="inherit"
@@ -716,518 +830,8 @@ function DefaultAppBar() {
                   Log Out
                 </MenuItem>
               </Menu>
-              <Modal
-                open={open}
-                onClose={() => setOpen(false)}
-                aria-labelledby="Sign Up"
-                aria-describedby="Sign Up"
-                closeAfterTransition
-                slotProps={{
-                  backdrop: {
-                    TransitionComponent: Fade,
-                  },
-                }}
-              >
-                <Box
-                  sx={{
-                    position: 'absolute',
-                    top: '50%',
-                    left: '50%',
-                    transform: 'translate(-50%, -50%)',
-                    height: 400,
-                    width: 500,
-                    bgcolor: 'common.white',
-                    boxShadow: 24,
-                    p: 5,
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    flexDirection: 'column',
-                  }}
-                >
-                  <IconButton
-                    onClick={() => setOpen(false)}
-                    sx={{ position: 'absolute', right: 5, top: 5 }}
-                    size="large"
-                    aria-label="search"
-                    color="primary.dark"
-                  >
-                    <CloseRounded />
-                  </IconButton>
-                  <Typography variant="h5" color={'primary'}>
-                    Sign in
-                  </Typography>
-                  <Box
-                    component="form"
-                    onSubmit={handleSubmit}
-                    noValidate
-                    sx={{ mt: 1 }}
-                  >
-                    <TextField
-                      color="secondary"
-                      margin="normal"
-                      required
-                      fullWidth
-                      id="email"
-                      label="Email Address"
-                      name="email"
-                      autoComplete="email"
-                    />
-                    <TextField
-                      color="secondary"
-                      margin="normal"
-                      required
-                      fullWidth
-                      name="password"
-                      label="Password"
-                      type="password"
-                      id="password"
-                      autoComplete="current-password"
-                    />
-                    <FormControlLabel
-                      control={<Checkbox value="remember" color="secondary" />}
-                      label="Remember me"
-                    />
-                    <Button
-                      type="submit"
-                      fullWidth
-                      variant="contained"
-                      sx={{
-                        '&:hover': {
-                          backgroundColor: 'primary.main',
-                        },
-                        mt: 3,
-                        mb: 2,
-                        backgroundColor: 'secondary.main',
-                      }}
-                    >
-                      Sign In
-                    </Button>
-                    <Grid container>
-                      <Grid item xs>
-                        <React.Fragment>
-                          <Typography
-                            onClick={() => {
-                              setOpenForgotPassword(true);
-                            }}
-                            component="span"
-                            variant="body2"
-                            color={'secondary'}
-                            mx={1}
-                          >
-                            Forgot password?
-                          </Typography>
-                          <Modal
-                            open={openForgotPassword}
-                            onClose={() => setOpenForgotPassword(false)}
-                            aria-labelledby="child-modal-title"
-                            aria-describedby="child-modal-description"
-                          >
-                            <Box
-                              sx={{
-                                position: 'absolute',
-                                top: '50%',
-                                left: '50%',
-                                transform: 'translate(-50%, -50%)',
-                                height: 400,
-                                width: 500,
-                                bgcolor: 'common.white',
-                                boxShadow: 24,
-                                p: 5,
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                                flexDirection: 'column',
-                              }}
-                            >
-                              <IconButton
-                                onClick={() => {
-                                  setOpenForgotPassword(false);
-                                  setOpen(false);
-                                }}
-                                sx={{ position: 'absolute', right: 5, top: 5 }}
-                                size="large"
-                                aria-label="search"
-                                color="primary.dark"
-                              >
-                                <CloseRounded />
-                              </IconButton>
-                              <Typography variant="h5" color={'primary'}>
-                                Password Reset
-                              </Typography>
-                              <Box
-                                component="form"
-                                onSubmit={handleSubmit}
-                                noValidate
-                                sx={{ mt: 1 }}
-                              >
-                                <TextField
-                                  color="secondary"
-                                  margin="normal"
-                                  required
-                                  fullWidth
-                                  id="email"
-                                  label="Email Address"
-                                  name="email"
-                                  autoComplete="email"
-                                />
-                                <Button
-                                  type="submit"
-                                  fullWidth
-                                  variant="contained"
-                                  sx={{
-                                    '&:hover': {
-                                      backgroundColor: 'primary.main',
-                                    },
-                                    mt: 3,
-                                    mb: 2,
-                                    backgroundColor: 'secondary.main',
-                                  }}
-                                >
-                                  Send Link
-                                </Button>
-                              </Box>
-                            </Box>
-                          </Modal>
-                        </React.Fragment>
-                      </Grid>
-                      <Grid item>
-                        <Typography variant="body2" color={'primary'}>
-                          {"Don't have an account?"}
-                          <React.Fragment>
-                            <Typography
-                              onClick={() => {
-                                setOpenSignUp(true);
-                              }}
-                              component="span"
-                              variant="body2"
-                              color={'secondary'}
-                              mx={1}
-                            >
-                              Signup
-                            </Typography>
-                            <Modal
-                              open={openSignUp}
-                              onClose={() => setOpenSignUp(false)}
-                              aria-labelledby="child-modal-title"
-                              aria-describedby="child-modal-description"
-                            >
-                              <Box
-                                sx={{
-                                  position: 'absolute',
-                                  top: '50%',
-                                  left: '50%',
-                                  transform: 'translate(-50%, -50%)',
-                                  height: 400,
-                                  width: 500,
-                                  bgcolor: 'common.white',
-                                  boxShadow: 24,
-                                  p: 5,
-                                  display: 'flex',
-                                  alignItems: 'center',
-                                  justifyContent: 'center',
-                                  flexDirection: 'column',
-                                }}
-                              >
-                                <IconButton
-                                  onClick={() => {
-                                    setOpenSignUp(false);
-                                    setOpen(false);
-                                  }}
-                                  sx={{
-                                    position: 'absolute',
-                                    right: 5,
-                                    top: 5,
-                                  }}
-                                  size="large"
-                                  aria-label="search"
-                                  color="primary.dark"
-                                >
-                                  <CloseRounded />
-                                </IconButton>
-                                <Typography variant="h5" color={'primary'}>
-                                  Sign up
-                                </Typography>
-                                <Box
-                                  component="form"
-                                  onSubmit={handleSubmit}
-                                  noValidate
-                                  sx={{ mt: 1 }}
-                                >
-                                  <TextField
-                                    color="secondary"
-                                    margin="normal"
-                                    required
-                                    fullWidth
-                                    id="name"
-                                    label="Name"
-                                    name="name"
-                                    autoComplete="name"
-                                  />
-                                  <TextField
-                                    color="secondary"
-                                    margin="normal"
-                                    required
-                                    fullWidth
-                                    id="email"
-                                    label="Email Address"
-                                    name="email"
-                                    autoComplete="email"
-                                  />
-                                  <TextField
-                                    color="secondary"
-                                    margin="normal"
-                                    required
-                                    fullWidth
-                                    name="password"
-                                    label="Password"
-                                    type="password"
-                                    id="password"
-                                    autoComplete="current-password"
-                                  />
-                                  <Button
-                                    type="submit"
-                                    fullWidth
-                                    variant="contained"
-                                    sx={{
-                                      '&:hover': {
-                                        backgroundColor: 'primary.main',
-                                      },
-                                      mt: 3,
-                                      mb: 2,
-                                      backgroundColor: 'secondary.main',
-                                    }}
-                                  >
-                                    Sign Up
-                                  </Button>
-                                </Box>
-                                <Typography variant="body2" color={'primary'}>
-                                  Already have an account?
-                                  <Typography
-                                    onClick={() => {
-                                      setOpenSignUp(false);
-                                      setOpen(true);
-                                    }}
-                                    component="span"
-                                    variant="body2"
-                                    color={'secondary'}
-                                    mx={1}
-                                  >
-                                    Login
-                                  </Typography>
-                                </Typography>
-                              </Box>
-                            </Modal>
-                          </React.Fragment>
-                        </Typography>
-                      </Grid>
-                    </Grid>
-                  </Box>
-                </Box>
-              </Modal>
-              <Drawer
-                size="xs"
-                style={{ zIndex: 1500 }}
-                placement={'right'}
-                open={openDrawer}
-                onClose={toggleDrawerHandler(false)}
-              >
-                <Drawer.Header>
-                  <Drawer.Title>
-                    <Typography
-                      component={'div'}
-                      variant="h6"
-                      color={'primary.dark'}
-                      sx={{
-                        fontWeight: 'normal',
-                        marginTop: '2px',
-                      }}
-                    >
-                      Cart Items (15)
-                    </Typography>
-                    <Typography
-                      component={'div'}
-                      variant="h6"
-                      color={'primary.dark'}
-                      sx={{
-                        fontWeight: 'normal',
-                        marginTop: 2,
-                      }}
-                    >
-                      Sub Total: 5678 /-
-                    </Typography>
-                  </Drawer.Title>
-                  <Drawer.Actions>
-                    <Box
-                      display="flex"
-                      flexDirection={'column'}
-                      width={'120px'}
-                      justifyContent={'space-between'}
-                    >
-                      <Link
-                        to="/cart"
-                        state={data}
-                        onClick={() =>
-                          window.scrollTo({ top: 0, behavior: 'smooth' })
-                        }
-                      >
-                        <Button
-                          fullWidth
-                          onClick={toggleDrawerHandler(false)}
-                          type="submit"
-                          variant="contained"
-                          sx={{
-                            '&:hover': {
-                              backgroundColor: 'primary.dark',
-                              color: 'common.white',
-                            },
-                            backgroundColor: 'primary.light',
-                            color: 'primary.dark',
-                          }}
-                        >
-                          View Cart
-                        </Button>
-                      </Link>
-                      <Link
-                        to="/checkout"
-                        state={data}
-                        onClick={() =>
-                          window.scrollTo({ top: 0, behavior: 'smooth' })
-                        }
-                      >
-                        <Button
-                          fullWidth
-                          onClick={toggleDrawerHandler(false)}
-                          type="submit"
-                          variant="contained"
-                          sx={{
-                            '&:hover': {
-                              backgroundColor: 'primary.main',
-                            },
-                            marginTop: 2,
-                            backgroundColor: 'secondary.main',
-                          }}
-                        >
-                          CHECKOUT
-                        </Button>
-                      </Link>
-                    </Box>
-                  </Drawer.Actions>
-                </Drawer.Header>
-                <Drawer.Body style={{ padding: 0 }}>
-                  <Stack
-                    direction={'column'}
-                    spacing={1}
-                    padding={1}
-                    sx={{
-                      marginTop: 2,
-                      marginBottom: 2,
-                    }}
-                  >
-                    {data.map((item, index) => (
-                      <Box
-                        key={index}
-                        display="flex"
-                        flexDirection={'column'}
-                        p={2}
-                      >
-                        <Box
-                          display="flex"
-                          flexDirection={'row'}
-                          justifyContent={'space-between'}
-                        >
-                          <CardMedia
-                            onClick={() =>
-                              navigate('/detail/' + item.title, {
-                                state: {
-                                  item: item,
-                                },
-                              })
-                            }
-                            component="img"
-                            image={item.img}
-                            alt="Image Title"
-                            sx={{ cursor: 'pointer', width: 150, height: 150 }}
-                          />
-                          <Box
-                            display="flex"
-                            justifyContent={'space-arround'}
-                            flexDirection={'column'}
-                            sx={{ marginLeft: 3 }}
-                          >
-                            <Typography
-                              onClick={() =>
-                                navigate('/detail/' + item.title, {
-                                  state: {
-                                    item: item,
-                                  },
-                                })
-                              }
-                              variant="h6"
-                              color={'primary.main'}
-                              component="div"
-                              sx={{
-                                fontWeight: 'bold',
-                                cursor: 'pointer',
-                                '&:hover': {
-                                  color: 'secondary.main',
-                                },
-                              }}
-                            >
-                              {item.title}
-                            </Typography>
-                            <Typography
-                              component={'span'}
-                              variant="body2"
-                              color={'primary.dark'}
-                              sx={{ fontWeight: '400', marginTop: '5px' }}
-                            >
-                              Color: Blue, Size: XL
-                            </Typography>
-                            <Typography
-                              component={'span'}
-                              variant="body2"
-                              color={'primary.dark'}
-                              sx={{ fontWeight: '400', marginTop: '5px' }}
-                            >
-                              {item.Price} /-
-                            </Typography>
-                            <Box
-                              display="flex"
-                              flexDirection={'row'}
-                              alignItems={'center'}
-                            >
-                              <ButtonGroup
-                                size="small"
-                                aria-label="small outlined button group"
-                              >
-                                <Button>+</Button>
-                                <Button>{2}</Button>
-                                <Button>-</Button>
-                              </ButtonGroup>
-                              <Typography
-                                variant="body2"
-                                color={'primary.main'}
-                                component="div"
-                                sx={{
-                                  marginLeft: '5px',
-                                  fontWeight: 'normal',
-                                  cursor: 'pointer',
-                                  '&:hover': {
-                                    color: 'secondary.main',
-                                  },
-                                }}
-                              >
-                                update
-                              </Typography>
-                            </Box>
-                          </Box>
-                        </Box>
-                      </Box>
-                    ))}
-                  </Stack>
-                </Drawer.Body>
-              </Drawer>
+
+              <AuthModal openModal={open} onCloseModal={() => setOpen(false)} />
             </Box>
           </Toolbar>
         </Container>

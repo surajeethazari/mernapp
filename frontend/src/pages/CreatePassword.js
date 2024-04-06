@@ -9,12 +9,17 @@ import {
   FormControlLabel,
   IconButton,
 } from '@mui/material';
+import AuthModal from '../components/AuthModal';
 
 export default function CreatePassword(props) {
   let crumbs = [
     { name: 'Home', trigger: '/', active: true },
     { name: 'Change Password', trigger: '/createPas', active: false },
   ];
+  const [open, setOpen] = React.useState(false);
+  const [hideCreatePasswrdControl, setHideCreatePasswrdControl] =
+    React.useState(false);
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -31,17 +36,27 @@ export default function CreatePassword(props) {
           boxShadow: 2,
           p: 5,
           marginTop: '120px',
-          marginBottom: 5,
+          marginBottom: '80px',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           flexDirection: 'column',
         }}
       >
-        <Typography variant="h4" color={'primary'}>
+        <Typography
+          display={hideCreatePasswrdControl ? 'none' : 'block'}
+          variant="h4"
+          color={'primary'}
+        >
           Create a New Password
         </Typography>
-        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+        <Box
+          display={hideCreatePasswrdControl ? 'none' : 'block'}
+          component="form"
+          onSubmit={handleSubmit}
+          noValidate
+          sx={{ mt: 1 }}
+        >
           <TextField
             color="secondary"
             margin="normal"
@@ -69,6 +84,42 @@ export default function CreatePassword(props) {
             label="Show Password"
           />
           <Button
+            onClick={() => setHideCreatePasswrdControl(true)}
+            type="submit"
+            fullWidth
+            variant="contained"
+            sx={{
+              '&:hover': {
+                backgroundColor: 'primary.main',
+              },
+              mt: 2,
+              mb: 2,
+              backgroundColor: 'secondary.main',
+            }}
+          >
+            Set a New Password
+          </Button>
+        </Box>
+        <Typography
+          display={!hideCreatePasswrdControl ? 'none' : 'block'}
+          variant="h4"
+          color={'primary'}
+          sx={{ mt: 2 }}
+        >
+          Password got changed...
+        </Typography>
+        <Box
+          display={!hideCreatePasswrdControl ? 'none' : 'block'}
+          component="form"
+          onSubmit={handleSubmit}
+          noValidate
+          sx={{ mt: 2 }}
+        >
+          <Typography variant="h6" color={'primary'}>
+            Click here to login.
+          </Typography>
+          <Button
+            onClick={() => setOpen(true)}
             type="submit"
             fullWidth
             variant="contained"
@@ -77,13 +128,14 @@ export default function CreatePassword(props) {
                 backgroundColor: 'primary.main',
               },
               mt: 3,
-              mb: 2,
+              mb: 3,
               backgroundColor: 'secondary.main',
             }}
           >
-            Set a New Password
+            Login
           </Button>
         </Box>
+        <AuthModal openModal={open} onCloseModal={() => setOpen(false)} />
       </Box>
     </Container>
   );

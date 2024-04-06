@@ -307,11 +307,18 @@ export default function Cart() {
                 type="submit"
                 variant="contained"
                 sx={{
-                  '&:hover': {
-                    backgroundColor: 'primary.main',
-                  },
                   marginTop: 2,
-                  backgroundColor: 'secondary.main',
+                  '&:hover': {
+                    backgroundColor: 'common.white',
+                    color: 'common.black',
+                    borderWidth: '1px',
+                    borderStyle: 'solid',
+                    borderColor: 'secondary.main',
+                  },
+                  borderWidth: '1px',
+                  borderStyle: 'solid',
+                  borderColor: 'common.black',
+                  backgroundColor: 'common.black',
                 }}
               >
                 CHECKOUT

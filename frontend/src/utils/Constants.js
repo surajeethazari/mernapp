@@ -18,6 +18,10 @@ let Constants = {
   sizeText: 'Size',
   brandText: 'Brand',
   addToCartText: 'Add To Cart',
+  addToWishListText: 'Add To Wishlist',
+  addedToWishlistText: 'Added to your wishlist',
+  viewWishListText: 'View Wishlist',
+  checkBtnText: 'Check',
   // Account Details
   myAccountText: 'My Account',
   accountDetailsText: 'Account Details',

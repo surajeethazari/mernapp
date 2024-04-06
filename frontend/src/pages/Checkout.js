@@ -369,6 +369,9 @@ export default function Checkout() {
                       borderStyle: 'solid',
                       borderColor: 'secondary.main',
                     },
+                    borderWidth: '1px',
+                    borderStyle: 'solid',
+                    borderColor: 'common.black',
                     backgroundColor: 'common.black',
                     display: { xs: 'none', md: 'block' },
                   }}
@@ -408,6 +411,9 @@ export default function Checkout() {
                     borderStyle: 'solid',
                     borderColor: 'secondary.main',
                   },
+                  borderWidth: '1px',
+                  borderStyle: 'solid',
+                  borderColor: 'common.black',
                   backgroundColor: 'common.black',
                   display: { xs: 'none', md: 'block' },
                 }}
@@ -440,6 +446,9 @@ export default function Checkout() {
                   borderStyle: 'solid',
                   borderColor: 'secondary.main',
                 },
+                borderWidth: '1px',
+                borderStyle: 'solid',
+                borderColor: 'common.black',
                 backgroundColor: 'common.black',
               }}
             >
@@ -684,6 +693,9 @@ export default function Checkout() {
                 borderStyle: 'solid',
                 borderColor: 'secondary.main',
               },
+              borderWidth: '1px',
+              borderStyle: 'solid',
+              borderColor: 'common.black',
               backgroundColor: 'common.black',
               mt: 3,
               mb: 2,

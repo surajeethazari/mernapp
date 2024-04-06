@@ -3,21 +3,17 @@ import {
   Button,
   CardMedia,
   Container,
-  ButtonGroup,
-  Drawer,
-  IconButton,
-  Stack,
   Tab,
   TextField,
   Typography,
+  Divider,
+  OutlinedInput,
+  InputAdornment,
 } from '@mui/material';
 import React from 'react';
 import BreadCrumbs from '../components/BreadCrumbs';
 import Constants from '../utils/Constants';
-import Slide from '@mui/material/Slide';
-import CloseRounded from '@mui/icons-material/CloseRounded';
 import { useNavigate, Link, useParams, useLocation } from 'react-router-dom';
-import ArrowForwardTwoTone from '@mui/icons-material/ArrowForwardTwoTone';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
@@ -30,12 +26,15 @@ import 'swiper/css/free-mode';
 import 'swiper/css/navigation';
 import 'swiper/css/thumbs';
 import { FreeMode, Navigation, Thumbs } from 'swiper/modules';
+import WishlistModal from '../components/WishlistModal';
+import CartDrawer from '../components/CartDrawer';
 
 export default function ProductDetail(props) {
   const [thumbsSwiper, setThumbsSwiper] = React.useState(null);
   const navigate = useNavigate();
   const params = useParams();
   const obj = useLocation();
+  const [modalOpen, setModalOpen] = React.useState(false);
   const [value, setValue] = React.useState('1');
   const [item, setItem] = React.useState(obj.state.item);
   let crumbs = [
@@ -121,7 +120,6 @@ export default function ProductDetail(props) {
           display="flex"
           sx={{
             marginTop: 5,
-            marginBottom: 5,
             flexDirection: { xs: 'column', md: 'row' },
           }}
         >
@@ -185,7 +183,7 @@ export default function ProductDetail(props) {
           <Box
             display="flex"
             flexDirection={'column'}
-            sx={{ width: { xs: '100%' }, marginBottom: '100px' }}
+            sx={{ width: { xs: '100%' }, marginBottom: '50px' }}
           >
             <Typography
               color={'primary.main'}
@@ -263,265 +261,68 @@ export default function ProductDetail(props) {
               variant="filled"
             />
 
-            <Button
-              onClick={toggleDrawerHandler(true)}
-              type="submit"
-              variant="contained"
-              sx={{
-                width: '200px',
-                '&:hover': {
-                  backgroundColor: 'primary.main',
-                },
-                marginTop: 2,
-                backgroundColor: 'secondary.main',
-              }}
+            <Box
+              display={'flex'}
+              flexDirection={'row'}
+              alignItems={'center'}
+              sx={{ marginTop: 2, marginBottom: 2 }}
             >
-              {Constants.addToCartText}
-            </Button>
-
-            <Drawer
-              anchor="right"
-              open={openDrawer}
-              onClose={toggleDrawerHandler(false)}
-            >
-              <Box height={'100%'} sx={{ overflowY: 'auto' }}>
-                <Box
-                  height={80}
-                  width={'100%'}
-                  display="flex"
-                  alignItems={'center'}
-                  justifyContent={'space-between'}
-                  flexDirection={'row'}
-                  sx={{
-                    position: 'absolute',
-                    left: 0,
-                    top: 0,
-                    zIndex: 999,
+              <Button
+                onClick={toggleDrawerHandler(true)}
+                type="submit"
+                variant="contained"
+                sx={{
+                  width: '200px',
+                  '&:hover': {
                     backgroundColor: 'common.white',
-                    boxShadow: '0 0 10px rgba(0, 0, 0, 0.2)',
-                  }}
-                >
-                  <Typography
-                    component={'div'}
-                    variant="h5"
-                    color={'primary.dark'}
-                    sx={{
-                      fontWeight: '400',
-                      fontWeight: 'bold',
-                      marginTop: '5px',
-                      marginLeft: '10px',
-                    }}
-                  >
-                    Shopping Cart
-                  </Typography>
-                  <IconButton
-                    onClick={toggleDrawerHandler(false)}
-                    size="large"
-                    aria-label="search"
-                    color="primary.dark"
-                  >
-                    <CloseRounded />
-                  </IconButton>
-                </Box>
-                <Stack
-                  direction={'column'}
-                  spacing={1}
-                  padding={1}
-                  sx={{ marginBottom: '200px', marginTop: '80px' }}
-                >
-                  {data.map((item, index) => (
-                    <Box
-                      key={index}
-                      display="flex"
-                      flexDirection={'column'}
-                      p={2}
-                    >
-                      <Box display="flex" flexDirection={'row'}>
-                        <CardMedia
-                          onClick={() =>
-                            navigate('/detail/' + item.title, {
-                              state: {
-                                item: item,
-                              },
-                            })
-                          }
-                          component="img"
-                          height={150}
-                          image={item.img}
-                          alt="Image Title"
-                          sx={{ cursor: 'pointer' }}
-                        />
-                        <Box
-                          display="flex"
-                          width={'300px'}
-                          justifyContent={'space-arround'}
-                          flexDirection={'column'}
-                          sx={{ marginLeft: 3 }}
-                        >
-                          <Typography
-                            onClick={() =>
-                              navigate('/detail/' + item.title, {
-                                state: {
-                                  item: item,
-                                },
-                              })
-                            }
-                            variant="h6"
-                            color={'primary.main'}
-                            component="div"
-                            sx={{
-                              fontWeight: 'bold',
-                              cursor: 'pointer',
-                              '&:hover': {
-                                color: 'secondary.main',
-                              },
-                            }}
-                          >
-                            {item.title}
-                          </Typography>
-                          <Typography
-                            component={'span'}
-                            variant="body2"
-                            color={'primary.dark'}
-                            sx={{ fontWeight: '400', marginTop: '5px' }}
-                          >
-                            Color: Blue, Size: XL
-                          </Typography>
-                          <Typography
-                            component={'span'}
-                            variant="body2"
-                            color={'primary.dark'}
-                            sx={{ fontWeight: '400', marginTop: '5px' }}
-                          >
-                            {item.Price} /-
-                          </Typography>
-                          <Box
-                            display="flex"
-                            flexDirection={'row'}
-                            alignItems={'center'}
-                          >
-                            <ButtonGroup
-                              size="small"
-                              aria-label="small outlined button group"
-                            >
-                              <Button>+</Button>
-                              <Button>{2}</Button>
-                              <Button>-</Button>
-                            </ButtonGroup>
-                            <Typography
-                              variant="body2"
-                              color={'primary.main'}
-                              component="div"
-                              sx={{
-                                marginLeft: '5px',
-                                fontWeight: 'normal',
-                                cursor: 'pointer',
-                                '&:hover': {
-                                  color: 'secondary.main',
-                                },
-                              }}
-                            >
-                              update
-                            </Typography>
-                          </Box>
-                        </Box>
-                      </Box>
-                    </Box>
-                  ))}
-                </Stack>
-                <Box
-                  display="flex"
-                  width={'100%'}
-                  flexDirection={'column'}
-                  sx={{
-                    position: 'absolute',
-                    left: 0,
-                    bottom: 0,
-                    zIndex: 999,
+                    color: 'common.black',
+                    borderWidth: '1px',
+                    borderStyle: 'solid',
+                    borderColor: 'secondary.main',
+                  },
+                  backgroundColor: 'common.black',
+                  borderWidth: '1px',
+                  borderStyle: 'solid',
+                  borderColor: 'common.black',
+                }}
+              >
+                {Constants.addToCartText}
+              </Button>
+              <CartDrawer
+                openDrawer={openDrawer}
+                closeDrawer={toggleDrawerHandler(false)}
+              />
+              <Button
+                onClick={() => setModalOpen(true)}
+                type="submit"
+                variant="contained"
+                sx={{
+                  width: '200px',
+                  '&:hover': {
                     backgroundColor: 'common.white',
-                    boxShadow: '0 0 10px rgba(0, 0, 0, 0.2)',
-                  }}
-                >
-                  <Box
-                    display="flex"
-                    justifyContent={'space-between'}
-                    flexDirection={'row'}
-                    sx={{ padding: 2 }}
-                  >
-                    <Typography
-                      component={'div'}
-                      variant="h6"
-                      color={'primary.main'}
-                      sx={{ fontWeight: '400', marginTop: '5px' }}
-                    >
-                      Sub Total
-                    </Typography>
-                    <Typography
-                      component={'div'}
-                      variant="h6"
-                      color={'primary.main'}
-                      sx={{ fontWeight: '400', marginTop: '5px' }}
-                    >
-                      5678 /-
-                    </Typography>
-                  </Box>
-                  <Box
-                    display="flex"
-                    justifyContent={'space-between'}
-                    flexDirection={'column'}
-                    sx={{ marginTop: 1, padding: 2 }}
-                  >
-                    <Link
-                      to="/cart"
-                      state={data}
-                      onClick={() =>
-                        window.scrollTo({ top: 0, behavior: 'smooth' })
-                      }
-                    >
-                      <Button
-                        fullWidth
-                        onClick={toggleDrawerHandler(false)}
-                        type="submit"
-                        variant="contained"
-                        sx={{
-                          '&:hover': {
-                            backgroundColor: 'primary.dark',
-                            color: 'common.white',
-                          },
-                          backgroundColor: 'primary.light',
-                          color: 'primary.dark',
-                        }}
-                      >
-                        View Cart
-                      </Button>
-                    </Link>
-                    <Link
-                      to="/checkout"
-                      state={data}
-                      onClick={() =>
-                        window.scrollTo({ top: 0, behavior: 'smooth' })
-                      }
-                    >
-                      <Button
-                        fullWidth
-                        onClick={toggleDrawerHandler(false)}
-                        type="submit"
-                        variant="contained"
-                        sx={{
-                          '&:hover': {
-                            backgroundColor: 'primary.main',
-                          },
-                          marginTop: 2,
-                          backgroundColor: 'secondary.main',
-                        }}
-                      >
-                        CHECKOUT
-                      </Button>
-                    </Link>
-                  </Box>
-                </Box>
-              </Box>
-            </Drawer>
+                    color: 'common.black',
+                    borderWidth: '1px',
+                    borderStyle: 'solid',
+                    borderColor: 'secondary.main',
+                  },
+                  borderWidth: '1px',
+                  borderStyle: 'solid',
+                  borderColor: 'common.black',
+                  backgroundColor: 'common.black',
+                  marginLeft: 2,
+                }}
+              >
+                {Constants.addToWishListText}
+              </Button>
+              <WishlistModal
+                openModal={modalOpen}
+                onCloseModal={() => setModalOpen(false)}
+                item={{
+                  img: item.img,
+                  title: item.title,
+                }}
+              />
+            </Box>
 
             <Box
               width={'48%'}
@@ -586,81 +387,284 @@ export default function ProductDetail(props) {
                 Pink
               </Button>
             </Box>
-
             <Typography
               color={'primary.main'}
-              variant="h6"
+              variant="h5"
               component="div"
               sx={{ marginTop: 2, fontWeight: 'normal' }}
             >
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Vestibulum feugiat mi eget elit elementum, id pulvinar tellus
-              eleifend. Integer porttitor elit id euismod elementum. Nulla vel
-              molestie massa, eget iaculis elit. Quisque a tortor vel lectus
-              ultricies pretium quis non purus. Pellentesque molestie leo eget
-              rutrum tristique.
+              Check cash on delivery
             </Typography>
+            <OutlinedInput
+              sx={{ marginTop: 2 }}
+              fullWidth
+              placeholder="Enter pin code"
+              endAdornment={
+                <InputAdornment position="end">
+                  <Button
+                    type="submit"
+                    variant="contained"
+                    sx={{
+                      marginLeft: 2,
+                      '&:hover': {
+                        backgroundColor: 'common.white',
+                        color: 'common.black',
+                        borderWidth: '1px',
+                        borderStyle: 'solid',
+                        borderColor: 'secondary.main',
+                      },
+                      borderWidth: '1px',
+                      borderStyle: 'solid',
+                      borderColor: 'common.black',
+                      backgroundColor: 'common.black',
+                    }}
+                  >
+                    {Constants.checkBtnText}
+                  </Button>
+                </InputAdornment>
+              }
+              aria-describedby="outlined-weight-helper-text"
+              inputProps={{
+                'aria-label': 'weight',
+              }}
+            />
+            <Typography
+              color={'primary.dark'}
+              variant="h6body2"
+              component="div"
+              sx={{ marginTop: 2, fontWeight: 'normal' }}
+            >
+              Offers Available (Promo code to be applied at checkout)
+            </Typography>
+            <Box
+              sx={{
+                height: 80,
+                padding: 2,
+                marginTop: 4,
+                borderWidth: 1,
+                position: 'relative',
+                borderStyle: 'dotted',
+                borderColor: 'primary.main',
+              }}
+              display={'flex'}
+              flexDirection={'column'}
+            >
+              <Box
+                sx={{ marginTop: 2 }}
+                display={'flex'}
+                flexDirection={'row'}
+                alignItems={'center'}
+                justifyContent={'space-between'}
+              >
+                <Typography
+                  color={'primary.dark'}
+                  variant="h6"
+                  component="div"
+                  sx={{ fontWeight: 'normal' }}
+                >
+                  Use Promocode - EXTRA10
+                </Typography>
+                <Typography
+                  color={'secondary.dark'}
+                  variant="body2"
+                  component="div"
+                  sx={{ fontWeight: 'normal' }}
+                >
+                  Copy
+                </Typography>
+              </Box>
+              <Typography
+                color={'primary.dark'}
+                variant="h6"
+                component="div"
+                sx={{ fontWeight: 'normal' }}
+              >
+                Get Additional 10% off on Prepaid order.
+              </Typography>
+              <Box
+                width={100}
+                sx={{
+                  padding: 1,
+                  position: 'absolute',
+                  top: '-20px',
+                  left: '20px',
+                  backgroundColor: 'common.black',
+                }}
+              >
+                <Typography
+                  align="center"
+                  color={'common.white'}
+                  variant="body2"
+                  component="div"
+                  sx={{ fontWeight: 'normal' }}
+                >
+                  EXTRA10
+                </Typography>
+              </Box>
+            </Box>
           </Box>
         </Box>
         <TabContext value={value}>
           <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
             <TabList onChange={handleTabChange}>
-              <Tab label="Details" sx={{ fontWeight: 'bold' }} value="1" />
-              <Tab label="More Informations" value="2" />
-              <Tab label="Reviews" value="3" />
-              <Tab label="Shipping & Return" value="4" />
+              <Tab
+                label="Details"
+                sx={{ fontWeight: value === '1' ? 'bold' : 'normal' }}
+                value="1"
+              />
+              <Tab
+                label="More Informations"
+                sx={{ fontWeight: value === '2' ? 'bold' : 'normal' }}
+                value="2"
+              />
+              <Tab
+                label="Reviews (5)"
+                sx={{ fontWeight: value === '3' ? 'bold' : 'normal' }}
+                value="3"
+              />
+              <Tab
+                label="Shipping & Return"
+                sx={{ fontWeight: value === '4' ? 'bold' : 'normal' }}
+                value="4"
+              />
             </TabList>
           </Box>
           <TabPanel value="1">
             <Typography
-              color={'primary.main'}
-              variant="body2"
+              color={'secondary.dark'}
+              variant="h6"
               component="div"
               sx={{ fontWeight: 'bold' }}
             >
               * Style is a way to say who you are without having to speak try
               trendy naira cut blue full sleeves kurti in georgette with floral
               prints on it.
-            </Typography>
-            <Typography
-              color={'primary.main'}
-              variant="body2"
-              component="div"
-              sx={{ fontWeight: 'bold' }}
-            >
+              <br />
               * This featured casual wear kurti avaiable ready-to-wear in M & L
               size and has extra 2 inches of margin to adjust up to 36"- 40" for
               your body comfort.
-            </Typography>
-            <Typography
-              color={'primary.main'}
-              variant="body2"
-              component="div"
-              sx={{ fontWeight: 'bold' }}
-            >
+              <br />
               * Dressed to chill this casual wear kurti for daily wear use with
               ankle-length denim or jegging pants at the office, college, or for
               an outing anywhere.
-            </Typography>
-            <Typography
-              color={'primary.main'}
-              variant="body2"
-              component="div"
-              sx={{ fontWeight: 'bold' }}
-            >
-              * Carry fancy solid color bellies or sneakers and danglers with it
-              to look more cool and stylish.
+              <br />* Carry fancy solid color bellies or sneakers and danglers
+              with it to look more cool and stylish.
             </Typography>
           </TabPanel>
           <TabPanel value="2">
-            <Typography
-              color={'primary.main'}
-              variant="h4"
-              component="div"
-              sx={{ fontWeight: 'bold' }}
-            >
-              More Informations
-            </Typography>
+            <Box display={'flex'} flexDirection={'row'} alignItems={'center'}>
+              <Typography
+                color={'primary.dark'}
+                variant="h6"
+                component="div"
+                sx={{ fontWeight: 'bold' }}
+              >
+                Model Number:
+              </Typography>
+              <Typography
+                color={'secondary.dark'}
+                variant="h6"
+                component="div"
+                sx={{ fontWeight: 'bold', marginLeft: 2 }}
+              >
+                LNB-2018-BLK
+              </Typography>
+            </Box>
+            <Divider sx={{ marginBottom: 1, marginTop: 1 }} />
+            <Box display={'flex'} flexDirection={'row'} alignItems={'center'}>
+              <Typography
+                color={'primary.dark'}
+                variant="h6"
+                component="div"
+                sx={{ fontWeight: 'bold' }}
+              >
+                Item Weight (IN KG):
+              </Typography>
+              <Typography
+                color={'secondary.dark'}
+                variant="h6"
+                component="div"
+                sx={{ fontWeight: 'bold', marginLeft: 2 }}
+              >
+                0.5
+              </Typography>
+            </Box>
+            <Divider sx={{ marginBottom: 1, marginTop: 1 }} />
+            <Box display={'flex'} flexDirection={'row'} alignItems={'center'}>
+              <Typography
+                color={'primary.dark'}
+                variant="h6"
+                component="div"
+                sx={{ fontWeight: 'bold' }}
+              >
+                Fabric:
+              </Typography>
+              <Typography
+                color={'secondary.dark'}
+                variant="h6"
+                component="div"
+                sx={{ fontWeight: 'bold', marginLeft: 2 }}
+              >
+                Crepe
+              </Typography>
+            </Box>
+            <Divider sx={{ marginBottom: 1, marginTop: 1 }} />
+            <Box display={'flex'} flexDirection={'row'} alignItems={'center'}>
+              <Typography
+                color={'primary.dark'}
+                variant="h6"
+                component="div"
+                sx={{ fontWeight: 'bold' }}
+              >
+                Color:
+              </Typography>
+              <Typography
+                color={'secondary.dark'}
+                variant="h6"
+                component="div"
+                sx={{ fontWeight: 'bold', marginLeft: 2 }}
+              >
+                Black
+              </Typography>
+            </Box>
+            <Divider sx={{ marginBottom: 1, marginTop: 1 }} />
+            <Box display={'flex'} flexDirection={'row'} alignItems={'center'}>
+              <Typography
+                color={'primary.dark'}
+                variant="h6"
+                component="div"
+                sx={{ fontWeight: 'bold' }}
+              >
+                Country of Origin:
+              </Typography>
+              <Typography
+                color={'secondary.dark'}
+                variant="h6"
+                component="div"
+                sx={{ fontWeight: 'bold', marginLeft: 2 }}
+              >
+                India
+              </Typography>
+            </Box>
+            <Divider sx={{ marginBottom: 1, marginTop: 1 }} />
+            <Box display={'flex'} flexDirection={'row'} alignItems={'center'}>
+              <Typography
+                color={'primary.dark'}
+                variant="h6"
+                component="div"
+                sx={{ fontWeight: 'bold' }}
+              >
+                Contact No:
+              </Typography>
+              <Typography
+                color={'secondary.dark'}
+                variant="h6"
+                component="div"
+                sx={{ fontWeight: 'bold', marginLeft: 2 }}
+              >
+                +91 8900-162-177
+              </Typography>
+            </Box>
           </TabPanel>
           <TabPanel value="3">
             <Typography
@@ -669,17 +673,44 @@ export default function ProductDetail(props) {
               component="div"
               sx={{ fontWeight: 'bold' }}
             >
-              Reviews
+              Reviews (5)
             </Typography>
           </TabPanel>
           <TabPanel value="4">
             <Typography
-              color={'primary.main'}
-              variant="h4"
+              color={'secondary.dark'}
+              variant="h6"
               component="div"
               sx={{ fontWeight: 'bold' }}
             >
-              Shipping & Return
+              * Customers have to ship the product to our address for
+              return/exchange orders
+              <br />
+              * Duties and taxes, if applicable, are to be paid by the customer.
+              <br />
+              * Kindly request a return/exchange via mail at
+              sonanlifashion@gmail.com within 7 days from the date of delivery.
+              Return requests will not be accepted through any other medium.
+              <br />
+              * Kindly note return or exchange is only one time available.
+              <br />
+              * We have a generous 7-day no-questions-asked return policy or
+              exchange policy.
+              <br />
+              * In Exchange, your replacement will be shipped after we receive
+              and verify the returned product.
+              <br />
+              * The product that needs to be exchanged must be returned in the
+              original condition with all parts/tags/accessories intact. Without
+              the original condition of the product, the exchange will not be
+              validated.
+              <br />
+              * In case of complaints regarding any damage or stain or other
+              reasons must be reported within 24 hours of purchasing the
+              product. We would require an image of the same for us to examine.
+              <br />* For claiming the wrong product was delivered, an unboxing
+              video must be provided showing the package received in intact
+              condition and non-tampered condition.
             </Typography>
           </TabPanel>
         </TabContext>
