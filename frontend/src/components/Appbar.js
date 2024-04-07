@@ -42,8 +42,6 @@ import {
   OutlinedInput,
   Popover,
   Select,
-  Snackbar,
-  Stack,
   SwipeableDrawer,
   TextField,
   Tooltip,
@@ -138,8 +136,6 @@ function DefaultAppBar() {
     setOpenDrawer(open);
   };
 
-  const [openSnackbar, setOpenSnackbar] = React.useState(true);
-
   const [category, setCategory] = React.useState('All Categories');
   const onChangeCategories = (event) => {
     setCategory(event.target.value);
@@ -147,20 +143,6 @@ function DefaultAppBar() {
   return (
     <ElevationScroll>
       <AppBar position="fixed" color="appmain">
-        <Snackbar
-          open={openSnackbar}
-          message="Flat 10% off Coupon Code: 'EXTRA10'"
-          action={
-            <IconButton
-              size="small"
-              aria-label="close"
-              color="inherit"
-              onClick={() => setOpenSnackbar(false)}
-            >
-              <CloseRounded fontSize="small" color="secondary" />
-            </IconButton>
-          }
-        />
         <Container maxWidth="xl">
           <Toolbar disableGutters>
             <Box sx={{ flexGrow: 2, display: { xs: 'flex', md: 'none' } }}>
