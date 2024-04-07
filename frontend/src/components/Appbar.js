@@ -77,7 +77,11 @@ ElevationScroll.propTypes = {
 };
 
 function DefaultAppBar() {
-  const navItems = ['Kurties', 'Palazzo Suits', 'Salwar Kamiz'];
+  const navItems = [
+    { name: 'Kurties', routePath: '/kurties' },
+    { name: 'Palazzo Suits', routePath: '/palazzoes' },
+    { name: 'Salwar Kamiz', routePath: '/salwars' },
+  ];
   const [state, setState] = React.useState(false);
   const [openDrawer, setOpenDrawer] = React.useState(false);
   const [openLeftDrawer, setOpenLeftDrawer] = React.useState(false);
@@ -102,14 +106,7 @@ function DefaultAppBar() {
   const theme = useTheme();
   const navigate = useNavigate();
 
-  const handleNavItemClick = (navItemName) => {
-    const navRouterPath = ['/kurties', '/palazzoes', '/salwars'];
-    const index = navItems.findIndex(function (params) {
-      console.log(params);
-      return params === navItemName;
-    });
-    console.log(index);
-    navigate(navRouterPath[index]);
+  const handleNavItemClick = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -198,13 +195,17 @@ function DefaultAppBar() {
                             },
                           }}
                           spacing={1}
-                          expanded={expanded === item}
-                          onChange={handleAccordionChange(item)}
+                          expanded={expanded === item.name}
+                          onChange={handleAccordionChange(item.name)}
                           key={index}
                         >
                           <AccordionSummary
                             expandIcon={
-                              expanded === item ? <RemoveIcon /> : <AddIcon />
+                              expanded === item.name ? (
+                                <RemoveIcon />
+                              ) : (
+                                <AddIcon />
+                              )
                             }
                           >
                             <Typography
@@ -214,7 +215,7 @@ function DefaultAppBar() {
                                 fontSize: '16px',
                               }}
                             >
-                              {item}
+                              {item.name}
                             </Typography>
                           </AccordionSummary>
                           <AccordionDetails>
@@ -356,7 +357,7 @@ function DefaultAppBar() {
                     },
                   }}
                   key={index}
-                  onClick={() => handleNavItemClick(navItem)}
+                  onClick={() => handleNavItemClick()}
                   TransitionComponent={Zoom}
                   title={
                     <React.Fragment>
@@ -470,15 +471,25 @@ function DefaultAppBar() {
                     </React.Fragment>
                   }
                 >
-                  <Button
-                    sx={{
-                      fontWeight: 'bold',
-                      fontSize: '15px',
-                      fontFamily: 'roboto',
+                  <NavLink
+                    exact={true}
+                    to={navItem.routePath}
+                    style={({ isActive, isPending, isTransitioning }) => {
+                      return {
+                        fontWeight: 'bold',
+                        fontSize: '20px',
+                        fontFamily: 'roboto',
+                        marginLeft: '20px',
+                        textDecoration: 'none',
+                        color: isActive
+                          ? theme.palette.secondary.dark
+                          : theme.palette.primary.main,
+                        viewTransitionName: isTransitioning ? 'slide' : '',
+                      };
                     }}
                   >
-                    {navItem}
-                  </Button>
+                    {navItem.name}
+                  </NavLink>
                 </Tooltip>
               ))}
             </Box>
