@@ -155,6 +155,13 @@ export default function MyWishLists() {
                             title="Add To Cart"
                           >
                             <IconButton
+                              onClick={() =>
+                                navigate('/detail/' + item.title, {
+                                  state: {
+                                    item: item,
+                                  },
+                                })
+                              }
                               size="medium"
                               aria-label="search"
                               sx={{

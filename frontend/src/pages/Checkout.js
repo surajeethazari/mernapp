@@ -26,6 +26,7 @@ import Constants from '../utils/Constants';
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import CreditScoreIcon from '@mui/icons-material/CreditScore';
 import { useTheme } from '@mui/material/styles';
+import PageTransition from '../utils/PageTransition';
 
 export default function Checkout() {
   // y220qkHeKQLWqzPnmhvrxMf6
@@ -87,164 +88,165 @@ export default function Checkout() {
   };
 
   return (
-    <Container maxWidth="xl">
-      <Box
-        alignItems={'center'}
-        flexDirection={'column'}
-        display={'flex'}
-        mb={2}
-        sx={{ marginTop: 12 }}
-      >
-        <BreadCrumbs crumbs={crumbs} />
-      </Box>
-      <Box display={'flex'} flexDirection={'row'} alignItems={'center'}>
+    <PageTransition>
+      <Container maxWidth="xl">
         <Box
-          width={'50%'}
-          display={'flex'}
-          flexDirection={'row'}
           alignItems={'center'}
-        >
-          <Box
-            width="46%"
-            sx={{
-              height: { xs: 4, md: 8 },
-              backgroundColor: activeStep
-                ? theme.palette.tertiary.main
-                : theme.palette.primary.main,
-              borderTopLeftRadius: 20,
-              borderBottomLeftRadius: 20,
-            }}
-          ></Box>
-          <Box
-            onClick={() => handleBack(true)}
-            display={'flex'}
-            flexDirection={'column'}
-            justifyContent={'space-arround'}
-            alignItems={'center'}
-            sx={{
-              width: { md: '6%', xs: '10%' },
-              height: { md: '50px', xs: '30px' },
-              borderWidth: { md: 8, xs: 3 },
-              borderColor: activeStep
-                ? theme.palette.tertiary.main
-                : theme.palette.primary.main,
-              backgroundColor: theme.palette.common.white,
-              borderStyle: 'solid',
-              borderRadius: '0% 0% 45% 45%',
-            }}
-          >
-            <LocalShippingIcon
-              sx={{
-                color: activeStep
-                  ? theme.palette.tertiary.main
-                  : theme.palette.primary.main,
-                fontSize: { md: '28px', xs: '12px' },
-                marginTop: 1,
-              }}
-            />
-            <Typography
-              variant="h6"
-              color={'primary'}
-              align="center"
-              sx={{
-                marginTop: { md: 3, xs: 1.5 },
-                fontSize: { xs: '15px', md: '25px' },
-              }}
-            >
-              Shipping
-            </Typography>
-          </Box>
-          <Box
-            width="46%"
-            sx={{
-              height: { xs: 4, md: 8 },
-              backgroundColor: activeStep
-                ? theme.palette.tertiary.main
-                : theme.palette.primary.main,
-            }}
-          ></Box>
-        </Box>
-        <Box
-          width={'50%'}
-          display={'flex'}
-          flexDirection={'row'}
-          alignItems={'center'}
-        >
-          <Box
-            width="46%"
-            sx={{
-              height: { xs: 4, md: 8 },
-              backgroundColor: !activeStep
-                ? theme.palette.tertiary.main
-                : theme.palette.primary.main,
-            }}
-          ></Box>
-          <Box
-            display={'flex'}
-            flexDirection={'column'}
-            justifyContent={'space-arround'}
-            alignItems={'center'}
-            sx={{
-              width: { md: '6%', xs: '10%' },
-              height: { md: '50px', xs: '30px' },
-              borderWidth: { md: 8, xs: 3 },
-              borderColor: !activeStep
-                ? theme.palette.tertiary.main
-                : theme.palette.primary.main,
-              backgroundColor: theme.palette.common.white,
-              borderStyle: 'solid',
-              borderRadius: '0% 0% 45% 45%',
-            }}
-          >
-            <CreditScoreIcon
-              sx={{
-                color: !activeStep
-                  ? theme.palette.tertiary.main
-                  : theme.palette.primary.main,
-                fontSize: { md: '28px', xs: '12px' },
-                marginTop: 1,
-              }}
-            />
-            <Typography
-              color={'primary'}
-              align="center"
-              sx={{
-                marginTop: { md: 3, xs: 1.5 },
-                fontSize: { xs: '15px', md: '25px' },
-              }}
-            >
-              Payment
-            </Typography>
-          </Box>
-          <Box
-            width="46%"
-            sx={{
-              height: { xs: 4, md: 8 },
-              backgroundColor: !activeStep
-                ? theme.palette.tertiary.main
-                : theme.palette.primary.main,
-              borderTopRightRadius: 20,
-              borderBottomRightRadius: 20,
-            }}
-          ></Box>
-        </Box>
-      </Box>
-      <Box
-        width={'100%'}
-        justifyContent={'space-between'}
-        display="flex"
-        sx={{
-          marginTop: 10,
-          marginBottom: '60px',
-          flexDirection: { xs: 'column', md: 'row' },
-        }}
-      >
-        <Box
-          display="flex"
           flexDirection={'column'}
-          sx={{ width: { xs: '100%', md: '68%' } }}
+          display={'flex'}
+          mb={2}
+          sx={{ marginTop: 12 }}
         >
-          {/* <Typography variant="h5" color={'primary'} sx={{ fontWeight: 'bold' }}>
+          <BreadCrumbs crumbs={crumbs} />
+        </Box>
+        <Box display={'flex'} flexDirection={'row'} alignItems={'center'}>
+          <Box
+            width={'50%'}
+            display={'flex'}
+            flexDirection={'row'}
+            alignItems={'center'}
+          >
+            <Box
+              width="46%"
+              sx={{
+                height: { xs: 4, md: 8 },
+                backgroundColor: activeStep
+                  ? theme.palette.tertiary.main
+                  : theme.palette.primary.main,
+                borderTopLeftRadius: 20,
+                borderBottomLeftRadius: 20,
+              }}
+            ></Box>
+            <Box
+              onClick={() => handleBack(true)}
+              display={'flex'}
+              flexDirection={'column'}
+              justifyContent={'space-arround'}
+              alignItems={'center'}
+              sx={{
+                width: { md: '6%', xs: '10%' },
+                height: { md: '50px', xs: '30px' },
+                borderWidth: { md: 8, xs: 3 },
+                borderColor: activeStep
+                  ? theme.palette.tertiary.main
+                  : theme.palette.primary.main,
+                backgroundColor: theme.palette.common.white,
+                borderStyle: 'solid',
+                borderRadius: '0% 0% 45% 45%',
+              }}
+            >
+              <LocalShippingIcon
+                sx={{
+                  color: activeStep
+                    ? theme.palette.tertiary.main
+                    : theme.palette.primary.main,
+                  fontSize: { md: '28px', xs: '12px' },
+                  marginTop: 1,
+                }}
+              />
+              <Typography
+                variant="h6"
+                color={'primary'}
+                align="center"
+                sx={{
+                  marginTop: { md: 3, xs: 1.5 },
+                  fontSize: { xs: '15px', md: '25px' },
+                }}
+              >
+                Shipping
+              </Typography>
+            </Box>
+            <Box
+              width="46%"
+              sx={{
+                height: { xs: 4, md: 8 },
+                backgroundColor: activeStep
+                  ? theme.palette.tertiary.main
+                  : theme.palette.primary.main,
+              }}
+            ></Box>
+          </Box>
+          <Box
+            width={'50%'}
+            display={'flex'}
+            flexDirection={'row'}
+            alignItems={'center'}
+          >
+            <Box
+              width="46%"
+              sx={{
+                height: { xs: 4, md: 8 },
+                backgroundColor: !activeStep
+                  ? theme.palette.tertiary.main
+                  : theme.palette.primary.main,
+              }}
+            ></Box>
+            <Box
+              display={'flex'}
+              flexDirection={'column'}
+              justifyContent={'space-arround'}
+              alignItems={'center'}
+              sx={{
+                width: { md: '6%', xs: '10%' },
+                height: { md: '50px', xs: '30px' },
+                borderWidth: { md: 8, xs: 3 },
+                borderColor: !activeStep
+                  ? theme.palette.tertiary.main
+                  : theme.palette.primary.main,
+                backgroundColor: theme.palette.common.white,
+                borderStyle: 'solid',
+                borderRadius: '0% 0% 45% 45%',
+              }}
+            >
+              <CreditScoreIcon
+                sx={{
+                  color: !activeStep
+                    ? theme.palette.tertiary.main
+                    : theme.palette.primary.main,
+                  fontSize: { md: '28px', xs: '12px' },
+                  marginTop: 1,
+                }}
+              />
+              <Typography
+                color={'primary'}
+                align="center"
+                sx={{
+                  marginTop: { md: 3, xs: 1.5 },
+                  fontSize: { xs: '15px', md: '25px' },
+                }}
+              >
+                Payment
+              </Typography>
+            </Box>
+            <Box
+              width="46%"
+              sx={{
+                height: { xs: 4, md: 8 },
+                backgroundColor: !activeStep
+                  ? theme.palette.tertiary.main
+                  : theme.palette.primary.main,
+                borderTopRightRadius: 20,
+                borderBottomRightRadius: 20,
+              }}
+            ></Box>
+          </Box>
+        </Box>
+        <Box
+          width={'100%'}
+          justifyContent={'space-between'}
+          display="flex"
+          sx={{
+            marginTop: 10,
+            marginBottom: '60px',
+            flexDirection: { xs: 'column', md: 'row' },
+          }}
+        >
+          <Box
+            display="flex"
+            flexDirection={'column'}
+            sx={{ width: { xs: '100%', md: '68%' } }}
+          >
+            {/* <Typography variant="h5" color={'primary'} sx={{ fontWeight: 'bold' }}>
             Customer Account
           </Typography>
           <Box sx={{ padding: 2, boxShadow: 3, marginTop: 2 }}>
@@ -328,40 +330,82 @@ export default function Checkout() {
               </Grid>
             </Grid>
           </Box> */}
-          <Typography
-            variant="h5"
-            color={'primary'}
-            sx={{ fontWeight: 'bold' }}
-          >
-            Apply Discount Code
-          </Typography>
-          <Box sx={{ padding: 2, boxShadow: 3, marginTop: 2 }}>
-            <Box
-              display={'flex'}
-              flexDirection={'row'}
-              alignItems={'center'}
-              justifyContent={'space-between'}
+            <Typography
+              variant="h5"
+              color={'primary'}
+              sx={{ fontWeight: 'bold' }}
             >
-              <Box width={'78%'}>
-                <TextField
-                  color="secondary"
-                  margin="normal"
-                  fullWidth
-                  id="coupon"
-                  label="Enter Coupon Code"
-                  name="coupon"
-                  autoComplete="coupon"
-                />
+              Apply Discount Code
+            </Typography>
+            <Box sx={{ padding: 2, boxShadow: 3, marginTop: 2 }}>
+              <Box
+                display={'flex'}
+                flexDirection={'row'}
+                alignItems={'center'}
+                justifyContent={'space-between'}
+              >
+                <Box width={'78%'}>
+                  <TextField
+                    color="secondary"
+                    margin="normal"
+                    fullWidth
+                    id="coupon"
+                    label="Enter Coupon Code"
+                    name="coupon"
+                    autoComplete="coupon"
+                  />
+                </Box>
+                <Box width={'20%'}>
+                  <Button
+                    fullWidth
+                    type="submit"
+                    variant="contained"
+                    sx={{
+                      padding: 1,
+                      mt: 1,
+                      fontSize: '20px',
+                      '&:hover': {
+                        backgroundColor: 'common.white',
+                        color: 'common.black',
+                        borderWidth: '1px',
+                        borderStyle: 'solid',
+                        borderColor: 'secondary.main',
+                      },
+                      borderWidth: '1px',
+                      borderStyle: 'solid',
+                      borderColor: 'common.black',
+                      backgroundColor: 'common.black',
+                      display: { xs: 'none', md: 'block' },
+                    }}
+                  >
+                    {Constants.applyBtnText}
+                  </Button>
+                </Box>
               </Box>
-              <Box width={'20%'}>
+            </Box>
+            <Typography
+              variant="h5"
+              color={'primary'}
+              sx={{ mt: 3, fontWeight: 'bold' }}
+            >
+              Payment Method
+            </Typography>
+            <Box sx={{ padding: 2, boxShadow: 3, marginTop: 2 }}>
+              <Box
+                width={'100%'}
+                display={'flex'}
+                flexDirection={'row'}
+                alignItems={'center'}
+                justifyContent={'space-between'}
+                sx={{ mt: 1 }}
+              >
+                <FormControlLabel control={<Checkbox />} label="Razor Pay" />
+
                 <Button
-                  fullWidth
+                  onClick={(e) => handlePayment(e)}
                   type="submit"
                   variant="contained"
                   sx={{
-                    padding: 1,
-                    mt: 1,
-                    fontSize: '20px',
                     '&:hover': {
                       backgroundColor: 'common.white',
                       color: 'common.black',
@@ -376,34 +420,27 @@ export default function Checkout() {
                     display: { xs: 'none', md: 'block' },
                   }}
                 >
-                  {Constants.applyBtnText}
+                  {Constants.payWithRazorText}
                 </Button>
               </Box>
+              <Divider sx={{ marginTop: 2 }} />
+              <FormControlLabel
+                sx={{ mb: 1, mt: 2 }}
+                control={<Checkbox />}
+                label="Cash On Delivery"
+              />
             </Box>
-          </Box>
-          <Typography
-            variant="h5"
-            color={'primary'}
-            sx={{ mt: 3, fontWeight: 'bold' }}
-          >
-            Payment Method
-          </Typography>
-          <Box sx={{ padding: 2, boxShadow: 3, marginTop: 2 }}>
             <Box
-              width={'100%'}
-              display={'flex'}
-              flexDirection={'row'}
+              sx={{ marginBottom: 3, marginTop: 2, display: 'flex' }}
               alignItems={'center'}
-              justifyContent={'space-between'}
-              sx={{ mt: 1 }}
+              justifyContent={'end'}
             >
-              <FormControlLabel control={<Checkbox />} label="Razor Pay" />
-
               <Button
-                onClick={(e) => handlePayment(e)}
+                onClick={() => handleNext(false)}
                 type="submit"
                 variant="contained"
                 sx={{
+                  width: '300px',
                   '&:hover': {
                     backgroundColor: 'common.white',
                     color: 'common.black',
@@ -415,72 +452,37 @@ export default function Checkout() {
                   borderStyle: 'solid',
                   borderColor: 'common.black',
                   backgroundColor: 'common.black',
-                  display: { xs: 'none', md: 'block' },
                 }}
               >
-                {Constants.payWithRazorText}
+                {Constants.placeOrderText}
               </Button>
             </Box>
-            <Divider sx={{ marginTop: 2 }} />
-            <FormControlLabel
-              sx={{ mb: 1, mt: 2 }}
-              control={<Checkbox />}
-              label="Cash On Delivery"
-            />
           </Box>
           <Box
-            sx={{ marginBottom: 3, marginTop: 2, display: 'flex' }}
-            alignItems={'center'}
-            justifyContent={'end'}
+            display="flex"
+            flexDirection={'column'}
+            sx={{
+              boxShadow: 2,
+              padding: 2,
+              width: { xs: '100%', md: '28%' },
+              marginBottom: '100px',
+              marginTop: { xs: 1, md: 7 },
+            }}
           >
-            <Button
-              onClick={() => handleNext(false)}
-              type="submit"
-              variant="contained"
-              sx={{
-                width: '300px',
-                '&:hover': {
-                  backgroundColor: 'common.white',
-                  color: 'common.black',
-                  borderWidth: '1px',
-                  borderStyle: 'solid',
-                  borderColor: 'secondary.main',
-                },
-                borderWidth: '1px',
-                borderStyle: 'solid',
-                borderColor: 'common.black',
-                backgroundColor: 'common.black',
-              }}
+            <Typography
+              variant="h5"
+              color={'primary'}
+              sx={{ fontWeight: 'bold', marginBottom: 1 }}
             >
-              {Constants.placeOrderText}
-            </Button>
-          </Box>
-        </Box>
-        <Box
-          display="flex"
-          flexDirection={'column'}
-          sx={{
-            boxShadow: 2,
-            padding: 2,
-            width: { xs: '100%', md: '28%' },
-            marginBottom: '100px',
-            marginTop: { xs: 1, md: 7 },
-          }}
-        >
-          <Typography
-            variant="h5"
-            color={'primary'}
-            sx={{ fontWeight: 'bold', marginBottom: 1 }}
-          >
-            Order Summary
-          </Typography>
-          <Stack
-            direction={'column'}
-            spacing={1}
-            padding={1}
-            sx={{ maxHeight: '250px', overflow: 'auto' }}
-          >
-            {/* {data.map((item, index) => (
+              Order Summary
+            </Typography>
+            <Stack
+              direction={'column'}
+              spacing={1}
+              padding={1}
+              sx={{ maxHeight: '250px', overflow: 'auto' }}
+            >
+              {/* {data.map((item, index) => (
               <Box key={index} display="flex" flexDirection={'column'}>
                 <Box key={index} display="flex" flexDirection={'row'}>
                   <CardMedia
@@ -523,189 +525,190 @@ export default function Checkout() {
                 </Box>
               </Box>
             ))} */}
-          </Stack>
-          <Divider sx={{ marginTop: 2 }} />
-          <Box
-            display="flex"
-            justifyContent={'space-between'}
-            flexDirection={'row'}
-            sx={{ marginTop: 2 }}
-          >
+            </Stack>
+            <Divider sx={{ marginTop: 2 }} />
+            <Box
+              display="flex"
+              justifyContent={'space-between'}
+              flexDirection={'row'}
+              sx={{ marginTop: 2 }}
+            >
+              <Typography
+                component={'div'}
+                variant="h6"
+                color={'primary.main'}
+                sx={{ fontWeight: '400', marginTop: '5px' }}
+              >
+                Sub Total
+              </Typography>
+              <Typography
+                component={'div'}
+                variant="h6"
+                color={'primary.main'}
+                sx={{ fontWeight: '400', marginTop: '5px' }}
+              >
+                1 Item
+              </Typography>
+              <Typography
+                component={'div'}
+                variant="h6"
+                color={'primary.main'}
+                sx={{ fontWeight: '400', marginTop: '5px' }}
+              >
+                5678 /-
+              </Typography>
+            </Box>
+            <Box
+              display="flex"
+              justifyContent={'space-between'}
+              flexDirection={'row'}
+              sx={{ marginTop: '10px' }}
+            >
+              <Typography
+                component={'div'}
+                variant="h6"
+                color={'primary.main'}
+                sx={{ fontWeight: '400', marginTop: '5px' }}
+              >
+                Shipping
+              </Typography>
+              <Typography
+                component={'div'}
+                variant="h6"
+                color={'primary.main'}
+                sx={{ fontWeight: '400', marginTop: '5px' }}
+              >
+                Standard Delivery
+              </Typography>
+              <Typography
+                component={'div'}
+                variant="h6"
+                color={'primary.main'}
+                sx={{ fontWeight: '400', marginTop: '5px' }}
+              >
+                0 /-
+              </Typography>
+            </Box>
+            <Divider sx={{ marginTop: 2 }} />
+            <Box
+              display="flex"
+              justifyContent={'space-between'}
+              flexDirection={'row'}
+            >
+              <Typography
+                component={'div'}
+                variant="h6"
+                color={'primary.main'}
+                sx={{ fontWeight: 'bold', marginTop: '5px' }}
+              >
+                Total Price
+              </Typography>
+              <Typography
+                component={'div'}
+                variant="h6"
+                color={'primary.main'}
+                sx={{ fontWeight: 'bold', marginTop: '5px' }}
+              >
+                5678 /-
+              </Typography>
+            </Box>
+            <Box
+              display="flex"
+              justifyContent={'space-between'}
+              flexDirection={'row'}
+            >
+              <Typography
+                component={'div'}
+                variant="h6"
+                color={'primary.main'}
+                sx={{ fontWeight: 'bold', marginTop: '5px' }}
+              >
+                Discount
+              </Typography>
+              <Typography
+                component={'div'}
+                variant="h6"
+                color={'primary.main'}
+                sx={{ fontWeight: 'bold', marginTop: '5px' }}
+              >
+                500 /-
+              </Typography>
+            </Box>
+            <Divider sx={{ marginTop: 2 }} />
+            <Box
+              display="flex"
+              justifyContent={'space-between'}
+              flexDirection={'row'}
+            >
+              <Typography
+                component={'div'}
+                variant="h6"
+                color={'primary.main'}
+                sx={{ fontWeight: 'bold', marginTop: '5px' }}
+              >
+                Total
+              </Typography>
+              <Typography
+                component={'div'}
+                variant="h6"
+                color={'primary.main'}
+                sx={{ fontWeight: 'bold', marginTop: '5px' }}
+              >
+                5178 /-
+              </Typography>
+            </Box>
             <Typography
               component={'div'}
-              variant="h6"
+              variant="body2"
               color={'primary.main'}
               sx={{ fontWeight: '400', marginTop: '5px' }}
             >
-              Sub Total
+              (Inclusive of tax $0.00)
             </Typography>
             <Typography
-              component={'div'}
-              variant="h6"
-              color={'primary.main'}
-              sx={{ fontWeight: '400', marginTop: '5px' }}
+              variant="h5"
+              color={'primary'}
+              sx={{ marginTop: 3, fontWeight: 'bold' }}
             >
-              1 Item
+              Shipping Method
             </Typography>
-            <Typography
-              component={'div'}
-              variant="h6"
-              color={'primary.main'}
-              sx={{ fontWeight: '400', marginTop: '5px' }}
-            >
-              5678 /-
+            <Divider sx={{ marginTop: 2 }} />
+            <Typography variant="h6" color={'primary'} sx={{ marginTop: 2 }}>
+              Shipping Cost - Standard
             </Typography>
-          </Box>
-          <Box
-            display="flex"
-            justifyContent={'space-between'}
-            flexDirection={'row'}
-            sx={{ marginTop: '10px' }}
-          >
-            <Typography
-              component={'div'}
-              variant="h6"
-              color={'primary.main'}
-              sx={{ fontWeight: '400', marginTop: '5px' }}
-            >
-              Shipping
-            </Typography>
-            <Typography
-              component={'div'}
-              variant="h6"
-              color={'primary.main'}
-              sx={{ fontWeight: '400', marginTop: '5px' }}
-            >
-              Standard Delivery
-            </Typography>
-            <Typography
-              component={'div'}
-              variant="h6"
-              color={'primary.main'}
-              sx={{ fontWeight: '400', marginTop: '5px' }}
-            >
-              0 /-
-            </Typography>
-          </Box>
-          <Divider sx={{ marginTop: 2 }} />
-          <Box
-            display="flex"
-            justifyContent={'space-between'}
-            flexDirection={'row'}
-          >
-            <Typography
-              component={'div'}
-              variant="h6"
-              color={'primary.main'}
-              sx={{ fontWeight: 'bold', marginTop: '5px' }}
-            >
-              Total Price
-            </Typography>
-            <Typography
-              component={'div'}
-              variant="h6"
-              color={'primary.main'}
-              sx={{ fontWeight: 'bold', marginTop: '5px' }}
-            >
-              5678 /-
-            </Typography>
-          </Box>
-          <Box
-            display="flex"
-            justifyContent={'space-between'}
-            flexDirection={'row'}
-          >
-            <Typography
-              component={'div'}
-              variant="h6"
-              color={'primary.main'}
-              sx={{ fontWeight: 'bold', marginTop: '5px' }}
-            >
-              Discount
-            </Typography>
-            <Typography
-              component={'div'}
-              variant="h6"
-              color={'primary.main'}
-              sx={{ fontWeight: 'bold', marginTop: '5px' }}
-            >
-              500 /-
-            </Typography>
-          </Box>
-          <Divider sx={{ marginTop: 2 }} />
-          <Box
-            display="flex"
-            justifyContent={'space-between'}
-            flexDirection={'row'}
-          >
-            <Typography
-              component={'div'}
-              variant="h6"
-              color={'primary.main'}
-              sx={{ fontWeight: 'bold', marginTop: '5px' }}
-            >
-              Total
-            </Typography>
-            <Typography
-              component={'div'}
-              variant="h6"
-              color={'primary.main'}
-              sx={{ fontWeight: 'bold', marginTop: '5px' }}
-            >
-              5178 /-
-            </Typography>
-          </Box>
-          <Typography
-            component={'div'}
-            variant="body2"
-            color={'primary.main'}
-            sx={{ fontWeight: '400', marginTop: '5px' }}
-          >
-            (Inclusive of tax $0.00)
-          </Typography>
-          <Typography
-            variant="h5"
-            color={'primary'}
-            sx={{ marginTop: 3, fontWeight: 'bold' }}
-          >
-            Shipping Method
-          </Typography>
-          <Divider sx={{ marginTop: 2 }} />
-          <Typography variant="h6" color={'primary'} sx={{ marginTop: 2 }}>
-            Shipping Cost - Standard
-          </Typography>
-          <Button
-            onClick={() =>
-              navigate('/paymentSuccess', {
-                state: {
-                  item: item,
+            <Button
+              onClick={() =>
+                navigate('/paymentSuccess', {
+                  state: {
+                    item: item,
+                  },
+                })
+              }
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{
+                '&:hover': {
+                  backgroundColor: 'common.white',
+                  color: 'common.black',
+                  borderWidth: '1px',
+                  borderStyle: 'solid',
+                  borderColor: 'secondary.main',
                 },
-              })
-            }
-            type="submit"
-            fullWidth
-            variant="contained"
-            sx={{
-              '&:hover': {
-                backgroundColor: 'common.white',
-                color: 'common.black',
                 borderWidth: '1px',
                 borderStyle: 'solid',
-                borderColor: 'secondary.main',
-              },
-              borderWidth: '1px',
-              borderStyle: 'solid',
-              borderColor: 'common.black',
-              backgroundColor: 'common.black',
-              mt: 3,
-              mb: 2,
-              display: { xs: 'block', md: 'none' },
-            }}
-          >
-            {Constants.continueePaymentText}
-          </Button>
+                borderColor: 'common.black',
+                backgroundColor: 'common.black',
+                mt: 3,
+                mb: 2,
+                display: { xs: 'block', md: 'none' },
+              }}
+            >
+              {Constants.continueePaymentText}
+            </Button>
+          </Box>
         </Box>
-      </Box>
-    </Container>
+      </Container>
+    </PageTransition>
   );
 }

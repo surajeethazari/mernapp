@@ -12,6 +12,7 @@ import Facebook from '@mui/icons-material/Facebook';
 import YouTube from '@mui/icons-material/YouTube';
 import Instagram from '@mui/icons-material/Instagram';
 import { Input } from 'antd';
+import PageTransition from '../utils/PageTransition';
 const { TextArea } = Input;
 
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
@@ -29,7 +30,7 @@ export default function Contact() {
     { name: 'Contact Us', trigger: '/contact', active: false },
   ];
   return (
-    <div>
+    <PageTransition>
       <Container maxWidth="xl">
         <Box
           alignItems={'center'}
@@ -142,6 +143,6 @@ export default function Contact() {
           </Box>
         </Box>
       </Container>
-    </div>
+    </PageTransition>
   );
 }

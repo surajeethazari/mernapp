@@ -2,6 +2,7 @@ import React from 'react';
 import BreadCrumbs from '../components/BreadCrumbs';
 import { Box, Container, List, Typography } from '@mui/material';
 import CircleIcon from '@mui/icons-material/Circle';
+import PageTransition from '../utils/PageTransition';
 
 export default function ReturnPolicy() {
   let crumbs = [
@@ -21,77 +22,83 @@ export default function ReturnPolicy() {
     'Thank you for choosing Ethnic Plus. We value your satisfaction and strive to provide you with the best shopping experience possible.',
   ];
   return (
-    <Container maxWidth="xl">
-      <Box
-        alignItems={'center'}
-        flexDirection={'column'}
-        display={'flex'}
-        mb={2}
-        sx={{ marginTop: 12 }}
-      >
-        <BreadCrumbs crumbs={crumbs} />
-      </Box>
-      <Container component="main" maxWidth="xl">
-        <Box display="flex" flexDirection={'column'} mt={5} mb={5} sx={{}}>
-          <Typography
-            color={'common.white'}
-            variant="h6"
-            component="div"
-            sx={{
-              fontWeight: 'normal',
-              marginTop: 2,
-              padding: 4,
-              borderWidth: 1,
-              borderColor: 'primary.light',
-              backgroundColor: 'error.light',
-            }}
-          >
-            Quality products that are priced at an honest value and backed by
-            the best customer service possible. Our customers will remain our
-            focus in the future. We will take care of each customer, one at a
-            time, each time we hear from him or her. After all, everything is
-            about… Emotions and Expressions...
-            <br />
-            <br />
-            We are always looking forward to giving you the best of products at
-            the best of prices and with the best of hopes that we continue our
-            relations till time abides with your love for things Indian! However
-            if due to some unforeseen situation you require the return of the
-            product then the following terms apply for a mutually consented
-            return.
-          </Typography>
-          <Typography
-            color={'primary.dark'}
-            variant="h6"
-            component="div"
-            sx={{ fontWeight: 'bold', marginTop: 2 }}
-          >
-            Return/Refund Policy:
-          </Typography>
-          <List>
-            {refundConditionLists.map((item, index) => (
-              <Box
-                key={index}
-                display="flex"
-                flexDirection={'row'}
-                alignItems={'center'}
-              >
-                <CircleIcon
-                  sx={{ color: 'primary.main', fontSize: '10px', marginTop: 1 }}
-                />
-                <Typography
-                  color={'primary.main'}
-                  variant="h6"
-                  component="div"
-                  sx={{ fontWeight: 'normal', marginTop: 1, marginLeft: 1 }}
-                >
-                  {item}
-                </Typography>
-              </Box>
-            ))}
-          </List>
+    <PageTransition>
+      <Container maxWidth="xl">
+        <Box
+          alignItems={'center'}
+          flexDirection={'column'}
+          display={'flex'}
+          mb={2}
+          sx={{ marginTop: 12 }}
+        >
+          <BreadCrumbs crumbs={crumbs} />
         </Box>
+        <Container component="main" maxWidth="xl">
+          <Box display="flex" flexDirection={'column'} mt={5} mb={5} sx={{}}>
+            <Typography
+              color={'common.white'}
+              variant="h6"
+              component="div"
+              sx={{
+                fontWeight: 'normal',
+                marginTop: 2,
+                padding: 4,
+                borderWidth: 1,
+                borderColor: 'primary.light',
+                backgroundColor: 'error.light',
+              }}
+            >
+              Quality products that are priced at an honest value and backed by
+              the best customer service possible. Our customers will remain our
+              focus in the future. We will take care of each customer, one at a
+              time, each time we hear from him or her. After all, everything is
+              about… Emotions and Expressions...
+              <br />
+              <br />
+              We are always looking forward to giving you the best of products
+              at the best of prices and with the best of hopes that we continue
+              our relations till time abides with your love for things Indian!
+              However if due to some unforeseen situation you require the return
+              of the product then the following terms apply for a mutually
+              consented return.
+            </Typography>
+            <Typography
+              color={'primary.dark'}
+              variant="h6"
+              component="div"
+              sx={{ fontWeight: 'bold', marginTop: 2 }}
+            >
+              Return/Refund Policy:
+            </Typography>
+            <List>
+              {refundConditionLists.map((item, index) => (
+                <Box
+                  key={index}
+                  display="flex"
+                  flexDirection={'row'}
+                  alignItems={'center'}
+                >
+                  <CircleIcon
+                    sx={{
+                      color: 'primary.main',
+                      fontSize: '10px',
+                      marginTop: 1,
+                    }}
+                  />
+                  <Typography
+                    color={'primary.main'}
+                    variant="h6"
+                    component="div"
+                    sx={{ fontWeight: 'normal', marginTop: 1, marginLeft: 1 }}
+                  >
+                    {item}
+                  </Typography>
+                </Box>
+              ))}
+            </List>
+          </Box>
+        </Container>
       </Container>
-    </Container>
+    </PageTransition>
   );
 }

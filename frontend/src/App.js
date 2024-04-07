@@ -1,10 +1,14 @@
 import * as React from 'react';
 import { colors } from '@mui/material';
-import Typography from '@mui/material/Typography';
-import Link from '@mui/material/Link';
 import { useEffect, useState } from 'react';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useLocation,
+} from 'react-router-dom';
+import { AnimatePresence } from 'framer-motion';
 
 import Home from './pages/Home';
 import DefaultAppBar from './components/Appbar';
@@ -63,6 +67,8 @@ const defaultTheme = createTheme({
 });
 
 function App() {
+  const location = useLocation();
+  const locationArr = location.pathname?.split('/') ?? [];
   const [message, setMessage] = useState([]);
   useEffect(() => {
     fetch(process.env.REACT_APP_BE_URI + '/client')
@@ -72,9 +78,9 @@ function App() {
 
   return (
     <ThemeProvider theme={defaultTheme}>
-      <Router>
-        <DefaultAppBar />
-        <Routes>
+      <DefaultAppBar />
+      <AnimatePresence mode="wait" initial={false}>
+        <Routes location={location} key={location.pathname}>
           <Route index element={<Home />} />
           <Route path="/createPassword" element={<CreatePassword />} />
           <Route path="/userdetails" element={<AccountDetails />} />
@@ -96,8 +102,8 @@ function App() {
           <Route path="/address" element={<MyAddress />} />
           <Route path="/*" element={<ErrorPage />} />
         </Routes>
-        <Footer />
-      </Router>
+      </AnimatePresence>
+      <Footer />
     </ThemeProvider>
   );
 }

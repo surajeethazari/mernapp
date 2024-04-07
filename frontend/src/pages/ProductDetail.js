@@ -28,6 +28,7 @@ import 'swiper/css/thumbs';
 import { FreeMode, Navigation, Thumbs } from 'swiper/modules';
 import WishlistModal from '../components/WishlistModal';
 import CartDrawer from '../components/CartDrawer';
+import PageTransition from '../utils/PageTransition';
 
 export default function ProductDetail(props) {
   const [thumbsSwiper, setThumbsSwiper] = React.useState(null);
@@ -103,7 +104,7 @@ export default function ProductDetail(props) {
   ];
 
   return (
-    <div>
+    <PageTransition>
       <Container maxWidth="xl">
         <Box
           alignItems={'center'}
@@ -715,6 +716,6 @@ export default function ProductDetail(props) {
           </TabPanel>
         </TabContext>
       </Container>
-    </div>
+    </PageTransition>
   );
 }

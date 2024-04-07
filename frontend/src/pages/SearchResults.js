@@ -1,6 +1,7 @@
 import { Container } from '@mui/material';
 import React from 'react';
 import BreadCrumbs from '../components/BreadCrumbs';
+import PageTransition from '../utils/PageTransition';
 
 export default function SearchResults() {
   let crumbs = [
@@ -9,16 +10,18 @@ export default function SearchResults() {
   ];
 
   return (
-    <Container maxWidth="xl">
-      <Box
-        alignItems={'center'}
-        flexDirection={'column'}
-        display={'flex'}
-        mb={2}
-        sx={{ marginTop: 12 }}
-      >
-        <BreadCrumbs crumbs={crumbs} />
-      </Box>
-    </Container>
+    <PageTransition>
+      <Container maxWidth="xl">
+        <Box
+          alignItems={'center'}
+          flexDirection={'column'}
+          display={'flex'}
+          mb={2}
+          sx={{ marginTop: 12 }}
+        >
+          <BreadCrumbs crumbs={crumbs} />
+        </Box>
+      </Container>
+    </PageTransition>
   );
 }
