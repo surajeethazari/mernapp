@@ -42,6 +42,7 @@ import 'swiper/css/effect-cube';
 import 'swiper/css/effect-fade';
 import 'swiper/css/pagination';
 import 'swiper/css/free-mode';
+import MyAcccountSidePanel from './components/MyAcccountSidePanel';
 
 const defaultTheme = createTheme({
   typography: {
@@ -83,23 +84,20 @@ function App() {
         <Routes location={location} key={location.pathname}>
           <Route index element={<Home />} />
           <Route path="/createPassword" element={<CreatePassword />} />
-          <Route path="/userdetails" element={<AccountDetails />} />
-          <Route path="/privacy" element={<Privacy />} />
-          <Route path="/shippingPolicy" element={<ShippingPolicy />} />
-          <Route path="/returnPolicy" element={<ReturnPolicy />} />
-          <Route path="/termsAndConditions" element={<TermsAndConditions />} />
-          <Route path="/about" element={<AboutUs />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/kurties" element={<Kurties />} />
-          <Route path="/palazzoes" element={<Palazzoes />} />
-          <Route path="/salwars" element={<Salwars />} />
-          <Route path="/detail/:title" element={<ProductDetail />} />
-          <Route path="/checkout" element={<Checkout />} />
-          <Route path="/paymentSuccess" element={<PaymentSuccess />} />
-          <Route path="/orders" element={<MyOrders />} />
-          <Route path="/wishlists" element={<MyWishLists />} />
-          <Route path="/address" element={<MyAddress />} />
+          <Route path="account" element={<MyAcccountSidePanel />} />
+          <Route path="privacy" element={<Privacy />} />
+          <Route path="shippingPolicy" element={<ShippingPolicy />} />
+          <Route path="returnPolicy" element={<ReturnPolicy />} />
+          <Route path="termsAndConditions" element={<TermsAndConditions />} />
+          <Route path="about" element={<AboutUs />} />
+          <Route path="cart" element={<Cart />} />
+          <Route path="contact" element={<Contact />} />
+          <Route path="kurties" element={<Kurties />} />
+          <Route path="palazzoes" element={<Palazzoes />} />
+          <Route path="salwars" element={<Salwars />} />
+          <Route path="detail/:title" element={<ProductDetail />} />
+          <Route path="checkout" element={<Checkout />} />
+          <Route path="paymentSuccess" element={<PaymentSuccess />} />
           <Route path="/*" element={<ErrorPage />} />
         </Routes>
       </AnimatePresence>

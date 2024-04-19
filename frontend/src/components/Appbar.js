@@ -472,7 +472,7 @@ function DefaultAppBar() {
                   }
                 >
                   <NavLink
-                    exact={true}
+                    exact="true"
                     to={navItem.routePath}
                     style={({ isActive, isPending, isTransitioning }) => {
                       return {

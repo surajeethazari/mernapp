@@ -29,86 +29,53 @@ export default function AccountDetails() {
   ];
 
   return (
-    <PageTransition>
-      <Container maxWidth="xl">
-        <Box
-          alignItems={'center'}
-          flexDirection={'column'}
-          display={'flex'}
-          mb={2}
-          sx={{ marginTop: 12 }}
+    <div>
+      <Typography
+        color={'primary.main'}
+        variant="h5"
+        component="div"
+        sx={{ fontWeight: '400' }}
+      >
+        {Constants.accountDetailsText}
+      </Typography>
+      <Divider sx={{ marginTop: 1 }} />
+      <Box display="flex" flexDirection={'row'} sx={{ marginTop: 2 }}>
+        <IconButton
+          size="medium"
+          aria-label="search"
+          color="inherit"
+          sx={{ '&:hover': { color: 'secondary.main' } }}
         >
-          <BreadCrumbs crumbs={crumbs} />
-        </Box>
-        <Box
-          width={'100%'}
-          justifyContent={'space-between'}
-          display="flex"
-          sx={{ marginTop: 5, flexDirection: { xs: 'column', md: 'row' } }}
+          <AccountCircle />
+        </IconButton>
+        <Typography
+          color={'primary.main'}
+          variant="h6"
+          component="div"
+          sx={{ fontWeight: '400', marginLeft: 1, marginTop: '2px' }}
         >
-          <MyAcccountSidePanel
-            activeButton={Constants.myAccountText}
-            trigger={() => navigate('/userdetails')}
-          />
-          <Box
-            display="flex"
-            flexDirection={'column'}
-            sx={{
-              width: { xs: '100%', md: '73%' },
-              marginBottom: '100px',
-              padding: 2,
-              boxShadow: 3,
-            }}
-          >
-            <Typography
-              color={'primary.main'}
-              variant="h5"
-              component="div"
-              sx={{ fontWeight: '400' }}
-            >
-              {Constants.accountDetailsText}
-            </Typography>
-            <Divider sx={{ marginTop: 1 }} />
-            <Box display="flex" flexDirection={'row'} sx={{ marginTop: 2 }}>
-              <IconButton
-                size="medium"
-                aria-label="search"
-                color="inherit"
-                sx={{ '&:hover': { color: 'secondary.main' } }}
-              >
-                <AccountCircle />
-              </IconButton>
-              <Typography
-                color={'primary.main'}
-                variant="h6"
-                component="div"
-                sx={{ fontWeight: '400', marginLeft: 1, marginTop: '2px' }}
-              >
-                Name
-              </Typography>
-            </Box>
+          Name
+        </Typography>
+      </Box>
 
-            <Box display="flex" flexDirection={'row'} sx={{ marginTop: 1 }}>
-              <IconButton
-                size="medium"
-                aria-label="search"
-                color="inherit"
-                sx={{ '&:hover': { color: 'secondary.main' } }}
-              >
-                <Email />
-              </IconButton>
-              <Typography
-                color={'primary.main'}
-                variant="h6"
-                component="div"
-                sx={{ fontWeight: '400', marginLeft: 1, marginTop: '2px' }}
-              >
-                sonanlifashioninfo@gmail.com
-              </Typography>
-            </Box>
-          </Box>
-        </Box>
-      </Container>
-    </PageTransition>
+      <Box display="flex" flexDirection={'row'} sx={{ marginTop: 1 }}>
+        <IconButton
+          size="medium"
+          aria-label="search"
+          color="inherit"
+          sx={{ '&:hover': { color: 'secondary.main' } }}
+        >
+          <Email />
+        </IconButton>
+        <Typography
+          color={'primary.main'}
+          variant="h6"
+          component="div"
+          sx={{ fontWeight: '400', marginLeft: 1, marginTop: '2px' }}
+        >
+          sonanlifashioninfo@gmail.com
+        </Typography>
+      </Box>
+    </div>
   );
 }

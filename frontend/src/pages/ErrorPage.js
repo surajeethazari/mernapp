@@ -37,18 +37,18 @@ export default function ErrorPage() {
   return (
     <Container component="main" maxWidth="xl">
       <Typography
-        sx={{ marginTop: 10 }}
+        sx={{ marginTop: 15 }}
         align="center"
-        variant="h1"
+        variant="h3"
         component="div"
         gutterBottom
       >
-        Oops!
+        Oops!, Lost your way?
       </Typography>
       <Box
         width={'100%'}
-        mb={22}
-        mt={8}
+        mb={20}
+        mt={2}
         display="flex"
         alignItems="center"
         justifyContent="center"
