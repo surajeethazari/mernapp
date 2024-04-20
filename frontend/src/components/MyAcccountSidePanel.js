@@ -57,19 +57,19 @@ export default function MyAcccountSidePanel() {
             {[
               {
                 name: Constants.myAccountText,
-                route: '/account/details',
+                route: 'details',
               },
               {
                 name: Constants.myOrderText,
-                route: '/account/orders',
+                route: 'orders',
               },
               {
                 name: Constants.myWishlistText,
-                route: '/account/wishlists',
+                route: 'wishlists',
               },
               {
                 name: Constants.myAddressText,
-                route: '/account/address',
+                route: 'address',
               },
             ].map((item, index) => (
               <Box key={index}>

@@ -29,7 +29,7 @@ export default function AccountDetails() {
   ];
 
   return (
-    <div>
+    <Box>
       <Typography
         color={'primary.main'}
         variant="h5"
@@ -76,6 +76,6 @@ export default function AccountDetails() {
           sonanlifashioninfo@gmail.com
         </Typography>
       </Box>
-    </div>
+    </Box>
   );
 }

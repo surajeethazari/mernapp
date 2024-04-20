@@ -15,6 +15,7 @@ import {
   PaginationItem,
   Paper,
   Stack,
+  TablePagination,
   Tooltip,
   Typography,
   Zoom,
@@ -30,6 +31,17 @@ import MyAcccountSidePanel from '../components/MyAcccountSidePanel';
 import Masonry from '@mui/lab/Masonry';
 
 export default function MyWishLists() {
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
   const [imageSectionShow, setImageSectionShow] = React.useState(0);
   const theme = useTheme();
   const navigate = useNavigate();
@@ -49,14 +61,29 @@ export default function MyWishLists() {
 
   return (
     <Box>
-      <Typography
-        color={'primary.main'}
-        variant="h5"
-        component="div"
-        sx={{ fontWeight: '400' }}
+      <Box
+        display={'flex'}
+        justifyContent={'space-between'}
+        alignItems={'center'}
       >
-        {Constants.myWishlistText}
-      </Typography>
+        <Typography
+          color={'primary.main'}
+          variant="h5"
+          component="div"
+          sx={{ fontWeight: '400' }}
+        >
+          {Constants.myWishlistText}
+        </Typography>
+        <TablePagination
+          component="div"
+          count={data.length}
+          page={page}
+          onPageChange={handleChangePage}
+          rowsPerPageOptions={[5, 10, 25]}
+          rowsPerPage={rowsPerPage}
+          onRowsPerPageChange={handleChangeRowsPerPage}
+        />
+      </Box>
 
       <Divider sx={{ marginTop: 1 }} />
       {/* <Typography
@@ -67,169 +94,162 @@ export default function MyWishLists() {
           >
             {Constants.noOrderFoundText}
           </Typography> */}
-      <Masonry sx={{ marginTop: 1 }} columns={{ md: 4, xs: 2 }} spacing={3}>
-        {data.map((item, index) => (
-          <Box key={index} sx={{ height: item.height + 100 }}>
-            <Card>
-              <CardContent sx={{ padding: 0, backgroundColor: 'common.white' }}>
-                <Box
-                  onMouseEnter={() => setImageSectionShow(index + 1)}
-                  onMouseLeave={() => setImageSectionShow(0)}
-                  sx={{ overflow: 'hidden' }}
+      <Masonry sx={{ marginTop: 1 }} columns={{ md: 3, xs: 2 }} spacing={3}>
+        {data
+          .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+          .map((item, index) => (
+            <Box key={index} sx={{ height: item.height + 100 }}>
+              <Card>
+                <CardContent
+                  sx={{ padding: 0, backgroundColor: 'common.white' }}
                 >
-                  <CardMedia
-                    onClick={() => onProductTitleClick(item)}
-                    component="img"
-                    height={item.height}
-                    image={item.img}
-                    alt="Image Title"
-                    sx={{
-                      cursor: 'pointer',
-                      transform: 'scale(1)',
-                      transformOrigin: '50% 50%',
-                      transition: '0.5s ease-in-out',
-                      '&:hover': {
-                        transform: 'scale(1.2)',
-                      },
-                    }}
-                  />
-                  <Grow in={imageSectionShow === index + 1}>
-                    <Box
+                  <Box
+                    onMouseEnter={() => setImageSectionShow(index + 1)}
+                    onMouseLeave={() => setImageSectionShow(0)}
+                    sx={{ overflow: 'hidden' }}
+                  >
+                    <CardMedia
+                      onClick={() => onProductTitleClick(item)}
+                      component="img"
+                      height={item.height}
+                      image={item.img}
+                      alt="Image Title"
                       sx={{
-                        marginTop: -9,
-                        position: 'relative',
-                        zIndex: 999,
-                        padding: 2,
+                        cursor: 'pointer',
+                        transform: 'scale(1)',
+                        transformOrigin: '50% 50%',
+                        transition: '0.5s ease-in-out',
+                        '&:hover': {
+                          transform: 'scale(1.2)',
+                        },
                       }}
-                      display={'flex'}
-                      flexDirection={'row'}
-                      justifyContent={'space-around'}
-                    >
-                      <Tooltip
-                        placement="top"
-                        componentsProps={{
-                          tooltip: {
-                            sx: {
-                              bgcolor: 'common.black',
-                            },
-                          },
-                          arrow: {
-                            sx: {
-                              color: 'common.black',
-                            },
-                          },
+                    />
+                    <Grow in={imageSectionShow === index + 1}>
+                      <Box
+                        sx={{
+                          marginTop: -9,
+                          position: 'relative',
+                          zIndex: 999,
+                          padding: 2,
                         }}
-                        TransitionComponent={Zoom}
-                        arrow
-                        title="Add To Cart"
+                        display={'flex'}
+                        flexDirection={'row'}
+                        justifyContent={'space-around'}
                       >
-                        <IconButton
-                          onClick={() =>
-                            navigate('/detail/' + item.title, {
-                              state: {
-                                item: item,
+                        <Tooltip
+                          placement="top"
+                          componentsProps={{
+                            tooltip: {
+                              sx: {
+                                bgcolor: 'common.black',
                               },
-                            })
-                          }
-                          size="medium"
-                          aria-label="search"
-                          sx={{
-                            padding: '5px',
-                            backgroundColor: 'common.white',
-                            borderRadius: '5px 5px 5px 5px',
-                            '&:hover': {
-                              backgroundColor: 'common.white',
+                            },
+                            arrow: {
+                              sx: {
+                                color: 'common.black',
+                              },
                             },
                           }}
+                          TransitionComponent={Zoom}
+                          arrow
+                          title="Add To Cart"
                         >
-                          <AddShoppingCartIcon
-                            sx={{ color: theme.palette.common.black }}
-                          />
-                        </IconButton>
-                      </Tooltip>
-                      <Tooltip
-                        placement="top"
-                        componentsProps={{
-                          tooltip: {
-                            sx: {
-                              bgcolor: 'common.black',
-                            },
-                          },
-                          arrow: {
-                            sx: {
-                              color: 'common.black',
-                            },
-                          },
-                        }}
-                        TransitionComponent={Zoom}
-                        arrow
-                        title="Remove From Wishlists"
-                      >
-                        <IconButton
-                          size="medium"
-                          aria-label="search"
-                          sx={{
-                            padding: '5px',
-                            backgroundColor: 'common.white',
-                            borderRadius: '5px 5px 5px 5px',
-                            '&:hover': {
+                          <IconButton
+                            onClick={() =>
+                              navigate('/detail/' + item.title, {
+                                state: {
+                                  item: item,
+                                },
+                              })
+                            }
+                            size="medium"
+                            aria-label="search"
+                            sx={{
+                              padding: '5px',
                               backgroundColor: 'common.white',
+                              borderRadius: '5px 5px 5px 5px',
+                              '&:hover': {
+                                backgroundColor: 'common.white',
+                              },
+                            }}
+                          >
+                            <AddShoppingCartIcon
+                              sx={{ color: theme.palette.common.black }}
+                            />
+                          </IconButton>
+                        </Tooltip>
+                        <Tooltip
+                          placement="top"
+                          componentsProps={{
+                            tooltip: {
+                              sx: {
+                                bgcolor: 'common.black',
+                              },
+                            },
+                            arrow: {
+                              sx: {
+                                color: 'common.black',
+                              },
                             },
                           }}
+                          TransitionComponent={Zoom}
+                          arrow
+                          title="Remove From Wishlists"
                         >
-                          <DeleteSweepIcon
-                            sx={{ color: theme.palette.common.black }}
-                          />
-                        </IconButton>
-                      </Tooltip>
-                    </Box>
-                  </Grow>
-                </Box>
-                <Box
-                  display={'flex'}
-                  flexDirection={'column'}
-                  sx={{ paddingLeft: 3, paddingRight: 3 }}
-                >
-                  <Typography
-                    onClick={() => onProductTitleClick(item)}
-                    color={'primary.dark'}
-                    variant="h6"
-                    component="div"
-                    sx={{
-                      cursor: 'pointer',
-                      fontWeight: 'bold',
-                      '&:hover': {
-                        color: 'secondary.main',
-                      },
-                    }}
+                          <IconButton
+                            size="medium"
+                            aria-label="search"
+                            sx={{
+                              padding: '5px',
+                              backgroundColor: 'common.white',
+                              borderRadius: '5px 5px 5px 5px',
+                              '&:hover': {
+                                backgroundColor: 'common.white',
+                              },
+                            }}
+                          >
+                            <DeleteSweepIcon
+                              sx={{ color: theme.palette.common.black }}
+                            />
+                          </IconButton>
+                        </Tooltip>
+                      </Box>
+                    </Grow>
+                  </Box>
+                  <Box
+                    display={'flex'}
+                    flexDirection={'column'}
+                    sx={{ paddingLeft: 3, paddingRight: 3 }}
                   >
-                    {item.title}
-                  </Typography>
-                  <Typography
-                    component={'div'}
-                    variant="body1"
-                    color={'primary.main'}
-                    sx={{ fontWeight: 'bold' }}
-                  >
-                    {item.Price}/-
-                  </Typography>
-                </Box>
-              </CardContent>
-            </Card>
-          </Box>
-        ))}
+                    <Typography
+                      onClick={() => onProductTitleClick(item)}
+                      color={'primary.dark'}
+                      variant="h6"
+                      component="div"
+                      sx={{
+                        cursor: 'pointer',
+                        fontWeight: 'bold',
+                        '&:hover': {
+                          color: 'secondary.main',
+                        },
+                      }}
+                    >
+                      {item.title}
+                    </Typography>
+                    <Typography
+                      component={'div'}
+                      variant="body1"
+                      color={'primary.main'}
+                      sx={{ fontWeight: 'bold' }}
+                    >
+                      {item.Price}/-
+                    </Typography>
+                  </Box>
+                </CardContent>
+              </Card>
+            </Box>
+          ))}
       </Masonry>
-      <Stack alignItems={'center'} sx={{ marginTop: 2 }} spacing={2}>
-        <Pagination
-          count={10}
-          renderItem={(item) => (
-            <PaginationItem
-              slots={{ previous: ArrowBackIcon, next: ArrowForwardIcon }}
-              {...item}
-            />
-          )}
-        />
-      </Stack>
     </Box>
   );
 }

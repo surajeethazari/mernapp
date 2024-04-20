@@ -83,7 +83,7 @@ function App() {
       <AnimatePresence mode="wait" initial={false}>
         <Routes location={location} key={location.pathname}>
           <Route index element={<Home />} />
-          <Route path="/createPassword" element={<CreatePassword />} />
+          <Route path="createPassword" element={<CreatePassword />} />
           <Route path="account" element={<MyAcccountSidePanel />} />
           <Route path="privacy" element={<Privacy />} />
           <Route path="shippingPolicy" element={<ShippingPolicy />} />

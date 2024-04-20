@@ -22,6 +22,7 @@ import {
   MenuItem,
   Paper,
   Slider,
+  TablePagination,
   Tooltip,
   Zoom,
 } from '@mui/material';
@@ -64,6 +65,17 @@ function valuetext(value) {
 }
 
 export default function Salwars() {
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
   const [imageSectionShow, setImageSectionShow] = React.useState(0);
   const [value, setValue] = React.useState([0, 100]);
   let crumbs = [
@@ -117,86 +129,15 @@ export default function Salwars() {
         </Box>
         <Container component="main" maxWidth="xl">
           <Box
-            height={50}
-            display="flex"
-            flexDirection={'row'}
-            m={2}
-            sx={{ justifyContent: { md: 'space-between', xs: 'end' } }}
-          >
-            <Typography
-              color={'primary.main'}
-              variant="h6"
-              component="div"
-              sx={{ fontWeight: 'bold', display: { md: 'block', xs: 'none' } }}
-            >
-              {Constants.shopByText}
-            </Typography>
-            <Box
-              display="flex"
-              alignItems="center"
-              flexDirection={'row'}
-              m={2}
-              sx={{}}
-            >
-              <Typography
-                color={'primary.main'}
-                variant="h6"
-                component="div"
-                sx={{ fontWeight: 'bold' }}
-              >
-                {Constants.sortByText}:
-              </Typography>
-              <List sx={{ bgcolor: 'common.white', marginLeft: 1, width: 150 }}>
-                <ListItemButton
-                  sx={{ boxShadow: '0 0 10px rgba(0, 0, 0, 0.2)' }}
-                  onClick={handleClickListItem}
-                >
-                  <ListItemText secondary={options[selectedIndex]} />
-                </ListItemButton>
-              </List>
-              <Menu
-                anchorEl={anchorEl}
-                open={open}
-                onClose={handleClose}
-                MenuListProps={{
-                  'aria-labelledby': 'lock-button',
-                  role: 'listbox',
-                }}
-              >
-                {options.map((option, index) => (
-                  <MenuItem
-                    key={option}
-                    selected={index === selectedIndex}
-                    onClick={(event) => handleMenuItemClick(event, index)}
-                  >
-                    {option}
-                  </MenuItem>
-                ))}
-              </Menu>
-              <IconButton
-                sx={{
-                  color: 'common.white',
-                  bgcolor: 'primary.main',
-                  marginLeft: 1,
-                  '&:hover': { color: 'secondary.main' },
-                }}
-                size="medium"
-                aria-label="Sort"
-              >
-                <ArrowDownward />
-              </IconButton>
-            </Box>
-          </Box>
-          <Box
             width={'100%'}
             justifyContent={'space-between'}
             display="flex"
             flexDirection={'row'}
-            m={1}
             sx={{}}
           >
             <Box
               flexDirection={'column'}
+              mt={4}
               sx={{
                 display: { xs: 'none', md: 'flex' },
                 width: { xs: '0%', md: '20%' },
@@ -280,163 +221,233 @@ export default function Salwars() {
               display="flex"
               alignItems={'center'}
               flexDirection={'column'}
-              m={1}
+              m={4}
               sx={{ width: { xs: '100%', md: '78%' } }}
             >
+              <Box
+                display="flex"
+                alignItems="center"
+                justifyContent={'space-between'}
+                flexDirection={'row'}
+                width={'100%'}
+              >
+                <Box display="flex" alignItems="center" flexDirection={'row'}>
+                  <Typography
+                    color={'primary.main'}
+                    variant="h6"
+                    component="div"
+                    sx={{ fontWeight: 'bold' }}
+                  >
+                    {Constants.sortByText}:
+                  </Typography>
+                  <List
+                    sx={{ bgcolor: 'common.white', marginLeft: 1, width: 150 }}
+                  >
+                    <ListItemButton
+                      sx={{ boxShadow: '0 0 10px rgba(0, 0, 0, 0.2)' }}
+                      onClick={handleClickListItem}
+                    >
+                      <ListItemText secondary={options[selectedIndex]} />
+                    </ListItemButton>
+                  </List>
+                  <Menu
+                    anchorEl={anchorEl}
+                    open={open}
+                    onClose={handleClose}
+                    MenuListProps={{
+                      'aria-labelledby': 'lock-button',
+                      role: 'listbox',
+                    }}
+                  >
+                    {options.map((option, index) => (
+                      <MenuItem
+                        key={option}
+                        selected={index === selectedIndex}
+                        onClick={(event) => handleMenuItemClick(event, index)}
+                      >
+                        {option}
+                      </MenuItem>
+                    ))}
+                  </Menu>
+                  <IconButton
+                    sx={{
+                      color: 'common.white',
+                      bgcolor: 'primary.main',
+                      marginLeft: 1,
+                      '&:hover': { color: 'secondary.main' },
+                    }}
+                    size="medium"
+                    aria-label="Sort"
+                  >
+                    <ArrowDownward />
+                  </IconButton>
+                </Box>
+                <TablePagination
+                  component="div"
+                  count={data.length}
+                  page={page}
+                  onPageChange={handleChangePage}
+                  rowsPerPageOptions={[5, 10, 25]}
+                  rowsPerPage={rowsPerPage}
+                  onRowsPerPageChange={handleChangeRowsPerPage}
+                />
+              </Box>
               <Masonry
                 sx={{ marginTop: 1, overflow: 'hidden' }}
                 columns={{ md: 4, xs: 2 }}
                 spacing={3}
               >
-                {data.map((item, index) => (
-                  <Box key={index} sx={{ height: item.height + 100 }}>
-                    <Card>
-                      <CardContent
-                        sx={{
-                          padding: 0,
-                          backgroundColor: 'common.white',
-                        }}
-                      >
-                        <Box
-                          onMouseEnter={() => setImageSectionShow(index + 1)}
-                          onMouseLeave={() => setImageSectionShow(0)}
-                          sx={{ overflow: 'hidden' }}
+                {data
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map((item, index) => (
+                    <Box key={index} sx={{ height: item.height + 100 }}>
+                      <Card>
+                        <CardContent
+                          sx={{
+                            padding: 0,
+                            backgroundColor: 'common.white',
+                          }}
                         >
-                          <CardMedia
-                            onClick={() => onProductTitleClick(item)}
-                            component="img"
-                            height={item.height}
-                            image={item.img}
-                            alt="Image Title"
-                            sx={{
-                              cursor: 'pointer',
-                              transform: 'scale(1)',
-                              transformOrigin: '50% 50%',
-                              transition: '0.5s ease-in-out',
-                              '&:hover': {
-                                transform: 'scale(1.2)',
-                              },
-                            }}
-                          />
-
-                          <Grow in={imageSectionShow === index + 1}>
-                            <Box
+                          <Box
+                            onMouseEnter={() => setImageSectionShow(index + 1)}
+                            onMouseLeave={() => setImageSectionShow(0)}
+                            sx={{ overflow: 'hidden' }}
+                          >
+                            <CardMedia
+                              onClick={() => onProductTitleClick(item)}
+                              component="img"
+                              height={item.height}
+                              image={item.img}
+                              alt="Image Title"
                               sx={{
-                                marginTop: -9,
-                                position: 'relative',
-                                zIndex: 999,
-                                padding: 2,
+                                cursor: 'pointer',
+                                transform: 'scale(1)',
+                                transformOrigin: '50% 50%',
+                                transition: '0.5s ease-in-out',
+                                '&:hover': {
+                                  transform: 'scale(1.2)',
+                                },
                               }}
-                              display={'flex'}
-                              flexDirection={'row'}
-                              justifyContent={'space-around'}
+                            />
+
+                            <Grow in={imageSectionShow === index + 1}>
+                              <Box
+                                sx={{
+                                  marginTop: -9,
+                                  position: 'relative',
+                                  zIndex: 999,
+                                  padding: 2,
+                                }}
+                                display={'flex'}
+                                flexDirection={'row'}
+                                justifyContent={'space-around'}
+                              >
+                                <Tooltip
+                                  placement="top"
+                                  componentsProps={{
+                                    tooltip: {
+                                      sx: {
+                                        bgcolor: 'common.black',
+                                      },
+                                    },
+                                    arrow: {
+                                      sx: {
+                                        color: 'common.black',
+                                      },
+                                    },
+                                  }}
+                                  TransitionComponent={Zoom}
+                                  arrow
+                                  title="Add To Cart"
+                                >
+                                  <IconButton
+                                    size="medium"
+                                    aria-label="search"
+                                    sx={{
+                                      padding: '5px',
+                                      backgroundColor: 'common.white',
+                                      borderRadius: '5px 5px 5px 5px',
+                                      '&:hover': {
+                                        backgroundColor: 'common.white',
+                                      },
+                                    }}
+                                  >
+                                    <AddShoppingCartIcon
+                                      sx={{ color: theme.palette.common.black }}
+                                    />
+                                  </IconButton>
+                                </Tooltip>
+                                <Tooltip
+                                  placement="top"
+                                  componentsProps={{
+                                    tooltip: {
+                                      sx: {
+                                        bgcolor: 'common.black',
+                                      },
+                                    },
+                                    arrow: {
+                                      sx: {
+                                        color: 'common.black',
+                                      },
+                                    },
+                                  }}
+                                  TransitionComponent={Zoom}
+                                  arrow
+                                  title="Add To Wishlists"
+                                >
+                                  <IconButton
+                                    size="medium"
+                                    aria-label="search"
+                                    sx={{
+                                      padding: '5px',
+                                      backgroundColor: 'common.white',
+                                      borderRadius: '5px 5px 5px 5px',
+                                      '&:hover': {
+                                        backgroundColor: 'common.white',
+                                      },
+                                    }}
+                                  >
+                                    <StarIcon
+                                      sx={{ color: theme.palette.common.black }}
+                                    />
+                                  </IconButton>
+                                </Tooltip>
+                              </Box>
+                            </Grow>
+                          </Box>
+                          <Box
+                            display={'flex'}
+                            flexDirection={'column'}
+                            sx={{ paddingLeft: 3, paddingRight: 3 }}
+                          >
+                            <Typography
+                              onClick={() => onProductTitleClick(item)}
+                              color={'primary.dark'}
+                              variant="h6"
+                              component="div"
+                              sx={{
+                                cursor: 'pointer',
+                                fontWeight: 'bold',
+                                '&:hover': {
+                                  color: 'secondary.main',
+                                },
+                              }}
                             >
-                              <Tooltip
-                                placement="top"
-                                componentsProps={{
-                                  tooltip: {
-                                    sx: {
-                                      bgcolor: 'common.black',
-                                    },
-                                  },
-                                  arrow: {
-                                    sx: {
-                                      color: 'common.black',
-                                    },
-                                  },
-                                }}
-                                TransitionComponent={Zoom}
-                                arrow
-                                title="Add To Cart"
-                              >
-                                <IconButton
-                                  size="medium"
-                                  aria-label="search"
-                                  sx={{
-                                    padding: '5px',
-                                    backgroundColor: 'common.white',
-                                    borderRadius: '5px 5px 5px 5px',
-                                    '&:hover': {
-                                      backgroundColor: 'common.white',
-                                    },
-                                  }}
-                                >
-                                  <AddShoppingCartIcon
-                                    sx={{ color: theme.palette.common.black }}
-                                  />
-                                </IconButton>
-                              </Tooltip>
-                              <Tooltip
-                                placement="top"
-                                componentsProps={{
-                                  tooltip: {
-                                    sx: {
-                                      bgcolor: 'common.black',
-                                    },
-                                  },
-                                  arrow: {
-                                    sx: {
-                                      color: 'common.black',
-                                    },
-                                  },
-                                }}
-                                TransitionComponent={Zoom}
-                                arrow
-                                title="Add To Wishlists"
-                              >
-                                <IconButton
-                                  size="medium"
-                                  aria-label="search"
-                                  sx={{
-                                    padding: '5px',
-                                    backgroundColor: 'common.white',
-                                    borderRadius: '5px 5px 5px 5px',
-                                    '&:hover': {
-                                      backgroundColor: 'common.white',
-                                    },
-                                  }}
-                                >
-                                  <StarIcon
-                                    sx={{ color: theme.palette.common.black }}
-                                  />
-                                </IconButton>
-                              </Tooltip>
-                            </Box>
-                          </Grow>
-                        </Box>
-                        <Box
-                          display={'flex'}
-                          flexDirection={'column'}
-                          sx={{ paddingLeft: 3, paddingRight: 3 }}
-                        >
-                          <Typography
-                            onClick={() => onProductTitleClick(item)}
-                            color={'primary.dark'}
-                            variant="h6"
-                            component="div"
-                            sx={{
-                              cursor: 'pointer',
-                              fontWeight: 'bold',
-                              '&:hover': {
-                                color: 'secondary.main',
-                              },
-                            }}
-                          >
-                            {item.title}
-                          </Typography>
-                          <Typography
-                            component={'div'}
-                            variant="body1"
-                            color={'primary.main'}
-                            sx={{ fontWeight: 'bold' }}
-                          >
-                            {item.Price}/-
-                          </Typography>
-                        </Box>
-                      </CardContent>
-                    </Card>
-                  </Box>
-                ))}
+                              {item.title}
+                            </Typography>
+                            <Typography
+                              component={'div'}
+                              variant="body1"
+                              color={'primary.main'}
+                              sx={{ fontWeight: 'bold' }}
+                            >
+                              {item.Price}/-
+                            </Typography>
+                          </Box>
+                        </CardContent>
+                      </Card>
+                    </Box>
+                  ))}
               </Masonry>
               <Stack sx={{ marginTop: 2 }} spacing={2}>
                 <Pagination
