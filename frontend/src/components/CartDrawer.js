@@ -1,6 +1,6 @@
 import React from 'react';
-import { Drawer } from 'rsuite';
 import {
+  Drawer,
   Box,
   Button,
   ButtonGroup,
@@ -10,97 +10,53 @@ import {
 } from '@mui/material';
 import { data } from '../assets/data/featuredCollection';
 import { useNavigate, NavLink, Link } from 'react-router-dom';
+import CloseRounded from '@mui/icons-material/CloseRounded';
 
 export default function CartDrawer(props) {
   const navigate = useNavigate();
 
   return (
     <Drawer
-      size="xs"
-      style={{ zIndex: 1500 }}
-      placement={'right'}
+      sx={{ width: '500px' }}
+      size="md"
+      anchor={'right'}
       open={props.openDrawer}
       onClose={props.closeDrawer}
     >
-      <Drawer.Header>
-        <Drawer.Title>
-          <Typography
-            component={'div'}
-            variant="h6"
-            color={'primary.dark'}
-            sx={{
-              fontWeight: 'normal',
-              marginTop: '2px',
-            }}
-          >
-            Cart Items (15)
-          </Typography>
-          <Typography
-            component={'div'}
-            variant="h6"
-            color={'primary.dark'}
-            sx={{
-              fontWeight: 'normal',
-              marginTop: 2,
-            }}
-          >
-            Sub Total: 5678 /-
-          </Typography>
-        </Drawer.Title>
-        <Drawer.Actions>
-          <Box
-            display="flex"
-            flexDirection={'column'}
-            width={'120px'}
-            justifyContent={'space-between'}
-          >
-            <Link
-              to="/cart"
-              state={data}
-              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            >
-              <Button
-                fullWidth
-                onClick={props.closeDrawer}
-                type="submit"
-                variant="contained"
-                sx={{
-                  '&:hover': {
-                    backgroundColor: 'primary.dark',
-                    color: 'common.white',
-                  },
-                  backgroundColor: 'primary.light',
-                  color: 'primary.dark',
-                }}
-              >
-                View Cart
-              </Button>
-            </Link>
-            <Link
-              to="/checkout"
-              state={data}
-              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            >
-              <Button
-                fullWidth
-                onClick={props.closeDrawer}
-                type="submit"
-                variant="contained"
-                sx={{
-                  '&:hover': {
-                    backgroundColor: 'primary.main',
-                  },
-                  marginTop: 2,
-                  backgroundColor: 'secondary.main',
-                }}
-              >
-                CHECKOUT
-              </Button>
-            </Link>
-          </Box>
-        </Drawer.Actions>
-      </Drawer.Header>
-      <Drawer.Body style={{ padding: 0 }}>
+      {/* Header */}
+      <Box
+        display={'flex'}
+        alignItems={'center'}
+        justifyContent={'space-between'}
+        sx={{ padding: '4px', marginTop: '10px' }}
+      >
+        <Typography
+          component={'div'}
+          variant="h5"
+          color={'primary.dark'}
+          sx={{
+            fontWeight: 'bold',
+            marginLeft: '20px',
+          }}
+        >
+          Cart Items (15)
+        </Typography>
+
+        <CloseRounded
+          onClick={props.closeDrawer}
+          color="primary"
+          sx={{ fontWeight: 'bold' }}
+        />
+      </Box>
+      {/* Body */}
+      <Box
+        sx={{
+          overFlowY: 'scroll',
+          overflowX: 'hidden',
+          marginTop: '15px',
+          flex: '100%',
+        }}
+      >
         <Stack
           direction={'column'}
           spacing={1}
@@ -128,7 +84,7 @@ export default function CartDrawer(props) {
                   component="img"
                   image={item.img}
                   alt="Image Title"
-                  sx={{ cursor: 'pointer', width: 150, height: 150 }}
+                  sx={{ cursor: 'pointer', width: 200, height: 200 }}
                 />
                 <Box
                   display="flex"
@@ -207,7 +163,75 @@ export default function CartDrawer(props) {
             </Box>
           ))}
         </Stack>
-      </Drawer.Body>
+      </Box>
+      {/* Footer */}
+      <Box sx={{ padding: '20px', flex: '0%' }}>
+        <Box
+          display={'flex'}
+          flexDirection={'row'}
+          alignItems={'center'}
+          justifyContent={'space-between'}
+        >
+          <Typography
+            component={'div'}
+            variant="h6"
+            color={'primary.dark'}
+            sx={{
+              fontWeight: 'bold',
+              marginTop: 2,
+            }}
+          >
+            Sub Total:
+          </Typography>
+          <Typography
+            component={'div'}
+            variant="h6"
+            color={'primary.dark'}
+            sx={{
+              fontWeight: 'bold',
+            }}
+          >
+            ₹ 5678 /-
+          </Typography>
+        </Box>
+        <Button
+          fullWidth
+          onClick={props.closeDrawer}
+          type="submit"
+          variant="contained"
+          sx={{
+            padding: '5px',
+            marginTop: 2,
+            fontSize: '20px',
+            '&:hover': {
+              backgroundColor: 'primary.dark',
+              color: 'common.white',
+            },
+            backgroundColor: 'primary.light',
+            color: 'primary.dark',
+          }}
+        >
+          View Cart
+        </Button>
+        <Button
+          fullWidth
+          onClick={props.closeDrawer}
+          type="submit"
+          variant="contained"
+          sx={{
+            padding: '5px',
+            fontSize: '20px',
+            '&:hover': {
+              backgroundColor: 'primary.main',
+            },
+            marginTop: 2,
+            marginBottom: 2,
+            backgroundColor: 'secondary.main',
+          }}
+        >
+          CHECKOUT
+        </Button>
+      </Box>
     </Drawer>
   );
 }

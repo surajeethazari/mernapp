@@ -8,12 +8,7 @@ import {
 } from '@mui/material';
 import React from 'react';
 import BreadCrumbs from '../components/BreadCrumbs';
-import Facebook from '@mui/icons-material/Facebook';
-import YouTube from '@mui/icons-material/YouTube';
-import Instagram from '@mui/icons-material/Instagram';
-import { Input } from 'antd';
 import PageTransition from '../utils/PageTransition';
-const { TextArea } = Input;
 
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
@@ -45,7 +40,11 @@ export default function Contact() {
           width={'100%'}
           justifyContent={'space-between'}
           display="flex"
-          sx={{ marginTop: 5, flexDirection: { xs: 'column', md: 'row' } }}
+          sx={{
+            marginTop: 5,
+            flexDirection: { xs: 'column', md: 'row' },
+            marginBottom: 5,
+          }}
         >
           <Box
             display="flex"
@@ -84,12 +83,17 @@ export default function Contact() {
               name="email"
               autoComplete="email"
             />
-
-            <TextArea
-              style={{ marginTop: 20 }}
-              rows={8}
-              placeholder="Message"
+            <TextField
+              color="secondary"
+              margin="normal"
+              required
+              fullWidth
+              id="outlined-multiline-static"
+              label="Message"
+              multiline
+              rows={4}
             />
+
             <Button
               type="submit"
               fullWidth
@@ -131,12 +135,9 @@ export default function Contact() {
               106, chaklalpur, radhamohanpur, west midnapore, west bengal, pin -
               721160
               <br />
-              <br />
               Phone: +91-8900162177
               <br />
-              <br />
               Mail ID: sonanlifashioninfo@gmail.com
-              <br />
               <br />
               Monday to Saturday 11:00 AM - 6:00 PM
             </Typography>

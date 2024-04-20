@@ -5,7 +5,6 @@ import CardMedia from '@mui/material/CardMedia';
 import KurtiBanner from '../assets/images/KurtiBanner.jpg';
 import PalazzoBanner from '../assets/images/PalazzoBanner.jpg';
 import SalwarBanner from '../assets/images/SalwarBanner.png';
-import { Carousel } from 'antd';
 import Masonry from '@mui/lab/Masonry';
 import Typography from '@mui/material/Typography';
 import AddIcon from '@mui/icons-material/Add';

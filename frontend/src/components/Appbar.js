@@ -23,13 +23,12 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import useScrollTrigger from '@mui/material/useScrollTrigger';
-import { Drawer } from 'rsuite';
 import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
   Button,
-  ButtonGroup,
+  Drawer,
   CardMedia,
   Checkbox,
   Divider,
@@ -50,6 +49,7 @@ import { useNavigate, NavLink, Link } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
 import CartDrawer from './CartDrawer';
 import Auth from './Auth';
+import Constants from '../utils/Constants';
 
 function ElevationScroll(props) {
   const { children, window } = props;
@@ -139,6 +139,15 @@ function DefaultAppBar() {
   const onChangeCategories = (event) => {
     setCategory(event.target.value);
   };
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    console.log({
+      search: data.get('search'),
+    });
+    navigate('/search/' + data.get('search'));
+  };
+
   return (
     <ElevationScroll>
       <AppBar position="fixed" color="appmain">
@@ -158,148 +167,122 @@ function DefaultAppBar() {
               <Drawer
                 closeButton={false}
                 style={{ zIndex: 1500, width: '300px' }}
-                placement={'left'}
+                anchor={'left'}
                 open={openLeftDrawer}
                 onClose={toggleLeftDrawerHandler(false)}
               >
-                <Drawer.Body style={{ padding: 0 }}>
-                  <Box
-                    width={'300px'}
-                    display={'flex'}
-                    flexDirection={'column'}
-                    p={1}
-                  >
-                    <IconButton
-                      onClick={toggleLeftDrawerHandler(false)}
-                      size="small"
-                      aria-label="search"
-                      color="primary.dark"
+                <Box
+                  sx={{
+                    overFlowY: 'scroll',
+                    overflowX: 'hidden',
+                    flex: '100%',
+                  }}
+                >
+                  {navItems.map((item, index) => (
+                    <Accordion
                       sx={{
-                        position: 'absolute',
-                        right: 8,
-                        top: 8,
-                        zIndex: 999,
-                        backgroundColor: 'common.white',
-                        boxShadow: '0 0 10px rgba(0, 0, 0, 0.2)',
-                      }}
-                    >
-                      <CloseRounded />
-                    </IconButton>
-                    <Box sx={{ marginTop: 5 }}>
-                      {navItems.map((item, index) => (
-                        <Accordion
-                          sx={{
-                            marginBottom: 1,
-                            boxShadow: 'none',
-                            padding: 0,
-                            '& .MuiAccordionSummary-content': {
-                              margin: 0,
-                            },
-                          }}
-                          spacing={1}
-                          expanded={expanded === item.name}
-                          onChange={handleAccordionChange(item.name)}
-                          key={index}
-                        >
-                          <AccordionSummary
-                            expandIcon={
-                              expanded === item.name ? (
-                                <RemoveIcon />
-                              ) : (
-                                <AddIcon />
-                              )
-                            }
-                          >
-                            <Typography
-                              sx={{
-                                fontWeight: 'bold',
-                                color: 'primary.dark',
-                                fontSize: '16px',
-                              }}
-                            >
-                              {item.name}
-                            </Typography>
-                          </AccordionSummary>
-                          <AccordionDetails>
-                            <Box>
-                              {[
-                                'Shop By Color',
-                                'Shop By Fabric',
-                                'Shop By Work',
-                              ].map((innetItem, index1) => (
-                                <Accordion
-                                  sx={{
-                                    marginBottom: 1,
-                                    boxShadow: 'none',
-                                  }}
-                                  spacing={1}
-                                  expanded={
-                                    innerAccordionExpanded === innetItem
-                                  }
-                                  onChange={handleInnerAccordionChange(
-                                    innetItem,
-                                  )}
-                                  key={index1}
-                                >
-                                  <AccordionSummary
-                                    expandIcon={
-                                      innerAccordionExpanded === innetItem ? (
-                                        <RemoveIcon />
-                                      ) : (
-                                        <AddIcon />
-                                      )
-                                    }
-                                  >
-                                    <Typography sx={{ color: 'primary.main' }}>
-                                      {innetItem}
-                                    </Typography>
-                                  </AccordionSummary>
-                                  <AccordionDetails>
-                                    <Box>
-                                      {[
-                                        'Print',
-                                        'Georgette',
-                                        'Net',
-                                        'Cotton',
-                                        'Silk',
-                                        'Satin',
-                                        'Velvet',
-                                      ].map((subInnerItem, index2) => (
-                                        <Typography
-                                          onClick={toggleLeftDrawerHandler(
-                                            false,
-                                          )}
-                                          key={index2}
-                                          sx={{ color: 'primary.main' }}
-                                        >
-                                          {subInnerItem}
-                                        </Typography>
-                                      ))}
-                                    </Box>
-                                  </AccordionDetails>
-                                </Accordion>
-                              ))}
-                            </Box>
-                          </AccordionDetails>
-                        </Accordion>
-                      ))}
-                    </Box>
-                    <Button
-                      fullWidth
-                      type="submit"
-                      variant="contained"
-                      sx={{
-                        '&:hover': {
-                          backgroundColor: 'primary.main',
+                        marginBottom: 1,
+                        boxShadow: 'none',
+                        padding: 0,
+                        '& .MuiAccordionSummary-content': {
+                          margin: 0,
                         },
-                        marginTop: 2,
-                        backgroundColor: 'secondary.main',
                       }}
+                      spacing={1}
+                      expanded={expanded === item.name}
+                      onChange={handleAccordionChange(item.name)}
+                      key={index}
                     >
-                      Sign In
-                    </Button>
-                  </Box>
-                </Drawer.Body>
+                      <AccordionSummary
+                        expandIcon={
+                          expanded === item.name ? <RemoveIcon /> : <AddIcon />
+                        }
+                      >
+                        <Typography
+                          sx={{
+                            fontWeight: 'bold',
+                            color: 'primary.dark',
+                            fontSize: '16px',
+                          }}
+                        >
+                          {item.name}
+                        </Typography>
+                      </AccordionSummary>
+                      <AccordionDetails>
+                        <Box>
+                          {[
+                            'Shop By Color',
+                            'Shop By Fabric',
+                            'Shop By Work',
+                          ].map((innetItem, index1) => (
+                            <Accordion
+                              sx={{
+                                marginBottom: 1,
+                                boxShadow: 'none',
+                              }}
+                              spacing={1}
+                              expanded={innerAccordionExpanded === innetItem}
+                              onChange={handleInnerAccordionChange(innetItem)}
+                              key={index1}
+                            >
+                              <AccordionSummary
+                                expandIcon={
+                                  innerAccordionExpanded === innetItem ? (
+                                    <RemoveIcon />
+                                  ) : (
+                                    <AddIcon />
+                                  )
+                                }
+                              >
+                                <Typography sx={{ color: 'primary.main' }}>
+                                  {innetItem}
+                                </Typography>
+                              </AccordionSummary>
+                              <AccordionDetails>
+                                <Box>
+                                  {[
+                                    'Print',
+                                    'Georgette',
+                                    'Net',
+                                    'Cotton',
+                                    'Silk',
+                                    'Satin',
+                                    'Velvet',
+                                  ].map((subInnerItem, index2) => (
+                                    <Typography
+                                      onClick={toggleLeftDrawerHandler(false)}
+                                      key={index2}
+                                      sx={{ color: 'primary.main' }}
+                                    >
+                                      {subInnerItem}
+                                    </Typography>
+                                  ))}
+                                </Box>
+                              </AccordionDetails>
+                            </Accordion>
+                          ))}
+                        </Box>
+                      </AccordionDetails>
+                    </Accordion>
+                  ))}
+                </Box>
+                <Box sx={{ padding: '20px', flex: '0%' }}>
+                  <Button
+                    onClick={toggleLeftDrawerHandler(false)}
+                    fullWidth
+                    type="submit"
+                    variant="contained"
+                    sx={{
+                      '&:hover': {
+                        backgroundColor: 'primary.main',
+                      },
+                      marginTop: 2,
+                      backgroundColor: 'secondary.main',
+                    }}
+                  >
+                    Close
+                  </Button>
+                </Box>
               </Drawer>
             </Box>
             <Box
@@ -563,26 +546,37 @@ function DefaultAppBar() {
                         <MenuItem value="Palazzo Suits">Palazzo Suits</MenuItem>
                         <MenuItem value="Salwar Kamiz">Salwar Kamiz</MenuItem>
                       </Select>
-                      <OutlinedInput
-                        fullWidth
-                        placeholder="Enter text to search"
-                        endAdornment={
-                          <InputAdornment position="end">
-                            <IconButton
-                              onClick={toggleDrawer(false)}
-                              size="large"
-                              aria-label="search"
-                              color="inherit"
-                            >
-                              <SearchIcon />
-                            </IconButton>
-                          </InputAdornment>
-                        }
-                        aria-describedby="outlined-weight-helper-text"
-                        inputProps={{
-                          'aria-label': 'weight',
-                        }}
-                      />
+                      <Box
+                        width={'100%'}
+                        component="form"
+                        onSubmit={handleSubmit}
+                        noValidate
+                      >
+                        <OutlinedInput
+                          name="search"
+                          label="Search"
+                          id="search"
+                          fullWidth
+                          placeholder="Enter text to search"
+                          endAdornment={
+                            <InputAdornment position="end">
+                              <IconButton
+                                onClick={toggleDrawer(false)}
+                                type="submit"
+                                size="large"
+                                aria-label="search"
+                                color="inherit"
+                              >
+                                <SearchIcon />
+                              </IconButton>
+                            </InputAdornment>
+                          }
+                          aria-describedby="outlined-weight-helper-text"
+                          inputProps={{
+                            'aria-label': 'weight',
+                          }}
+                        />
+                      </Box>
                     </Box>
                     <Box
                       alignItems="center"
@@ -687,13 +681,20 @@ function DefaultAppBar() {
                 title="Wish Lists"
               >
                 <IconButton
-                  onClick={() => navigate('/wishlists')}
                   sx={{ display: { md: 'inline-flex', xs: 'none' } }}
                   size="large"
                   color="inherit"
                 >
                   <Badge badgeContent={2} color="secondary">
-                    <StarOutlineIcon />
+                    <StarOutlineIcon
+                      onClick={() =>
+                        navigate('/account', {
+                          state: {
+                            path: Constants.myWishlistText,
+                          },
+                        })
+                      }
+                    />
                   </Badge>
                 </IconButton>
               </Tooltip>
@@ -752,7 +753,6 @@ function DefaultAppBar() {
                     setMountElementForAccount(event.currentTarget);
                   }}
                   size="large"
-                  aria-label="search"
                   color="inherit"
                   sx={{
                     '&:hover': { color: 'secondary.main' },

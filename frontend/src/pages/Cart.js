@@ -49,12 +49,10 @@ export default function Cart() {
             }}
           >
             <TableContainer
-              component={Paper}
+              component={Box}
               sx={{
                 maxHeight: '500px',
                 overflow: 'auto',
-                boxShadow: 4,
-                padding: 2,
               }}
             >
               <Table sx={{ minWidth: 700 }} aria-label="spanning table">
@@ -70,7 +68,7 @@ export default function Cart() {
                         Product
                       </Typography>
                     </TableCell>
-                    <TableCell align="right">
+                    <TableCell align="left">
                       <Typography
                         color={'primary.main'}
                         variant="h6"
@@ -82,7 +80,7 @@ export default function Cart() {
                     </TableCell>
                     <TableCell
                       sx={{ display: { xs: 'none', md: 'table-cell' } }}
-                      align="right"
+                      align="left"
                     >
                       <Typography
                         color={'primary.main'}
@@ -95,7 +93,7 @@ export default function Cart() {
                     </TableCell>
                     <TableCell
                       sx={{ display: { xs: 'none', md: 'table-cell' } }}
-                      align="right"
+                      align="left"
                     >
                       <Typography
                         color={'primary.main'}
@@ -109,17 +107,17 @@ export default function Cart() {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {item.map((innerItem, index) => (
+                  {item.slice(0, 3).map((innerItem, index) => (
                     <TableRow key={index}>
-                      <TableCell>
+                      <TableCell width="40%">
                         <Box display="flex" flexDirection={'row'}>
-                          <CardMedia
-                            component="img"
-                            height="100px"
-                            width="100px"
-                            image={innerItem.img}
-                            alt="Image Title"
-                          />
+                          <Box width={100} height={100}>
+                            <CardMedia
+                              component="img"
+                              image={innerItem.img}
+                              alt="Image Title"
+                            />
+                          </Box>
                           <Box
                             display="flex"
                             flexDirection={'column'}
@@ -152,14 +150,14 @@ export default function Cart() {
                           </Box>
                         </Box>
                       </TableCell>
-                      <TableCell align="right">
+                      <TableCell align="left">
                         <Typography
                           color={'primary.main'}
-                          variant="h5"
+                          variant="h6"
                           component="div"
                           sx={{ fontWeight: 'normal', marginLeft: 1 }}
                         >
-                          {innerItem.Price} /-
+                          ₹ {innerItem.Price} /-
                         </Typography>
                         <ButtonGroup
                           sx={{
@@ -176,7 +174,7 @@ export default function Cart() {
                       </TableCell>
                       <TableCell
                         sx={{ display: { xs: 'none', md: 'table-cell' } }}
-                        align="right"
+                        align="left"
                       >
                         <ButtonGroup
                           size="small"
@@ -189,7 +187,7 @@ export default function Cart() {
                       </TableCell>
                       <TableCell
                         sx={{ display: { xs: 'none', md: 'table-cell' } }}
-                        align="right"
+                        align="left"
                       >
                         <Typography
                           color={'primary.main'}
@@ -198,10 +196,9 @@ export default function Cart() {
                           sx={{
                             fontWeight: 'normal',
                             marginLeft: 1,
-                            textDecoration: 'underline',
                           }}
                         >
-                          {innerItem.Price} /-
+                          ₹ {innerItem.Price} /-
                         </Typography>
                       </TableCell>
                     </TableRow>
@@ -228,6 +225,54 @@ export default function Cart() {
                     APPLY
                   </Button>
               </Box> */}
+            <Box
+              mt={2}
+              alignItems={'center'}
+              justifyContent={'space-between'}
+              display={'flex'}
+              flexDirection="row"
+            >
+              <Button
+                type="submit"
+                variant="contained"
+                sx={{
+                  width: '200px',
+                  '&:hover': {
+                    backgroundColor: 'common.white',
+                    color: 'common.black',
+                    borderWidth: '1px',
+                    borderStyle: 'solid',
+                    borderColor: 'secondary.main',
+                  },
+                  borderWidth: '1px',
+                  borderStyle: 'solid',
+                  borderColor: 'common.black',
+                  backgroundColor: 'common.black',
+                }}
+              >
+                Continuee Shopping
+              </Button>
+              <Button
+                type="submit"
+                variant="contained"
+                sx={{
+                  width: '200px',
+                  '&:hover': {
+                    backgroundColor: 'common.white',
+                    color: 'common.black',
+                    borderWidth: '1px',
+                    borderStyle: 'solid',
+                    borderColor: 'secondary.main',
+                  },
+                  borderWidth: '1px',
+                  borderStyle: 'solid',
+                  borderColor: 'common.black',
+                  backgroundColor: 'common.black',
+                }}
+              >
+                Clear Cart
+              </Button>
+            </Box>
             <Box
               display={'flex'}
               alignItems={'end'}

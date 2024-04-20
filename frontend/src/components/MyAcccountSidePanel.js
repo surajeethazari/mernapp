@@ -6,6 +6,7 @@ import PageTransition from '../utils/PageTransition';
 import BreadCrumbs from './BreadCrumbs';
 import AccountDetails from '../pages/AccountDetails';
 import { AnimatePresence } from 'framer-motion';
+
 import MyOrders from '../pages/MyOrders';
 import MyWishLists from '../pages/MyWishlists';
 import MyAddress from '../pages/MyAddress';
@@ -14,7 +15,9 @@ export default function MyAcccountSidePanel() {
   let location = useLocation();
   console.log(location);
   const navigate = useNavigate();
-  let [currentPage, setCurrentPage] = React.useState(Constants.myAccountText);
+  let [currentPage, setCurrentPage] = React.useState(
+    location.state.path ? location.state.path : Constants.myAccountText,
+  );
   let crumbs = [
     { name: 'Home', trigger: '/', active: true },
     { name: 'My Account', trigger: '/details', active: false },
