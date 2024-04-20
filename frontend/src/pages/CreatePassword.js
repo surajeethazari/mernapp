@@ -9,7 +9,6 @@ import {
   FormControlLabel,
   IconButton,
 } from '@mui/material';
-import AuthModal from '../components/AuthModal';
 
 export default function CreatePassword(props) {
   let crumbs = [
@@ -115,27 +114,54 @@ export default function CreatePassword(props) {
           noValidate
           sx={{ mt: 2 }}
         >
-          <Typography variant="h6" color={'primary'}>
-            Click here to login.
-          </Typography>
+          <TextField
+            color="secondary"
+            margin="normal"
+            required
+            fullWidth
+            id="email"
+            label="Email Address"
+            name="email"
+            autoComplete="email"
+          />
+          <TextField
+            color="secondary"
+            margin="normal"
+            required
+            fullWidth
+            name="password"
+            label="Password"
+            type="password"
+            id="password"
+            autoComplete="current-password"
+          />
+          <FormControlLabel
+            control={<Checkbox value="remember" color="secondary" />}
+            label="Remember me"
+          />
           <Button
-            onClick={() => setOpen(true)}
             type="submit"
             fullWidth
             variant="contained"
             sx={{
               '&:hover': {
-                backgroundColor: 'primary.main',
+                backgroundColor: 'common.white',
+                color: 'common.black',
+                borderWidth: '1px',
+                borderStyle: 'solid',
+                borderColor: 'secondary.main',
               },
+              borderWidth: '1px',
+              borderStyle: 'solid',
+              borderColor: 'common.black',
+              backgroundColor: 'common.black',
               mt: 3,
-              mb: 3,
-              backgroundColor: 'secondary.main',
+              mb: 2,
             }}
           >
-            Login
+            Sign In
           </Button>
         </Box>
-        <AuthModal openModal={open} onCloseModal={() => setOpen(false)} />
       </Box>
     </Container>
   );

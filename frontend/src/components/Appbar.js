@@ -48,8 +48,8 @@ import {
 } from '@mui/material';
 import { useNavigate, NavLink, Link } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
-import AuthModal from './AuthModal';
 import CartDrawer from './CartDrawer';
+import Auth from './Auth';
 
 function ElevationScroll(props) {
   const { children, window } = props;
@@ -77,6 +77,7 @@ ElevationScroll.propTypes = {
 };
 
 function DefaultAppBar() {
+  let login = false;
   const navItems = [
     { name: 'Kurties', routePath: '/kurties' },
     { name: 'Palazzo Suits', routePath: '/palazzoes' },
@@ -86,6 +87,7 @@ function DefaultAppBar() {
   const [openDrawer, setOpenDrawer] = React.useState(false);
   const [openLeftDrawer, setOpenLeftDrawer] = React.useState(false);
   const [open, setOpen] = React.useState(false);
+  const [openFP, setOpenFP] = React.useState(false);
 
   const [mountElementForAccount, setMountElementForAccount] =
     React.useState(null);
@@ -741,14 +743,14 @@ function DefaultAppBar() {
                 }}
                 TransitionComponent={Zoom}
                 arrow
-                title="Profile"
+                title={login ? 'Profile' : 'Login'}
               >
                 <IconButton
                   disableFocusRipple
-                  onClick={() => setOpen(true)}
-                  // onClick={(event) => {
-                  //   setMountElementForAccount(event.currentTarget);
-                  // }}
+                  // onClick={() => setOpen(true)}
+                  onClick={(event) => {
+                    setMountElementForAccount(event.currentTarget);
+                  }}
                   size="large"
                   aria-label="search"
                   color="inherit"
@@ -762,8 +764,7 @@ function DefaultAppBar() {
                 </IconButton>
               </Tooltip>
               <Menu
-                sx={{ width: '250px' }}
-                elevation={0}
+                elevation={2}
                 anchorOrigin={{
                   vertical: 'bottom',
                   horizontal: 'right',
@@ -776,55 +777,71 @@ function DefaultAppBar() {
                 open={openAccountMenu}
                 onClose={handleCloseAccountMenu}
               >
-                <MenuItem
-                  key={1}
-                  onClick={(event) => {
-                    navigate('/userdetails');
-                    handleCloseAccountMenu(event);
-                  }}
-                  sx={{
-                    color: theme.palette.primary.dark,
-                    fontSize: '18px',
-                    width: '150px',
-                  }}
-                >
-                  My account
-                </MenuItem>
-                <MenuItem
-                  key={2}
-                  onClick={(event) => {
-                    navigate('/orders');
-                    handleCloseAccountMenu(event);
-                  }}
-                  sx={{ color: theme.palette.primary.dark, fontSize: '18px' }}
-                >
-                  My Orders
-                </MenuItem>
-                <MenuItem
-                  key={3}
-                  onClick={(event) => {
-                    navigate('/wishlists');
-                    handleCloseAccountMenu(event);
-                  }}
-                  sx={{ color: theme.palette.primary.dark, fontSize: '18px' }}
-                >
-                  My Wishlists
-                </MenuItem>
-                <Divider sx={{ my: 0.5 }} />
-                <MenuItem
-                  key={4}
-                  onClick={(event) => {
-                    navigate('/');
-                    handleCloseAccountMenu(event);
-                  }}
-                  sx={{ color: theme.palette.primary.dark, fontSize: '18px' }}
-                >
-                  <LogoutIcon color="secondary" sx={{ marginRight: 1 }} />
-                  Log Out
-                </MenuItem>
+                {login ? (
+                  <Box
+                    width={'150px'}
+                    display={'flex'}
+                    flexDirection={'column'}
+                  >
+                    <MenuItem
+                      key={1}
+                      onClick={(event) => {
+                        navigate('/userdetails');
+                        handleCloseAccountMenu(event);
+                      }}
+                      sx={{
+                        color: theme.palette.primary.dark,
+                        fontSize: '18px',
+                      }}
+                    >
+                      My account
+                    </MenuItem>
+                    <MenuItem
+                      key={2}
+                      onClick={(event) => {
+                        navigate('/orders');
+                        handleCloseAccountMenu(event);
+                      }}
+                      sx={{
+                        color: theme.palette.primary.dark,
+                        fontSize: '18px',
+                      }}
+                    >
+                      My Orders
+                    </MenuItem>
+                    <MenuItem
+                      key={3}
+                      onClick={(event) => {
+                        navigate('/wishlists');
+                        handleCloseAccountMenu(event);
+                      }}
+                      sx={{
+                        color: theme.palette.primary.dark,
+                        fontSize: '18px',
+                      }}
+                    >
+                      My Wishlists
+                    </MenuItem>
+                    <Divider sx={{ my: 0.5 }} />
+                    <MenuItem
+                      key={4}
+                      onClick={(event) => {
+                        navigate('/');
+                        handleCloseAccountMenu(event);
+                      }}
+                      sx={{
+                        color: theme.palette.primary.dark,
+                        fontSize: '18px',
+                      }}
+                    >
+                      <LogoutIcon color="secondary" sx={{ marginRight: 1 }} />
+                      Log Out
+                    </MenuItem>
+                  </Box>
+                ) : (
+                  <Auth onCloseMenu={() => setMountElementForAccount(null)} />
+                )}
               </Menu>
-
-              <AuthModal openModal={open} onCloseModal={() => setOpen(false)} />
             </Box>
           </Toolbar>
         </Container>
