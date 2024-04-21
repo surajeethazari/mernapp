@@ -11,7 +11,6 @@ import {
   Typography,
 } from '@mui/material';
 import React from 'react';
-import BreadCrumbs from '../components/BreadCrumbs';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
 import Masonry from '@mui/lab/Masonry';
 import CheckCircleOutlined from '@mui/icons-material/CheckCircleOutlined';
@@ -25,29 +24,16 @@ export default function PaymentSuccess() {
   const obj = useLocation();
   const [item, setItem] = React.useState(data);
   console.log(item[0][0]);
-  let crumbs = [
-    { name: 'Home', trigger: '/', active: true },
-    { name: 'Payment Success', trigger: '/paymentSuccess', active: false },
-  ];
 
   return (
     <PageTransition>
       <Container maxWidth="xl">
         <Box
-          alignItems={'center'}
-          flexDirection={'column'}
-          display={'flex'}
-          mb={2}
-          sx={{ marginTop: 12 }}
-        >
-          <BreadCrumbs crumbs={crumbs} />
-        </Box>
-        <Box
           width={'100%'}
           justifyContent={'space-between'}
           display="flex"
           sx={{
-            marginTop: 5,
+            marginTop: 12,
             marginBottom: 5,
             flexDirection: { xs: 'column', md: 'row' },
           }}
@@ -251,7 +237,7 @@ export default function PaymentSuccess() {
             }}
           >
             <Link
-              to="/products"
+              to="/"
               state={data}
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
             >

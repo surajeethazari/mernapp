@@ -69,7 +69,7 @@ export default function Checkout() {
   const [province, setProvince] = React.useState('');
   let crumbs = [
     { name: 'Home', trigger: '/', active: true },
-    { name: 'Payment Success', trigger: '/paymentSuccess', active: false },
+    { name: 'Payment', trigger: '/', active: false },
   ];
   const handleChangeProvince = (event) => {
     setProvince(event.target.value);

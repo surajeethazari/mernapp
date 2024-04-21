@@ -98,7 +98,7 @@ function App() {
             <Route path="detail/:title" element={<ProductDetail />} />
             <Route path="search/:text" element={<Search />} />
             <Route path="checkout" element={<Checkout />} />
-            <Route path="paymentSuccess" element={<PaymentSuccess />} />
+            <Route path="success" element={<PaymentSuccess />} />
             <Route path="/*" element={<ErrorPage />} />
           </Routes>
         </AnimatePresence>

@@ -76,13 +76,13 @@ export default function ReturnPolicy() {
                   key={index}
                   display="flex"
                   flexDirection={'row'}
-                  alignItems={'center'}
+                  alignItems={'start'}
                 >
                   <CircleIcon
                     sx={{
                       color: 'primary.main',
                       fontSize: '10px',
-                      marginTop: 1,
+                      marginTop: '20px',
                     }}
                   />
                   <Typography
