@@ -22,7 +22,7 @@ import PageTransition from '../utils/PageTransition';
 export default function Cart() {
   const navigate = useNavigate();
   const obj = useLocation();
-  const [item, setItem] = React.useState(obj.state);
+  const [item, setItem] = React.useState(obj.state.item);
 
   let crumbs = [
     { name: 'Home', trigger: '/', active: true },
@@ -308,7 +308,7 @@ export default function Cart() {
                     component="div"
                     sx={{ fontWeight: 'normal', marginLeft: 1 }}
                   >
-                    500 /-
+                    ₹ 500 /-
                   </Typography>
                 </Box>
                 <Box
@@ -331,7 +331,7 @@ export default function Cart() {
                     component="div"
                     sx={{ fontWeight: 'normal', marginLeft: 1 }}
                   >
-                    500 /-
+                    ₹ 500 /-
                   </Typography>
                 </Box>
                 <Typography
@@ -340,7 +340,7 @@ export default function Cart() {
                   component="div"
                   sx={{ fontWeight: '400' }}
                 >
-                  (Inclusive of tax 0.00 /-)
+                  (Inclusive of tax ₹ 0.00 /-)
                 </Typography>
                 <Button
                   onClick={() => {

@@ -196,7 +196,14 @@ export default function CartDrawer(props) {
         </Box>
         <Button
           fullWidth
-          onClick={props.closeDrawer}
+          onClick={() => {
+            props.closeDrawer();
+            navigate('/cart', {
+              state: {
+                item: data,
+              },
+            });
+          }}
           type="submit"
           variant="contained"
           sx={{
@@ -215,7 +222,14 @@ export default function CartDrawer(props) {
         </Button>
         <Button
           fullWidth
-          onClick={props.closeDrawer}
+          onClick={() => {
+            props.closeDrawer();
+            navigate('/checkout', {
+              state: {
+                item: data,
+              },
+            });
+          }}
           type="submit"
           variant="contained"
           sx={{

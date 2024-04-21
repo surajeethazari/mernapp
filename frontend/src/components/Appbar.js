@@ -434,8 +434,6 @@ function DefaultAppBar() {
                             'Zori Work',
                             'Embroidary',
                             'Stone Work',
-                            'Brown',
-                            'Yellow',
                           ].map((item, index) => (
                             <Typography
                               key={index}

@@ -14,6 +14,8 @@ let Constants = {
   shopByText: 'Shop By',
   sortByText: 'Sort By',
   priceText: 'Price',
+  fabricText: 'Fabric',
+  workDetailsText: 'Work Details',
   colorText: 'Color',
   sizeText: 'Size',
   brandText: 'Brand',

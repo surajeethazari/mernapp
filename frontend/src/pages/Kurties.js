@@ -13,8 +13,10 @@ import {
   Divider,
   FormControlLabel,
   FormGroup,
+  Grid,
   Grow,
   IconButton,
+  ImageList,
   List,
   ListItemButton,
   ListItemText,
@@ -23,6 +25,7 @@ import {
   Paper,
   Slider,
   TablePagination,
+  TextField,
   Tooltip,
   Zoom,
 } from '@mui/material';
@@ -41,22 +44,43 @@ import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import InfoIcon from '@mui/icons-material/Info';
 import StarIcon from '@mui/icons-material/Star';
 import KurtiBanner from '../assets/images/KurtiBanner.jpg';
+import CircleIcon from '@mui/icons-material/Circle';
 import PageTransition from '../utils/PageTransition';
 
 const colorTypes = [
-  'White',
+  'Beige',
+  'Crimson',
+  'Aquamarine',
+  'Blueviolet',
   'Black',
   'Grey',
   'Blue',
   'Brown',
+  'Cadetblue',
   'Yellow',
   'Red',
   'Green',
   'Magenta',
+  'Cyan',
   'Orange',
+  'Deeppink',
+  'White',
 ];
-const sizeTypes = ['XXL', 'XL', 'M', 'S'];
-const brandTypes = ['A', 'B'];
+const fabricText = [
+  'Print (1)',
+  'Georgette (5)',
+  'Netm (12)',
+  'Cotton (2)',
+  'Silk (15)',
+  'Satin (8)',
+  'Velvet(3)',
+];
+const workDetailsTypes = [
+  'Digital Print (2)',
+  'Zori Work (10)',
+  'Emboridary (3)',
+  'Stone Work (12)',
+];
 
 const options = ['Default', 'Price', 'Name'];
 
@@ -65,6 +89,7 @@ function valuetext(value) {
 }
 
 export default function Kurties() {
+  const minDistance = 10;
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -78,7 +103,7 @@ export default function Kurties() {
   };
 
   const [imageSectionShow, setImageSectionShow] = React.useState(0);
-  const [value, setValue] = React.useState([0, 100]);
+  const [value1, setValue1] = React.useState([349, 999]);
   let crumbs = [
     { name: 'Home', trigger: '/', active: true },
     { name: 'Kurties', trigger: '/kurties', active: false },
@@ -102,8 +127,16 @@ export default function Kurties() {
     setAnchorEl(null);
   };
 
-  const handleSliderChange = (event, newValue) => {
-    setValue(newValue);
+  const handleChange1 = (event, newValue, activeThumb) => {
+    if (!Array.isArray(newValue)) {
+      return;
+    }
+
+    if (activeThumb === 0) {
+      setValue1([Math.min(newValue[0], value1[1] - minDistance), value1[1]]);
+    } else {
+      setValue1([value1[0], Math.max(newValue[1], value1[0] + minDistance)]);
+    }
   };
 
   const onProductTitleClick = (item) => {
@@ -155,11 +188,60 @@ export default function Kurties() {
               <Slider
                 sx={{ marginTop: 2 }}
                 getAriaLabel={() => 'Price range'}
-                value={value}
-                onChange={handleSliderChange}
+                value={value1}
+                onChange={handleChange1}
                 valueLabelDisplay="auto"
                 getAriaValueText={valuetext}
               />
+              <Box
+                alignItems={'center'}
+                justifyContent={'space-between'}
+                display={'flex'}
+                flexDirection={'row'}
+                sx={{ marginTop: 2 }}
+              >
+                <TextField
+                  color="secondary"
+                  margin="normal"
+                  required
+                  sx={{ width: '100px' }}
+                  label="₹"
+                  type="text"
+                  name="first"
+                  value={349}
+                />
+                <TextField
+                  color="secondary"
+                  margin="normal"
+                  required
+                  sx={{ width: '100px' }}
+                  label="₹"
+                  type="text"
+                  name="second"
+                  value={999}
+                />
+              </Box>
+              <Button
+                type="submit"
+                variant="contained"
+                fullWidth
+                sx={{
+                  marginTop: '10px',
+                  '&:hover': {
+                    backgroundColor: 'common.white',
+                    color: 'common.black',
+                    borderWidth: '1px',
+                    borderStyle: 'solid',
+                    borderColor: 'secondary.main',
+                  },
+                  borderWidth: '1px',
+                  borderStyle: 'solid',
+                  borderColor: 'common.black',
+                  backgroundColor: 'common.black',
+                }}
+              >
+                Apply
+              </Button>
 
               <Typography
                 color={'primary.main'}
@@ -170,12 +252,82 @@ export default function Kurties() {
                 {Constants.colorText}
               </Typography>
               <Divider sx={{ marginTop: 2 }} />
-              <FormGroup sx={{ marginTop: 2 }}>
+              <ImageList cols={5}>
                 {colorTypes.map((item, index) => (
+                  <Tooltip
+                    placement="top"
+                    componentsProps={{
+                      tooltip: {
+                        sx: {
+                          bgcolor: 'common.black',
+                        },
+                      },
+                      arrow: {
+                        sx: {
+                          color: 'common.black',
+                        },
+                      },
+                    }}
+                    TransitionComponent={Zoom}
+                    arrow
+                    title={item}
+                  >
+                    <CircleIcon
+                      sx={{
+                        transition: '0.5s ease-in-out',
+                        '&:hover': {
+                          transform: 'scale(0.8)',
+                          borderWidth: '1px',
+                          borderColor: 'black',
+                          borderStyle: 'solid',
+                        },
+                        transform: 'scale(1)',
+                        borderWidth: '1px',
+                        borderColor: 'white',
+                        borderStyle: 'solid',
+                        cursor: 'pointer',
+                        borderRadius: '100%',
+                        boxShadow: '0 0 10px rgba(0, 0, 0, 0.2)',
+                        color: item,
+                        fontSize: '35px',
+                        marginRight: '10px',
+                      }}
+                    />
+                  </Tooltip>
+                ))}
+              </ImageList>
+
+              <Typography
+                color={'primary.main'}
+                variant="h6"
+                component="div"
+                sx={{ fontWeight: 'normal', marginTop: 5 }}
+              >
+                {Constants.fabricText}
+              </Typography>
+              <Divider sx={{ marginTop: 2 }} />
+              <FormGroup sx={{ marginTop: 2 }}>
+                {fabricText.map((item, index) => (
                   <FormControlLabel
                     key={index}
-                    control={<Checkbox />}
+                    control={
+                      <Checkbox
+                        color="secondary"
+                        sx={{
+                          '&:hover': {
+                            color: theme.palette.secondary.main,
+                          },
+                          padding: '5px',
+                        }}
+                      />
+                    }
                     label={item}
+                    sx={{
+                      color: theme.palette.primary.main,
+                      '&:hover': {
+                        color: theme.palette.secondary.main,
+                      },
+                    }}
                   />
                 ))}
               </FormGroup>
@@ -186,34 +338,31 @@ export default function Kurties() {
                 component="div"
                 sx={{ fontWeight: 'normal', marginTop: 5 }}
               >
-                {Constants.sizeText}
+                {Constants.workDetailsText}
               </Typography>
               <Divider sx={{ marginTop: 2 }} />
               <FormGroup sx={{ marginTop: 2 }}>
-                {sizeTypes.map((item, index) => (
+                {workDetailsTypes.map((item, index) => (
                   <FormControlLabel
                     key={index}
-                    control={<Checkbox />}
+                    control={
+                      <Checkbox
+                        color="secondary"
+                        sx={{
+                          '&:hover': {
+                            color: theme.palette.secondary.main,
+                          },
+                          padding: '5px',
+                        }}
+                      />
+                    }
                     label={item}
-                  />
-                ))}
-              </FormGroup>
-
-              <Typography
-                color={'primary.main'}
-                variant="h6"
-                component="div"
-                sx={{ fontWeight: 'normal', marginTop: 5 }}
-              >
-                {Constants.brandText}
-              </Typography>
-              <Divider sx={{ marginTop: 2 }} />
-              <FormGroup sx={{ marginTop: 2 }}>
-                {brandTypes.map((item, index) => (
-                  <FormControlLabel
-                    key={index}
-                    control={<Checkbox />}
-                    label={item}
+                    sx={{
+                      color: theme.palette.primary.main,
+                      '&:hover': {
+                        color: theme.palette.secondary.main,
+                      },
+                    }}
                   />
                 ))}
               </FormGroup>
